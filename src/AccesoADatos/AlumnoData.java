@@ -1,0 +1,208 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package AccesoADatos;
+
+import Entidades.Alumno;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author valen
+ */
+public class AlumnoData {
+    private Connection con=null;
+
+    public AlumnoData() {
+        this.con=Conexion.buscarConexion();
+    }
+
+    public void guardarAlumno(Alumno al) {
+        String query = "INSERT INTO alumno(dni,apellido, nombre, fechaNacimiento,estado) "
+                + "VALUES (?,?,?,?,?)";
+        try {
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, al.getDni());
+            ps.setString(2, al.getApellido());
+            ps.setString(3, al.getNombre());
+            ps.setString(4, al.getfN().toString());
+            ps.setBoolean(5, al.isActivo());
+            ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                al.setId(rs.getInt(1));
+            } else {
+                System.out.println("No se pudo recuperar el ID");
+            }
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al guardar al alumno: " + al.getNombre() + " " + al.getApellido() + " " + e.getMessage());
+
+        }
+
+    }
+
+    public void eliminarAlumnoLogico(int id) {
+        String query = "UPDATE alumno SET estado=0 WHERE idAlumno=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, id);
+            int registro = ps.executeUpdate();
+
+            if (registro == 1) {
+                System.out.println("El alumno ha sido borrado");
+            } else {
+                System.out.println("No se pudo borrar al alumno");
+            }
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al borrar al alumno" + e.getMessage());
+
+        }
+    }
+
+    public void eliminarAlumno(int id) {
+        String query = "DELETE FROM `alumno` WHERE idAlumno=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            ps.setInt(1, id);
+            int registro = ps.executeUpdate();
+
+            if (registro == 1) {
+                System.out.println("El alumno ha sido borrado");
+            } else {
+                System.out.println("No se pudo borrar al alumno");
+            }
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al borrar al alumno" + e.getMessage());
+
+        }
+
+    }
+ 
+    public void editarAlumno(Alumno al) {
+        String query = "UPDATE `alumno` SET `dni`=?,`apellido`=?,`nombre`=?,`fechaNacimiento`=? WHERE idAlumno=?";
+        try {
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, al.getDni());
+            ps.setString(2, al.getApellido());
+            ps.setString(3, al.getNombre());
+            ps.setString(4, al.getfN().toString());      
+            ps.setInt(5,al.getId());
+            int resultado = ps.executeUpdate();
+            if (resultado == 1) {
+                System.out.println("El alumno fue editado correctamente");
+            } else {
+                System.out.println("El alumno no pudo ser editado");
+            }
+
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error editar al alumno : " + al.getNombre() + " " + al.getApellido() + " " + e.getMessage());
+
+        }
+
+    } 
+    //  BUSCAR ALUMNO POR ID Y POR DNI
+    public Alumno buscarAlumnoPorId(int id){
+    Alumno al=new Alumno();
+        String query = "SELECT * FROM alumno WHERE idAlumno=? and estado=1";
+        try {
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+
+           if(rs.next()) {
+
+                al.setId(rs.getInt("idAlumno"));
+                al.setNombre(rs.getString("nombre"));
+                al.setDni(rs.getInt("dni"));
+                al.setApellido(rs.getString("apellido"));
+                al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
+                al.setActivo(rs.getBoolean("estado"));
+           
+            }else{
+                JOptionPane.showMessageDialog(null, "No existe el alumno");
+            }
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al buscar el alumno" + e.getMessage());
+
+        }
+    return al;
+    }
+
+    public Alumno buscarAlumnoPorDni(int dni) {
+        Alumno al = new Alumno();
+        String query = "SELECT * FROM alumno WHERE dni=? and estado=1";
+        try {
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, dni);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+
+                al.setId(rs.getInt("idAlumno"));
+                al.setNombre(rs.getString("nombre"));
+                al.setDni(rs.getInt("dni"));
+                al.setApellido(rs.getString("apellido"));
+                al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
+                al.setActivo(rs.getBoolean("estado"));
+           
+            }else{
+                JOptionPane.showMessageDialog(null, "No existe el alumno");
+            }
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al buscar el alumno" + e.getMessage());
+
+        }
+    return al;
+}
+    //LISTAR ALUMNOS
+    public ArrayList<Alumno> listarAlumnos(){
+    ArrayList<Alumno> listaDeAlumno=new  ArrayList();
+        String query = "SELECT * FROM alumno";
+        try {
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Alumno al = new Alumno();
+                al.setId(rs.getInt("idAlumno"));
+                al.setNombre(rs.getString("nombre"));
+                al.setDni(rs.getInt("dni"));
+                al.setApellido(rs.getString("apellido"));
+                al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
+                al.setActivo(rs.getBoolean("estado"));
+                listaDeAlumno.add(al);
+            }
+            ps.close();
+
+        } catch (SQLException e) {
+            System.out.println("Error al borrar al alumno" + e.getMessage());
+
+        }
+    return listaDeAlumno;
+}
+}
