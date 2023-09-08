@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AccesoADatos;
+package universidad.accesoADatos;
 
-import Entidades.Alumno;
+import universidad.entidades.Alumno;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,33 +19,34 @@ import javax.swing.JOptionPane;
  * @author valen
  */
 public class AlumnoData {
-    private Connection con=null;
+
+    private Connection con = null;
 
     public AlumnoData() {
-        this.con=Conexion.buscarConexion();
+        this.con = Conexion.buscarConexion();
     }
 
-    public void guardarAlumno(Alumno al) {
+    public void guardarAlumno(Alumno alumno) {
         String query = "INSERT INTO alumno(dni,apellido, nombre, fechaNacimiento,estado) "
                 + "VALUES (?,?,?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, al.getDni());
-            ps.setString(2, al.getApellido());
-            ps.setString(3, al.getNombre());
-            ps.setString(4, al.getfN().toString());
-            ps.setBoolean(5, al.isActivo());
+            ps.setInt(1, alumno.getDni());
+            ps.setString(2, alumno.getApellido());
+            ps.setString(3, alumno.getNombre());
+            ps.setString(4, alumno.getfN().toString());
+            ps.setBoolean(5, alumno.isActivo());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                al.setId(rs.getInt(1));
+                alumno.setId(rs.getInt(1));
             } else {
                 System.out.println("No se pudo recuperar el ID");
             }
             ps.close();
 
         } catch (SQLException e) {
-            System.out.println("Error al guardar al alumno: " + al.getNombre() + " " + al.getApellido() + " " + e.getMessage());
+            System.out.println("Error al guardar al alumno: " + alumno.getNombre() + " " + alumno.getApellido() + " " + e.getMessage());
 
         }
 
@@ -95,16 +94,16 @@ public class AlumnoData {
         }
 
     }
- 
-    public void editarAlumno(Alumno al) {
+
+    public void editarAlumno(Alumno alumno) {
         String query = "UPDATE `alumno` SET `dni`=?,`apellido`=?,`nombre`=?,`fechaNacimiento`=? WHERE idAlumno=?";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, al.getDni());
-            ps.setString(2, al.getApellido());
-            ps.setString(3, al.getNombre());
-            ps.setString(4, al.getfN().toString());      
-            ps.setInt(5,al.getId());
+            ps.setInt(1, alumno.getDni());
+            ps.setString(2, alumno.getApellido());
+            ps.setString(3, alumno.getNombre());
+            ps.setString(4, alumno.getfN().toString());
+            ps.setInt(5, alumno.getId());
             int resultado = ps.executeUpdate();
             if (resultado == 1) {
                 System.out.println("El alumno fue editado correctamente");
@@ -115,21 +114,22 @@ public class AlumnoData {
             ps.close();
 
         } catch (SQLException e) {
-            System.out.println("Error editar al alumno : " + al.getNombre() + " " + al.getApellido() + " " + e.getMessage());
+            System.out.println("Error editar al alumno : " + alumno.getNombre() + " " + alumno.getApellido() + " " + e.getMessage());
 
         }
 
-    } 
+    }
+
     //  BUSCAR ALUMNO POR ID Y POR DNI
-    public Alumno buscarAlumnoPorId(int id){
-    Alumno al=new Alumno();
+    public Alumno buscarAlumnoPorId(int id) {
+        Alumno al = new Alumno();
         String query = "SELECT * FROM alumno WHERE idAlumno=? and estado=1";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
-           if(rs.next()) {
+            if (rs.next()) {
 
                 al.setId(rs.getInt("idAlumno"));
                 al.setNombre(rs.getString("nombre"));
@@ -137,8 +137,8 @@ public class AlumnoData {
                 al.setApellido(rs.getString("apellido"));
                 al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
                 al.setActivo(rs.getBoolean("estado"));
-           
-            }else{
+
+            } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
             ps.close();
@@ -147,7 +147,7 @@ public class AlumnoData {
             System.out.println("Error al buscar el alumno" + e.getMessage());
 
         }
-    return al;
+        return al;
     }
 
     public Alumno buscarAlumnoPorDni(int dni) {
@@ -166,8 +166,8 @@ public class AlumnoData {
                 al.setApellido(rs.getString("apellido"));
                 al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
                 al.setActivo(rs.getBoolean("estado"));
-           
-            }else{
+
+            } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
             ps.close();
@@ -176,11 +176,12 @@ public class AlumnoData {
             System.out.println("Error al buscar el alumno" + e.getMessage());
 
         }
-    return al;
-}
+        return al;
+    }
+
     //LISTAR ALUMNOS
-    public ArrayList<Alumno> listarAlumnos(){
-    ArrayList<Alumno> listaDeAlumno=new  ArrayList();
+    public ArrayList<Alumno> listarAlumnos() {
+        ArrayList<Alumno> listaDeAlumno = new ArrayList();
         String query = "SELECT * FROM alumno";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -203,6 +204,6 @@ public class AlumnoData {
             System.out.println("Error al borrar al alumno" + e.getMessage());
 
         }
-    return listaDeAlumno;
-}
+        return listaDeAlumno;
+    }
 }

@@ -3,29 +3,32 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package AccesoADatos;
+package universidad.entidades;
 
 /**
  *
  * @author valen
  */
 public class Materia {
-    private int id=-1;
+
+    private int id = -1;
     private int anioMateria;
     private String nombre;
     private boolean activo;
-public Materia(int id, int anioMateria, String nombre, boolean activo) {
-    this.id=id;
-    
+
+    public Materia(int id, int anioMateria, String nombre, boolean activo) {
+        this.id = id;
+
         this.anioMateria = anioMateria;
         this.nombre = nombre;
         this.activo = activo;
     }
+
     public Materia() {
     }
 
     public Materia(int anioMateria, String nombre, boolean activo) {
-       
+
         this.anioMateria = anioMateria;
         this.nombre = nombre;
         this.activo = activo;
@@ -62,15 +65,5 @@ public Materia(int id, int anioMateria, String nombre, boolean activo) {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

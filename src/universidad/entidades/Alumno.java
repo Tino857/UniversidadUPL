@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Entidades;
+package universidad.entidades;
 
 import java.time.LocalDate;
 import static java.time.temporal.TemporalQueries.localDate;
