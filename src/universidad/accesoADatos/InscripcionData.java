@@ -134,7 +134,8 @@ public class InscripcionData {
     public ArrayList<Materia> listarMateriasNoCursadas(int id) {
         ArrayList<Materia> listaDeMateriasNoCursadas = new ArrayList();
         //AgregarCondicion
-        String query = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion JOIN materia ON (inscripcion.idMateria = materia.idMateria) WHERE inscripcion.idAlumno = ?";
+        String query = "SELECT m.idMateria, m.nombre, m.año FROM materia AS m WHERE NOT EXISTS "
+                + "(SELECT 1 FROM inscripcion AS i WHERE i.idAlumno = 1 AND i.idMateria = m.idMateria)";
 
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
