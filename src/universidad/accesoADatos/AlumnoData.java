@@ -187,7 +187,7 @@ public class AlumnoData {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ResultSet rs = ps.executeQuery();
-
+           
             while (rs.next()) {
                 Alumno al = new Alumno();
                 al.setId(rs.getInt("idAlumno"));
