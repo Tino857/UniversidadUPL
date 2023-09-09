@@ -60,9 +60,9 @@ public class InscripcionData {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ResultSet rs = ps.executeQuery();
-            Inscripcion insc = new Inscripcion();
-
+            Inscripcion insc = null;
             while (rs.next()) {
+                insc=new Inscripcion();
                 insc.setIdInscripcion(rs.getInt("idInscripcion"));
                 insc.setIdMateria(rs.getInt("idMateria"));
                 insc.setIdAlumno(rs.getInt("idAlumno"));
@@ -85,9 +85,10 @@ public class InscripcionData {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            Inscripcion insc = new Inscripcion();
+            Inscripcion insc = null;
 
             while (rs.next()) {
+                insc = new Inscripcion();
                 insc.setIdInscripcion(rs.getInt("idInscripcion"));
                 insc.setIdMateria(rs.getInt("idMateria"));
                 insc.setIdAlumno(rs.getInt("idAlumno"));
@@ -112,13 +113,14 @@ public class InscripcionData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
-            Materia materia = new Materia();
+            Materia mat =null; 
 
             while (rs.next()) {
-                materia.setId(rs.getInt("idMateria"));
-                materia.setAnioMateria(rs.getInt("año"));
-                materia.setNombre(rs.getString("nombre"));
-                listaDeMateriasCursadas.add(materia);
+                mat=new Materia();
+                mat.setId(rs.getInt("idMateria"));
+                mat.setAnioMateria(rs.getInt("año"));
+                mat.setNombre(rs.getString("nombre"));
+                listaDeMateriasCursadas.add(mat);
             }
             ps.close();
 
@@ -140,13 +142,14 @@ public class InscripcionData {
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
-            Materia materia = new Materia();
+            Materia mat =null; 
 
             while (rs.next()) {
-                materia.setId(rs.getInt("idMateria"));
-                materia.setAnioMateria(rs.getInt("año"));
-                materia.setNombre(rs.getString("nombre"));
-                listaDeMateriasNoCursadas.add(materia);
+                mat=new Materia();
+                mat.setId(rs.getInt("idMateria"));
+                mat.setAnioMateria(rs.getInt("año"));
+                mat.setNombre(rs.getString("nombre"));
+                listaDeMateriasNoCursadas.add(mat);
             }
             ps.close();
 
@@ -210,9 +213,9 @@ String query = "SELECT alumno.idAlumno,alumno.dni,alumno.apellido,alumno.nombre,
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ResultSet rs = ps.executeQuery();
-           
+            Alumno al =null;
             while (rs.next()) {
-                Alumno al = new Alumno();
+                al = new Alumno();
                 al.setId(rs.getInt("idAlumno"));
                 al.setApellido(rs.getString("apellido"));
                 al.setNombre(rs.getString("nombre"));

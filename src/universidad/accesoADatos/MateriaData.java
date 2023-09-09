@@ -116,25 +116,21 @@ public class MateriaData {
     }
         //BUSCAR MATERIA
         public Materia buscarMateriaPorId(int id){
-            Materia mat=new Materia();
+            Materia mat=null;
             String query="SELECT * FROM `materia` WHERE idMateria=? and estado=1";
-             try {
-            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()) {
-
-                mat.setId(id);
-                mat.setAnioMateria(rs.getInt("año"));
-                mat.setNombre(rs.getString("nombre"));
-                mat.setActivo(true);
-              
-               
-               
-           
-            }else{
-                JOptionPane.showMessageDialog(null, "No existe la materia");
-            }
+            try {
+                PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    mat = new Materia();
+                    mat.setId(id);
+                    mat.setAnioMateria(rs.getInt("año"));
+                    mat.setNombre(rs.getString("nombre"));
+                    mat.setActivo(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "No existe la materia");
+                }
             
             ps.close();
 
@@ -152,14 +148,14 @@ public class MateriaData {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ResultSet rs = ps.executeQuery();
-
+            Materia mat = null;
             while (rs.next()) {
-                Materia mat=new Materia();
+                mat = new Materia();
                 mat.setId(rs.getInt("idMateria"));
                 mat.setAnioMateria(rs.getInt("año"));
                 mat.setNombre(rs.getString("nombre"));
                 mat.setActivo(true);
-               mat.setActivo(rs.getBoolean("estado"));
+                mat.setActivo(rs.getBoolean("estado"));
                 listaDeMateria.add(mat);
             }
             ps.close();

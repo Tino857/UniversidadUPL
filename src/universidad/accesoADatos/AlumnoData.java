@@ -122,7 +122,7 @@ public class AlumnoData {
 
     //  BUSCAR ALUMNO POR ID Y POR DNI
     public Alumno buscarAlumnoPorId(int id) {
-        Alumno al = new Alumno();
+        Alumno al =null; 
         String query = "SELECT * FROM alumno WHERE idAlumno=? and estado=1";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -130,7 +130,7 @@ public class AlumnoData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
+                al = new Alumno();
                 al.setId(rs.getInt("idAlumno"));
                 al.setNombre(rs.getString("nombre"));
                 al.setDni(rs.getInt("dni"));
@@ -151,7 +151,7 @@ public class AlumnoData {
     }
 
     public Alumno buscarAlumnoPorDni(int dni) {
-        Alumno al = new Alumno();
+        Alumno al =null; 
         String query = "SELECT * FROM alumno WHERE dni=? and estado=1";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -159,7 +159,7 @@ public class AlumnoData {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-
+                al = new Alumno();
                 al.setId(rs.getInt("idAlumno"));
                 al.setNombre(rs.getString("nombre"));
                 al.setDni(rs.getInt("dni"));
@@ -187,9 +187,9 @@ public class AlumnoData {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ResultSet rs = ps.executeQuery();
-           
+           Alumno al = null;
             while (rs.next()) {
-                Alumno al = new Alumno();
+             al = new Alumno();
                 al.setId(rs.getInt("idAlumno"));
                 al.setNombre(rs.getString("nombre"));
                 al.setDni(rs.getInt("dni"));
