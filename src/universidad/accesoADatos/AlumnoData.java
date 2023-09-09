@@ -201,7 +201,7 @@ public class AlumnoData {
             ps.close();
 
         } catch (SQLException e) {
-            System.out.println("Error al borrar al alumno" + e.getMessage());
+            System.out.println("Error al encontrar al alumno" + e.getMessage());
 
         }
         return listaDeAlumno;
