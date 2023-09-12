@@ -52,12 +52,12 @@ public class AlumnoData {
 
     }
 
-    public void eliminarAlumnoLogico(int id) {
-        String query = "UPDATE alumno SET estado=0 WHERE idAlumno=?";
+    public void eliminarAlumnoLogico(int dni) {
+        String query = "UPDATE alumno SET estado=0 WHERE dni=?";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1, id);
+            ps.setInt(1,dni);
             int registro = ps.executeUpdate();
 
             if (registro == 1) {

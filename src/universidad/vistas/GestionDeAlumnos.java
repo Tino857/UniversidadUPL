@@ -5,6 +5,11 @@
  */
 package universidad.vistas;
 
+import java.sql.Date;
+import java.time.ZoneId;
+import javax.swing.JOptionPane;
+import universidad.entidades.Alumno;
+
 /**
  *
  * @author user
@@ -16,6 +21,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
      */
     public GestionDeAlumnos() {
         initComponents();
+       jRBEstado.setEnabled(false);
+        
+        
+        
+        
     }
 
     /**
@@ -45,6 +55,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jBSalir = new javax.swing.JButton();
 
+        setClosable(true);
+
+        jPanel1.setForeground(new java.awt.Color(255, 102, 102));
+
         jLabel2.setText("Documento:");
 
         jLabel3.setText("Apellido:");
@@ -56,17 +70,47 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jLabel6.setText("Fecha de nacimiento:");
 
         jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
+
+        jRBEstado.setBackground(new java.awt.Color(102, 102, 102));
+        jRBEstado.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jRBEstado.setForeground(new java.awt.Color(51, 51, 51));
+        jRBEstado.setBorderPainted(true);
 
         jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Alumnos");
 
         jBSalir.setText("Salir");
+        jBSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,7 +130,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                             .addComponent(jTFApellido))
                         .addGap(121, 121, 121))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
+                        .addGap(96, 96, 96)
                         .addComponent(jRBEstado)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -97,7 +141,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
@@ -138,8 +182,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(jRBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jRBEstado))
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -165,11 +209,73 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 43, Short.MAX_VALUE))
+                .addGap(0, 35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+       dispose();
+    }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        if (jRBEstado.isSelected()) {
+           JOptionPane.showMessageDialog(this, "Este alumno ya esta eliminado"); 
+        return;}
+        try{
+           int dni=Integer.parseInt(JTFDni.getText());
+           Vista.getAD().eliminarAlumnoLogico(dni);
+           jRBEstado.setSelected(false);
+           //Despues hay que llamar a limpiar();
+       }catch (NumberFormatException e){
+           JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
+       }
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+      
+        
+        try{
+        if (jTFNombre.getText().isEmpty()||jTFApellido.getText().isEmpty()||JTFDni.getText().isEmpty()) {
+              JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+              return;
+        }
+        
+           Alumno al= new Alumno(Integer.parseInt(JTFDni.getText()), jTFNombre.getText() ,jTFApellido.getText(),jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() , true);
+       Vista.getAD().guardarAlumno(al);
+        JOptionPane.showMessageDialog(this, "Alumno guardado con exito");
+       limpiar();
+        }catch (NumberFormatException e){
+           JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
+       }catch(NullPointerException e){
+           JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio"); 
+       }
+    }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+      try{
+          int dni=Integer.parseInt(JTFDni.getText());
+          Alumno al=Vista.getAD().buscarAlumnoPorDni(dni);
+      jTFNombre.setText(al.getNombre());
+      jTFApellido.setText(al.getApellido());
+      JTFDni.setText(Integer.toString(dni));
+      jRBEstado.setSelected(al.isActivo());
+      jDCCalendario.setDate(Date.valueOf(al.getfN()));
+      
+      
+      
+      }catch (NumberFormatException e){
+           JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
+       }catch(NullPointerException e){
+           
+       }
+      
+    }//GEN-LAST:event_jBBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -191,4 +297,12 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFApellido;
     private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
+public void limpiar(){
+JTFDni.setText("");
+jTFApellido.setText("");
+jTFNombre.setText("");
+jDCCalendario.setDate(null);
+jRBEstado.setSelected(false);
+
+}
 }

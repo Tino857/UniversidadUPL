@@ -22,8 +22,8 @@ public class InscripcionData {
     private final AlumnoData aluData;
     private final MateriaData matData;
 
-    public InscripcionData(Conexion conex, AlumnoData aluData, MateriaData matData) {
-        this.con = conex.buscarConexion();
+    public InscripcionData(AlumnoData aluData, MateriaData matData) {
+        this.con = Conexion.buscarConexion();
         this.aluData = aluData;
         this.matData = matData;
     }
