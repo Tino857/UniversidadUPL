@@ -166,9 +166,14 @@ public class AlumnoData {
                 al.setApellido(rs.getString("apellido"));
                 al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
                 al.setActivo(rs.getBoolean("estado"));
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
+                
+            }
+            else {
+              
+                    JOptionPane.showMessageDialog(null, "No existe el alumno");  
+              
+  
+               
             }
             ps.close();
 

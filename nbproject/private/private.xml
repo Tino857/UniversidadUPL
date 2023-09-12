@@ -3,11 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/valen/OneDrive/Documentos/NetBeansProjects/Ejercicio1_Guia4/src/universidad/entidades/Alumno.java</file>
             <file>file:/C:/Users/valen/OneDrive/Documentos/NetBeansProjects/Ejercicio1_Guia4/src/universidad/vistas/GestionDeAlumnos.java</file>
+            <file>file:/C:/Users/valen/OneDrive/Documentos/NetBeansProjects/Ejercicio1_Guia4/src/universidad/accesoADatos/AlumnoData.java</file>
             <file>file:/C:/Users/valen/OneDrive/Documentos/NetBeansProjects/Ejercicio1_Guia4/src/universidad/vistas/GestionDeMaterias.java</file>
-            <file>file:/C:/Users/valen/OneDrive/Documentos/NetBeansProjects/Ejercicio1_Guia4/src/universidad/vistas/EdisionDeMateria.java</file>
             <file>file:/C:/Users/valen/OneDrive/Documentos/NetBeansProjects/Ejercicio1_Guia4/src/universidad/vistas/Vista.java</file>
-            <file>file:/C:/Users/valen/OneDrive/Documentos/NetBeansProjects/Ejercicio1_Guia4/src/universidad/vistas/EdisionDeAlumno.java</file>
+            <file>file:/C:/Users/valen/OneDrive/Documentos/NetBeansProjects/Ejercicio1_Guia4/src/universidad/entidades/Inscripcion.java</file>
         </group>
     </open-files>
 </project-private>
