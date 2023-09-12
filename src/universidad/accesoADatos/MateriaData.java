@@ -49,24 +49,21 @@ public class MateriaData {
 
     } 
        //ELIMINAR MATERIA
-        public void eliminarMateriaLogico(int id) {
+        public int eliminarMateriaLogico(int id) {
         String query = "UPDATE `materia` SET estado=0 WHERE idMateria=?";
+        int registro=0;
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
-            int registro = ps.executeUpdate();
+            registro = ps.executeUpdate();
 
-            if (registro == 1) {
-                System.out.println("La materia ha sido borrada");
-            } else {
-                System.out.println("No se pudo borrar a la materia");
-            }
             ps.close();
 
         } catch (SQLException e) {
             System.out.println("Error al borrar la materia : "+ e.getMessage());
 
         }
+        return registro;
 
     } 
         public void eliminarMateria(int id) {

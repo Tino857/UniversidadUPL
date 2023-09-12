@@ -5,6 +5,11 @@
  */
 package universidad.vistas;
 
+import java.sql.Date;
+import javax.swing.JOptionPane;
+import universidad.entidades.Alumno;
+import universidad.entidades.Materia;
+
 /**
  *
  * @author valen
@@ -16,6 +21,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
      */
     public GestionDeMaterias() {
         initComponents();
+        jRBEstado.setEnabled(false);
     }
 
     /**
@@ -52,10 +58,25 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jLabel5.setText("Estado:");
 
         jBBuscar.setText("Buscar");
+        jBBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBuscarActionPerformed(evt);
+            }
+        });
 
         jBLimpiar.setText("Limpiar");
+        jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBLimpiarActionPerformed(evt);
+            }
+        });
 
         jBEliminar.setText("Eliminar");
+        jBEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBEliminarActionPerformed(evt);
+            }
+        });
 
         jBGuardar.setText("Guardar");
 
@@ -166,8 +187,47 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-dispose();        // TODO add your handling code here:
+        dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jBSalirActionPerformed
+
+    private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+
+        try {
+            int codigo = Integer.parseInt(jTFCodigo.getText());
+            Materia materia = Vista.getMD().buscarMateriaPorId(codigo);
+            jTFNombre.setText(materia.getNombre());
+            jTFAño.setText(materia.getAnioMateria() + "");
+            jRBEstado.setSelected(materia.isActivo());
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
+        } catch (NullPointerException e) {
+
+        }
+    }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+        if (!jRBEstado.isSelected()) {
+            JOptionPane.showMessageDialog(this, "Esta materia ya esta eliminada");
+            return;
+        }
+        try {
+            int codigo = Integer.parseInt(jTFCodigo.getText());
+            int registro = Vista.getMD().eliminarMateriaLogico(codigo);
+            if (registro == 1) {
+                JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo borrar a la materia");
+            }
+            jRBEstado.setSelected(false);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
+        } 
+    }//GEN-LAST:event_jBEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -187,4 +247,13 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JTextField jTFCodigo;
     private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiar() {
+        jTFAño.setText("");
+        jTFCodigo.setText("");
+        jTFNombre.setText("");
+        jRBEstado.setSelected(false);
+
+    }
+
 }

@@ -9,12 +9,12 @@ package universidad.vistas;
  *
  * @author valen
  */
-public class EdisionDeAlumno extends javax.swing.JInternalFrame {
+public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form EdisionDeAlumno
      */
-    public EdisionDeAlumno() {
+    public EdicionDeAlumno() {
         initComponents();
     }
 

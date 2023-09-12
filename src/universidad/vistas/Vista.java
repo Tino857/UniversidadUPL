@@ -15,16 +15,16 @@ import universidad.accesoADatos.MateriaData;
  */
 public class Vista extends javax.swing.JFrame {
 
-  private static AlumnoData AD;
-  private static MateriaData MD;
-  private static InscripcionData ID;
+    private static AlumnoData AD;
+    private static MateriaData MD;
+    private static InscripcionData ID;
+
     public Vista() {
         initComponents();
-       AD=new AlumnoData();
-       MD=new MateriaData();
-       ID= new InscripcionData(AD,MD);
-        
-        
+        AD = new AlumnoData();
+        MD = new MateriaData();
+        ID = new InscripcionData(AD, MD);
+
     }
 
     public static AlumnoData getAD() {
@@ -61,9 +61,10 @@ public class Vista extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
+        jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(800, 600));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -73,7 +74,7 @@ public class Vista extends javax.swing.JFrame {
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 535, Short.MAX_VALUE)
+            .addGap(0, 547, Short.MAX_VALUE)
         );
 
         jMenu2.setText("Alumnos");
@@ -86,7 +87,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
-        jMenuItem6.setText("Edision de Alumno");
+        jMenuItem6.setText("Edicion de Alumno");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
@@ -106,7 +107,7 @@ public class Vista extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem2);
 
-        jMenuItem7.setText("Edision de Materia");
+        jMenuItem7.setText("Edicion de Materia");
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -143,8 +144,13 @@ public class Vista extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu5.setText("Salir");
-        jMenuBar1.add(jMenu5);
+        jMSalir.setText("Salir");
+        jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMSalirMouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMSalir);
 
         setJMenuBar(jMenuBar1);
 
@@ -156,17 +162,19 @@ public class Vista extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(escritorio)
-                .addContainerGap())
+            .addComponent(escritorio)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        escritorio.removeAll();
+        escritorio.repaint();
+        GestionDeMaterias GDM = new GestionDeMaterias();
+        GDM.setVisible(true);
+        escritorio.add(GDM);
+        escritorio.moveToFront(GDM);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -191,8 +199,17 @@ public class Vista extends javax.swing.JFrame {
         GestionDeAlumnos GDA = new GestionDeAlumnos();
         GDA.setVisible(true);
         escritorio.add(GDA);
-        escritorio.moveToFront(GDA);     
+        escritorio.moveToFront(GDA);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMSalirMouseClicked
+        escritorio.removeAll();
+        escritorio.repaint();
+        SalirView exit = new SalirView();
+        exit.setVisible(true);
+        escritorio.add(exit);
+        escritorio.moveToFront(exit);
+    }//GEN-LAST:event_jMSalirMouseClicked
 
     /**
      * @param args the command line arguments
@@ -231,11 +248,11 @@ public class Vista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMSalir;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;

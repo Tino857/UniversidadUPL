@@ -26,9 +26,10 @@ public class AlumnoData {
         this.con = Conexion.buscarConexion();
     }
 
-    public void guardarAlumno(Alumno alumno) {
+    public int guardarAlumno(Alumno alumno) {
         String query = "INSERT INTO alumno(dni,apellido, nombre, fechaNacimiento,estado) "
                 + "VALUES (?,?,?,?,?)";
+        int registro = 0;
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
@@ -38,8 +39,10 @@ public class AlumnoData {
             ps.setBoolean(5, alumno.isActivo());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
+            
             if (rs.next()) {
                 alumno.setId(rs.getInt(1));
+                registro = rs.getInt(1);
             } else {
                 System.out.println("No se pudo recuperar el ID");
             }
@@ -49,6 +52,7 @@ public class AlumnoData {
             System.out.println("Error al guardar al alumno: " + alumno.getNombre() + " " + alumno.getApellido() + " " + e.getMessage());
 
         }
+        return registro;
 
     }
 

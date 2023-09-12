@@ -21,11 +21,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
      */
     public GestionDeAlumnos() {
         initComponents();
-       jRBEstado.setEnabled(false);
-        
-        
-        
-        
+        jRBEstado.setEnabled(false);
+
     }
 
     /**
@@ -216,7 +213,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
@@ -225,62 +222,64 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
         if (!jRBEstado.isSelected()) {
-           JOptionPane.showMessageDialog(this, "Este alumno ya esta eliminado"); 
-        return;}
-        try{
-           int dni=Integer.parseInt(JTFDni.getText());
-           int registro=Vista.getAD().eliminarAlumnoLogico(dni);
-           if (registro == 1) {
+            JOptionPane.showMessageDialog(this, "Este alumno ya esta eliminado");
+            return;
+        }
+        try {
+            int dni = Integer.parseInt(JTFDni.getText());
+            int registro = Vista.getAD().eliminarAlumnoLogico(dni);
+            if (registro == 1) {
                 JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
             } else {
-                JOptionPane.showMessageDialog(this,"No se pudo borrar al alumno");
+                JOptionPane.showMessageDialog(this, "No se pudo borrar al alumno");
             }
-           jRBEstado.setSelected(false);
-           
-           //Despues hay que llamar a limpiar();
-       }catch (NumberFormatException e){
-           JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
-       }
+            jRBEstado.setSelected(false);
+
+            //Despues hay que llamar a limpiar();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
+        }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-      
-        
-        try{
-        if (jTFNombre.getText().isEmpty()||jTFApellido.getText().isEmpty()||JTFDni.getText().isEmpty()) {
-              JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
-              return;
+
+        try {
+            if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+                return;
+            }
+
+            Alumno al = new Alumno(Integer.parseInt(JTFDni.getText()), jTFNombre.getText(), jTFApellido.getText(), jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
+            int registro = Vista.getAD().guardarAlumno(al);
+            if (registro > 0) {
+                JOptionPane.showMessageDialog(this, "El alumno ha sido agregado");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo agregar al alumno, el DNI ya existe");
+            }
+            limpiar();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
         }
-        
-           Alumno al= new Alumno(Integer.parseInt(JTFDni.getText()), jTFNombre.getText() ,jTFApellido.getText(),jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate() , true);
-       Vista.getAD().guardarAlumno(al);
-        JOptionPane.showMessageDialog(this, "Alumno guardado con exito");
-       limpiar();
-        }catch (NumberFormatException e){
-           JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
-       }catch(NullPointerException e){
-           JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio"); 
-       }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-      try{
-          int dni=Integer.parseInt(JTFDni.getText());
-          Alumno al=Vista.getAD().buscarAlumnoPorDni(dni);
-      jTFNombre.setText(al.getNombre());
-      jTFApellido.setText(al.getApellido());
-      JTFDni.setText(Integer.toString(dni));
-      jRBEstado.setSelected(al.isActivo());
-      jDCCalendario.setDate(Date.valueOf(al.getfN()));
-      
-      
-      
-      }catch (NumberFormatException e){
-           JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
-       }catch(NullPointerException e){
-           
-       }
-      
+        try {
+            int dni = Integer.parseInt(JTFDni.getText());
+            Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
+            jTFNombre.setText(al.getNombre());
+            jTFApellido.setText(al.getApellido());
+            JTFDni.setText(Integer.toString(dni));
+            jRBEstado.setSelected(al.isActivo());
+            jDCCalendario.setDate(Date.valueOf(al.getfN()));
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
+        } catch (NullPointerException e) {
+
+        }
+
     }//GEN-LAST:event_jBBuscarActionPerformed
 
 
@@ -303,12 +302,12 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFApellido;
     private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
-public void limpiar(){
-JTFDni.setText("");
-jTFApellido.setText("");
-jTFNombre.setText("");
-jDCCalendario.setDate(null);
-jRBEstado.setSelected(false);
 
-}
+    public void limpiar() {
+        JTFDni.setText("");
+        jTFApellido.setText("");
+        jTFNombre.setText("");
+        jDCCalendario.setDate(null);
+        jRBEstado.setSelected(false);
+    }
 }

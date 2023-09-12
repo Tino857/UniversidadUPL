@@ -9,12 +9,12 @@ package universidad.vistas;
  *
  * @author valen
  */
-public class EdisionDeMateria extends javax.swing.JInternalFrame {
+public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form EdisionDeMateria
      */
-    public EdisionDeMateria() {
+    public EdicionDeMateria() {
         initComponents();
     }
 
