@@ -52,25 +52,26 @@ public class AlumnoData {
 
     }
 
-    public void eliminarAlumnoLogico(int dni) {
+    public int eliminarAlumnoLogico(int dni) {
         String query = "UPDATE alumno SET estado=0 WHERE dni=?";
+        int registro = 0;
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1,dni);
-            int registro = ps.executeUpdate();
+             registro = ps.executeUpdate();
 
-            if (registro == 1) {
+           /* if (registro == 1) {
                 System.out.println("El alumno ha sido borrado");
             } else {
                 System.out.println("No se pudo borrar al alumno");
-            }
+            }*/
             ps.close();
 
         } catch (SQLException e) {
             System.out.println("Error al borrar al alumno" + e.getMessage());
 
-        }
+        } return registro;
     }
 
     public void eliminarAlumno(int id) {
@@ -82,9 +83,9 @@ public class AlumnoData {
             int registro = ps.executeUpdate();
 
             if (registro == 1) {
-                System.out.println("El alumno ha sido borrado");
+                JOptionPane.showMessageDialog(null, "El alumno ha sido borrado");
             } else {
-                System.out.println("No se pudo borrar al alumno");
+                JOptionPane.showMessageDialog(null,"No se pudo borrar al alumno");
             }
             ps.close();
 

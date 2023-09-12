@@ -66,7 +66,7 @@ public class InscripcionData {
                 insc.setIdInscripcion(rs.getInt("idInscripcion"));
                 insc.setIdMateria(rs.getInt("idMateria"));
                 insc.setIdAlumno(rs.getInt("idAlumno"));
-                insc.setNota(rs.getInt("nota"));
+                insc.setNota(rs.getDouble("nota"));
                 listaDeInscripciones.add(insc);
             }
             ps.close();
@@ -92,7 +92,7 @@ public class InscripcionData {
                 insc.setIdInscripcion(rs.getInt("idInscripcion"));
                 insc.setIdMateria(rs.getInt("idMateria"));
                 insc.setIdAlumno(rs.getInt("idAlumno"));
-                insc.setNota(rs.getInt("nota"));
+                insc.setNota(rs.getDouble("nota"));
                 listaDeInscripciones.add(insc);
             }
             ps.close();

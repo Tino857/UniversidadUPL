@@ -224,13 +224,19 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        if (jRBEstado.isSelected()) {
+        if (!jRBEstado.isSelected()) {
            JOptionPane.showMessageDialog(this, "Este alumno ya esta eliminado"); 
         return;}
         try{
            int dni=Integer.parseInt(JTFDni.getText());
-           Vista.getAD().eliminarAlumnoLogico(dni);
+           int registro=Vista.getAD().eliminarAlumnoLogico(dni);
+           if (registro == 1) {
+                JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
+            } else {
+                JOptionPane.showMessageDialog(this,"No se pudo borrar al alumno");
+            }
            jRBEstado.setSelected(false);
+           
            //Despues hay que llamar a limpiar();
        }catch (NumberFormatException e){
            JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
