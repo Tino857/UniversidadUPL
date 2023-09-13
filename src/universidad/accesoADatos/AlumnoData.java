@@ -101,12 +101,17 @@ public class AlumnoData {
 
     }
 
-    public void editarAlumno(Alumno alumno) {
+    public int editarAlumno(Alumno alumno) {
         String query = "UPDATE `alumno` SET `dni`=?,`apellido`=?,`nombre`=?,`fechaNacimiento`=? WHERE idAlumno=?";
+        int registro = 0;
         try {
-            if (Vista.getAD().buscarAlumnoPorDni(alumno.getDni()).getId()!=alumno.getId()) {
-                JOptionPane.showMessageDialog(null, "El dni está en uso");
-                return;
+            Alumno al= Vista.getAD().buscarAlumnoPorDni(alumno.getDni());
+            if (al!=null)
+            {if (al.getId()!= alumno.getId()) {
+                     JOptionPane.showMessageDialog(null, "El dni está en uso");
+                return registro;
+                }
+               
             }
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
@@ -114,8 +119,8 @@ public class AlumnoData {
             ps.setString(3, alumno.getNombre());
             ps.setString(4, alumno.getfN().toString());
             ps.setInt(5, alumno.getId());
-            int resultado = ps.executeUpdate();
-            if (resultado == 1) {
+            registro = ps.executeUpdate();
+            if (registro == 1) {
                 System.out.println("El alumno fue editado correctamente");
             } else {
                 System.out.println("El alumno no pudo ser editado");
@@ -126,7 +131,7 @@ public class AlumnoData {
         } catch (SQLException e) {
             System.out.println("Error editar al alumno : " + alumno.getNombre() + " " + alumno.getApellido() + " " + e.getMessage());
 
-        }
+        }return registro;
 
     }
 

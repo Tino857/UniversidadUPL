@@ -227,21 +227,26 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         } else {
 
             try {
-                int filaSelec = jTable1.getSelectedRow();
+                int filaSelec = jTable1.getSelectedRow();  
 
                 Alumno al = Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
                 al.setDni(Integer.parseInt(jTFDni.getText()));
                 al.setApellido(jTFApellido.getText());
                 al.setNombre(jTFNombre.getText());
                 al.setfN(jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                Vista.getAD().editarAlumno(al);
+                int registro=Vista.getAD().editarAlumno(al);
+                if (registro>0) {
+                    JOptionPane.showMessageDialog(this,"Datos actualizados");
+                    
+                }
 
-                modelo.removeRow(filaSelec);
-                cargarTabla(al);
+                limpiarTabla();
+                
+                cargarDatos();
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "En la casilla de Telefono solo deben ir numeros");
             }
-            JOptionPane.showMessageDialog(this, "El alumno ha sido editado con exito");
+            //JOptionPane.showMessageDialog(this, "El alumno ha sido actualizado con exito");
             limpiar();
 
             return;
@@ -290,7 +295,9 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             al.getApellido(),
             al.getNombre(),
             al.getfN().toString()
+                
         });
+        
     }
 
     public void limpiar() {
@@ -298,5 +305,12 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jTFApellido.setText("");
         jTFNombre.setText("");
         jDCCalendario.setDate(null);
+    }
+    private void limpiarTabla(){
+        int filas=modelo.getRowCount()-1;
+        for (int i = filas; i >= 0; i--) {
+            modelo.removeRow(i);
+            
+        }
     }
 }
