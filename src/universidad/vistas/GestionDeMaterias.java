@@ -6,6 +6,7 @@
 package universidad.vistas;
 
 import java.sql.Date;
+import java.time.ZoneId;
 import javax.swing.JOptionPane;
 import universidad.entidades.Alumno;
 import universidad.entidades.Materia;
@@ -79,6 +80,11 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jBGuardar.setText("Guardar");
+        jBGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBGuardarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setText("Materias");
@@ -211,11 +217,15 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        if (!jRBEstado.isSelected()) {
-            JOptionPane.showMessageDialog(this, "Esta materia ya esta eliminada");
-            return;
-        }
-        try {
+        
+        if (jTFCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "La casilla Codigo no debe estar vacia si desea eliminar la materia.");
+                return;
+            }
+         if (!Vista.getMD().buscarMateriaPorId(Integer.parseInt(jTFCodigo.getText())).isActivo()) {
+             JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
+        }else{
+           try {
             int codigo = Integer.parseInt(jTFCodigo.getText());
             int registro = Vista.getMD().eliminarMateriaLogico(codigo);
             if (registro == 1) {
@@ -226,8 +236,31 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
             jRBEstado.setSelected(false);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
-        } 
+        }   
+         }
+        
     }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+     try {
+            if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty() || jTFCodigo.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+                return;
+            }
+            Materia mat =new Materia(Integer.parseInt(jTFAño.getText()),jTFNombre.getText(), true);
+            int registro = Vista.getMD().guardarMateria(mat);
+            if (registro > 0) {
+                JOptionPane.showMessageDialog(this, "La materia ha sido guardada");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo agregar al alumno, el DNI ya existe");
+            }
+            limpiar();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "En la casilla año debe ir solo numeros.");
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+        }
+    }//GEN-LAST:event_jBGuardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

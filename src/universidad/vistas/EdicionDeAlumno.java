@@ -5,17 +5,25 @@
  */
 package universidad.vistas;
 
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+
+import javax.swing.table.DefaultTableModel;
+import universidad.entidades.Alumno;
+
 /**
  *
  * @author valen
  */
 public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form EdisionDeAlumno
-     */
+   private DefaultTableModel modelo=new DefaultTableModel();
     public EdicionDeAlumno() {
         initComponents();
+         armarTabla();
+         cargarDatos();
     }
 
     /**
@@ -33,14 +41,16 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         JBEditar = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        jTFDni = new javax.swing.JTextField();
+        jTFApellido = new javax.swing.JTextField();
+        jTFNombre = new javax.swing.JTextField();
         jDCCalendario = new com.toedter.calendar.JDateChooser();
         jBSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
+
+        setClosable(true);
 
         jLabel2.setText("Documento:");
 
@@ -51,6 +61,11 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jLabel6.setText("Fecha de nacimiento:");
 
         JBEditar.setText("Editar");
+        JBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBEditarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -70,27 +85,28 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3)
-                    .addComponent(jTextField2))
+                    .addComponent(jTFNombre)
+                    .addComponent(jTFApellido))
                 .addGap(121, 121, 121))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1)
+                .addComponent(jTFDni)
                 .addGap(115, 115, 115))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6)
-                .addGap(75, 75, 75)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(75, 75, 75)
                         .addComponent(JBEditar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addComponent(jBSalir)
                         .addGap(101, 101, 101))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -99,15 +115,15 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
@@ -130,6 +146,11 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -143,13 +164,12 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addComponent(jLabel5)))
                 .addContainerGap(67, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,7 +190,56 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+     
+         if (jTable1.getSelectedRow()==-1) {
+              JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+            return;
+        }else{
+             int filaSelec = jTable1.getSelectedRow();
+             String dni = (String) modelo.getValueAt(filaSelec,1);
+             String apellido = (String) modelo.getValueAt(filaSelec, 2);
+             String nombre = (String) modelo.getValueAt(filaSelec, 3);
+             String FN = (String) modelo.getValueAt(filaSelec, 4);
+             jTFDni.setText(dni);
+             jTFApellido.setText(apellido);
+             jTFNombre.setText(nombre);
+             jDCCalendario.setDateFormatString(FN);//No puedo hacer que se setee la fecha en el j calendar. Una vez que toco alguna fecha ya empieza a andar. Es raro
 
+    }//GEN-LAST:event_jTable1MouseClicked
+    }
+
+    private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
+        if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || jTFDni.getText().isEmpty()||jDCCalendario.getDate()==null) {
+                JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+                return;
+            }else if (jTable1.getSelectedRow()==-1) {
+              JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+            return;
+        }else {
+            
+            try {
+                int filaSelec=jTable1.getSelectedRow();
+                 
+           Alumno al=Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec,1)));
+           al.setDni(Integer.parseInt(jTFDni.getText()));
+           al.setApellido(jTFApellido.getText());
+           al.setNombre(jTFNombre.getText());
+           al.setfN(jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+           Vista.getAD().editarAlumno(al);
+           
+            modelo.removeRow(filaSelec);
+            cargarTabla(al);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "En la casilla de Telefono solo deben ir numeros");
+            }
+            JOptionPane.showMessageDialog(this, "El alumno ha sido editado con exito");
+           limpiar();
+
+            return;
+    }//GEN-LAST:event_JBEditarActionPerformed
+
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBEditar;
     private javax.swing.JButton jBSalir;
@@ -182,9 +251,46 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTFApellido;
+    private javax.swing.JTextField jTFDni;
+    private javax.swing.JTextField jTFNombre;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     // End of variables declaration//GEN-END:variables
+private void armarTabla(){
+    modelo.addColumn("ID");
+    modelo.addColumn("DNI");
+    modelo.addColumn("Apellido");
+     modelo.addColumn("Nombre");
+     modelo.addColumn("Fecha de Nacimiento");
+    jTable1.setModel(modelo);
+
+}
+private void cargarDatos(){
+  ArrayList<Alumno> ListaDeAlumnos= Vista.getAD().listarAlumnos();
+    for (Iterator<Alumno> al = ListaDeAlumnos.iterator(); al.hasNext();) {
+        Alumno next = al.next();
+        cargarTabla(next);     
+    }
+   
+}
+private void cargarTabla(Alumno al){
+   
+   modelo.addRow(new Object[]{
+       al.getId(),
+       Integer.toString(al.getDni()),
+       al.getApellido(),
+       al.getNombre(),
+       al.getfN().toString()
+       
+       
+   });
+
+}
+ public void limpiar() {
+        jTFDni.setText("");
+        jTFApellido.setText("");
+        jTFNombre.setText("");
+        jDCCalendario.setDate(null);
+        ;
+    }
 }

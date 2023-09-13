@@ -157,7 +157,7 @@ public class AlumnoData {
 
     public Alumno buscarAlumnoPorDni(int dni) {
         Alumno al =null; 
-        String query = "SELECT * FROM alumno WHERE dni=? and estado=1";
+        String query = "SELECT * FROM alumno WHERE dni=?"; //and estado=1";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, dni);
@@ -171,14 +171,9 @@ public class AlumnoData {
                 al.setApellido(rs.getString("apellido"));
                 al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
                 al.setActivo(rs.getBoolean("estado"));
-                
-            }
-            else {
-              
-                    JOptionPane.showMessageDialog(null, "No existe el alumno");  
-              
   
-               
+            } else {
+                JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
             ps.close();
 
@@ -192,7 +187,7 @@ public class AlumnoData {
     //LISTAR ALUMNOS
     public ArrayList<Alumno> listarAlumnos() {
         ArrayList<Alumno> listaDeAlumno = new ArrayList();
-        String query = "SELECT * FROM alumno";
+        String query = "SELECT * FROM alumno WHERE estado=1";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 

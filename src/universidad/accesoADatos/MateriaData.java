@@ -25,8 +25,9 @@ public class MateriaData {
        this.con=Conexion.buscarConexion();
     }
     // GUARDAR MATERIA
-       public void guardarMateria(Materia M) {
-        String query = "INSERT INTO `materia`(`nombre`, `año`, `estado`) "
+       public int guardarMateria(Materia M) {
+        int registro=0;
+           String query = "INSERT INTO `materia`(`nombre`, `año`, `estado`) "
                 + "VALUES (?,?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -37,6 +38,7 @@ public class MateriaData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 M.setId(rs.getInt(1));
+                registro = rs.getInt(1);
             } else {
                 System.out.println("No se pudo recuperar el ID");
             }
@@ -46,6 +48,7 @@ public class MateriaData {
             System.out.println("Error al guardar la materia : " + M.getNombre() + " "+ e.getMessage());
 
         }
+        return registro;
 
     } 
        //ELIMINAR MATERIA
@@ -114,7 +117,7 @@ public class MateriaData {
         //BUSCAR MATERIA
         public Materia buscarMateriaPorId(int id){
             Materia mat=null;
-            String query="SELECT * FROM `materia` WHERE idMateria=? and estado=1";
+            String query="SELECT * FROM `materia` WHERE idMateria=?";// and estado=1";
             try {
                 PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
                 ps.setInt(1, id);
@@ -124,7 +127,7 @@ public class MateriaData {
                     mat.setId(id);
                     mat.setAnioMateria(rs.getInt("año"));
                     mat.setNombre(rs.getString("nombre"));
-                    mat.setActivo(true);
+                    mat.setActivo(rs.getBoolean("estado"));
                 } else {
                     JOptionPane.showMessageDialog(null, "No existe la materia");
                 }

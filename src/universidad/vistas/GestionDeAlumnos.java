@@ -221,11 +221,14 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        if (!jRBEstado.isSelected()) {
-            JOptionPane.showMessageDialog(this, "Este alumno ya esta eliminado");
-            return;
-        }
-        try {
+         if (JTFDni.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
+                return;
+            }
+        if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
+             JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
+        }else {
+           try {
             int dni = Integer.parseInt(JTFDni.getText());
             int registro = Vista.getAD().eliminarAlumnoLogico(dni);
             if (registro == 1) {
@@ -238,13 +241,15 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             //Despues hay que llamar a limpiar();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
+        } 
         }
+   
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
         try {
-            if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty()) {
+            if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty()||jDCCalendario.getDate()==null) {
                 JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
                 return;
             }
