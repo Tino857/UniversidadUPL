@@ -5,6 +5,7 @@
  */
 package universidad.vistas;
 
+import java.sql.Date;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -19,11 +20,18 @@ import universidad.entidades.Alumno;
  */
 public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
-   private DefaultTableModel modelo=new DefaultTableModel();
+    private DefaultTableModel modelo = new DefaultTableModel(){
+    
+        @Override
+        public boolean isCellEditable (int f, int c){
+            return false;
+        }
+    };
+
     public EdicionDeAlumno() {
         initComponents();
-         armarTabla();
-         cargarDatos();
+        armarTabla();
+        cargarDatos();
     }
 
     /**
@@ -187,59 +195,60 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-dispose();        // TODO add your handling code here:
+        dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-     
-         if (jTable1.getSelectedRow()==-1) {
-              JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
-            return;
-        }else{
-             int filaSelec = jTable1.getSelectedRow();
-             String dni = (String) modelo.getValueAt(filaSelec,1);
-             String apellido = (String) modelo.getValueAt(filaSelec, 2);
-             String nombre = (String) modelo.getValueAt(filaSelec, 3);
-             String FN = (String) modelo.getValueAt(filaSelec, 4);
-             jTFDni.setText(dni);
-             jTFApellido.setText(apellido);
-             jTFNombre.setText(nombre);
-             jDCCalendario.setDateFormatString(FN);//No puedo hacer que se setee la fecha en el j calendar. Una vez que toco alguna fecha ya empieza a andar. Es raro
 
+        if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+            return;
+        } else {
+            int filaSelec = jTable1.getSelectedRow();
+            String dni = (String) modelo.getValueAt(filaSelec, 1);
+            String apellido = (String) modelo.getValueAt(filaSelec, 2);
+            String nombre = (String) modelo.getValueAt(filaSelec, 3);
+            String FN = (String) modelo.getValueAt(filaSelec, 4);
+            jTFDni.setText(dni);
+            jTFApellido.setText(apellido);
+            jTFNombre.setText(nombre);
+            jDCCalendario.setDate(Date.valueOf(FN));
+        }
     }//GEN-LAST:event_jTable1MouseClicked
-    }
+
 
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
-        if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || jTFDni.getText().isEmpty()||jDCCalendario.getDate()==null) {
-                JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
-                return;
-            }else if (jTable1.getSelectedRow()==-1) {
-              JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+        if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || jTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
             return;
-        }else {
-            
+        } else if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+            return;
+        } else {
+
             try {
-                int filaSelec=jTable1.getSelectedRow();
-                 
-           Alumno al=Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec,1)));
-           al.setDni(Integer.parseInt(jTFDni.getText()));
-           al.setApellido(jTFApellido.getText());
-           al.setNombre(jTFNombre.getText());
-           al.setfN(jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-           Vista.getAD().editarAlumno(al);
-           
-            modelo.removeRow(filaSelec);
-            cargarTabla(al);
+                int filaSelec = jTable1.getSelectedRow();
+
+                Alumno al = Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
+                al.setDni(Integer.parseInt(jTFDni.getText()));
+                al.setApellido(jTFApellido.getText());
+                al.setNombre(jTFNombre.getText());
+                al.setfN(jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+                Vista.getAD().editarAlumno(al);
+
+                modelo.removeRow(filaSelec);
+                cargarTabla(al);
             } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "En la casilla de Telefono solo deben ir numeros");
             }
             JOptionPane.showMessageDialog(this, "El alumno ha sido editado con exito");
-           limpiar();
+            limpiar();
 
             return;
+        }
     }//GEN-LAST:event_JBEditarActionPerformed
 
-    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBEditar;
     private javax.swing.JButton jBSalir;
@@ -256,41 +265,38 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-private void armarTabla(){
-    modelo.addColumn("ID");
-    modelo.addColumn("DNI");
-    modelo.addColumn("Apellido");
-     modelo.addColumn("Nombre");
-     modelo.addColumn("Fecha de Nacimiento");
-    jTable1.setModel(modelo);
-
-}
-private void cargarDatos(){
-  ArrayList<Alumno> ListaDeAlumnos= Vista.getAD().listarAlumnos();
-    for (Iterator<Alumno> al = ListaDeAlumnos.iterator(); al.hasNext();) {
-        Alumno next = al.next();
-        cargarTabla(next);     
+    private void armarTabla() {
+        modelo.addColumn("ID");
+        modelo.addColumn("DNI");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Fecha de Nacimiento");
+        jTable1.setModel(modelo);
     }
-   
-}
-private void cargarTabla(Alumno al){
-   
-   modelo.addRow(new Object[]{
-       al.getId(),
-       Integer.toString(al.getDni()),
-       al.getApellido(),
-       al.getNombre(),
-       al.getfN().toString()
-       
-       
-   });
 
-}
- public void limpiar() {
+    private void cargarDatos() {
+        ArrayList<Alumno> ListaDeAlumnos = Vista.getAD().listarAlumnos();
+        for (Iterator<Alumno> al = ListaDeAlumnos.iterator(); al.hasNext();) {
+            Alumno next = al.next();
+            cargarTabla(next);
+        }
+    }
+
+    private void cargarTabla(Alumno al) {
+
+        modelo.addRow(new Object[]{
+            al.getId(),
+            Integer.toString(al.getDni()),
+            al.getApellido(),
+            al.getNombre(),
+            al.getfN().toString()
+        });
+    }
+
+    public void limpiar() {
         jTFDni.setText("");
         jTFApellido.setText("");
         jTFNombre.setText("");
         jDCCalendario.setDate(null);
-        ;
     }
 }

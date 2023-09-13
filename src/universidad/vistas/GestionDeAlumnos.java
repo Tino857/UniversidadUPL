@@ -221,15 +221,17 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-         if (JTFDni.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
+        if (JTFDni.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
+            return;
+        }
+
+        try {
+            int dni = Integer.parseInt(JTFDni.getText());
+            if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
+                JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
                 return;
             }
-        if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
-             JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
-        }else {
-           try {
-            int dni = Integer.parseInt(JTFDni.getText());
             int registro = Vista.getAD().eliminarAlumnoLogico(dni);
             if (registro == 1) {
                 JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
@@ -241,15 +243,17 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             //Despues hay que llamar a limpiar();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
-        } 
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
-   
+
+
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
         try {
-            if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty()||jDCCalendario.getDate()==null) {
+            if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
                 JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
                 return;
             }
@@ -282,7 +286,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
         } catch (NullPointerException e) {
-
+            JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
 
     }//GEN-LAST:event_jBBuscarActionPerformed

@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import universidad.vistas.Vista;
 
 /**
  *
@@ -103,6 +104,10 @@ public class AlumnoData {
     public void editarAlumno(Alumno alumno) {
         String query = "UPDATE `alumno` SET `dni`=?,`apellido`=?,`nombre`=?,`fechaNacimiento`=? WHERE idAlumno=?";
         try {
+            if (Vista.getAD().buscarAlumnoPorDni(alumno.getDni()).getId()!=alumno.getId()) {
+                JOptionPane.showMessageDialog(null, "El dni está en uso");
+                return;
+            }
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
@@ -172,9 +177,7 @@ public class AlumnoData {
                 al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
                 al.setActivo(rs.getBoolean("estado"));
   
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe el alumno");
-            }
+            } 
             ps.close();
 
         } catch (SQLException e) {
