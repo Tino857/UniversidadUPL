@@ -12,7 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import universidad.entidades.Alumno;
 import universidad.entidades.Materia;
+import universidad.vistas.Vista;
 
 /**
  *
@@ -52,12 +54,13 @@ public class MateriaData {
 
     } 
        //ELIMINAR MATERIA
-        public int eliminarMateriaLogico(int id) {
-        String query = "UPDATE `materia` SET estado=0 WHERE idMateria=?";
+        public int eliminarMateriaLogico(String nombre)//Deberiammos pasar como parametro el nombre ya que es unico  
+        {
+        String query = "UPDATE `materia` SET estado=0 WHERE nombre=?";
         int registro=0;
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, id);
+            ps.setString(1, nombre);
             registro = ps.executeUpdate();
 
             ps.close();
@@ -69,30 +72,22 @@ public class MateriaData {
         return registro;
 
     } 
-        public void eliminarMateria(int id) {
-        String query = "DELETE FROM materia WHERE idMateria=?";
-        try {
-            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, id);
-            int registro = ps.executeUpdate();
+       
 
-            if (registro == 1) {
-                System.out.println("La materia ha sido borrada");
-            } else {
-                System.out.println("No se pudo borrar a la materia");
-            }
-            ps.close();
-
-        } catch (SQLException e) {
-            System.out.println("Error al borrar la materia : "+ e.getMessage());
-
-        }
-
-    }
+    
         //EDITAR MATERIA
-        public void editarMateria(Materia M) {
+        public int editarMateria(Materia M) {
         String query = "UPDATE materia SET nombre=?,año=? WHERE idMateria=?";
+         int registro = 0;
         try {
+             Materia mat= Vista.getMD().buscarMateriaPorNombre(M.getNombre());
+            if (mat!=null)
+            {if (mat.getId()!= M.getId()) {
+                     JOptionPane.showMessageDialog(null, "El nombre está en uso");
+                return registro;
+                }
+               
+            }
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
            ps.setString(1, M.getNombre());
             ps.setInt(2, M.getAnioMateria());
@@ -108,25 +103,25 @@ public class MateriaData {
             ps.close();
 
         } catch (SQLException e) {
-            System.out.println("Error editar al alumno : " + M.getNombre() +" " + e.getMessage());
+            System.out.println("Error editar la materia : " + M.getNombre() +" " + e.getMessage());
 
-        }
+        }return registro;
         
 
     }
         //BUSCAR MATERIA
-        public Materia buscarMateriaPorId(int id){
+        public Materia buscarMateriaPorNombre(String nombre){
             Materia mat=null;
-            String query="SELECT * FROM `materia` WHERE idMateria=?";// and estado=1";
+            String query="SELECT * FROM `materia` WHERE nombre=?";// and estado=1";
             try {
                 PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-                ps.setInt(1, id);
+                ps.setString(1, nombre);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     mat = new Materia();
-                    mat.setId(id);
+                    mat.setId(rs.getInt("idMateria"));
                     mat.setAnioMateria(rs.getInt("año"));
-                    mat.setNombre(rs.getString("nombre"));
+                    mat.setNombre(nombre);
                     mat.setActivo(rs.getBoolean("estado"));
                 } else {
                     JOptionPane.showMessageDialog(null, "No existe la materia");
@@ -143,7 +138,7 @@ public class MateriaData {
         //LISTAR MATERIAS
         public ArrayList<Materia> listarMaterias(){
     ArrayList<Materia> listaDeMateria=new  ArrayList();
-        String query = "SELECT * FROM materia";
+        String query = "SELECT * FROM materia WHERE estado=1";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 

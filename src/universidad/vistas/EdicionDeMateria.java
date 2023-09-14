@@ -5,17 +5,33 @@
  */
 package universidad.vistas;
 
+import java.sql.Date;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import universidad.entidades.Alumno;
+import universidad.entidades.Materia;
+
 /**
  *
  * @author valen
  */
 public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
-    /**
-     * Creates new form EdisionDeMateria
-     */
+     private DefaultTableModel modelo = new DefaultTableModel(){
+    
+        @Override
+        public boolean isCellEditable (int f, int c){
+            return false;
+        }
+    };
+     
     public EdicionDeMateria() {
         initComponents();
+         armarTabla();
+        cargarDatos();
     }
 
     /**
@@ -40,7 +56,14 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         JBEditar.setText("Editar");
+        JBEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                JBEditarActionPerformed(evt);
+            }
+        });
 
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -54,6 +77,8 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         jLabel3.setText("Año");
 
         jLabel4.setText("Nombre:");
+
+        jTFCodigo.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -117,10 +142,15 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
-        jLabel5.setText("Elija el alumno que desea editar");
+        jLabel5.setText("Elija la materia que desea editar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -157,6 +187,57 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 dispose();        // TODO add your handling code here:
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+       if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+            return;
+        } else {
+            int filaSelec = jTable1.getSelectedRow();
+            String codigo = (String) modelo.getValueAt(filaSelec, 0);
+            String nombre = (String) modelo.getValueAt(filaSelec, 1);
+            String anio = (String) modelo.getValueAt(filaSelec, 2);
+            jTFCodigo.setText(codigo);
+            jTFNombre.setText(nombre);
+            jTFAño.setText(anio);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
+       if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            return;
+        } else if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+            return;
+        } else {
+
+            try {
+                int filaSelec = jTable1.getSelectedRow();  
+                Materia mat=Vista.getMD().buscarMateriaPorNombre((String) modelo.getValueAt(filaSelec, 1));
+               
+                mat.setId(Integer.parseInt(jTFCodigo.getText()));
+               mat.setAnioMateria(Integer.parseInt(jTFAño.getText()));
+                mat.setNombre(jTFNombre.getText());
+                
+                int registro=Vista.getMD().editarMateria(mat);
+                if (registro>0) {
+                    JOptionPane.showMessageDialog(this,"Datos actualizados");
+                    
+                }
+
+                limpiarTabla();
+                
+                cargarDatos();
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "En la casilla de Año solo deben ir numeros");
+            }
+            //JOptionPane.showMessageDialog(this, "El alumno ha sido actualizado con exito");
+            limpiar();
+
+            return;
+        }
+    }//GEN-LAST:event_JBEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBEditar;
@@ -172,4 +253,48 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+ private void armarTabla() {
+        modelo.addColumn("Codigo");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Año");
+      
+        jTable1.setModel(modelo);
+    }
+private void cargarDatos() {
+        ArrayList<Materia> ListaDeMaterias = Vista.getMD().listarMaterias();
+        for (Iterator<Materia> iterator = ListaDeMaterias.iterator(); iterator.hasNext();) {
+        Materia next = iterator.next();
+        cargarTabla(next);
+    }
+    }
+ private void cargarTabla(Materia mat) {
+
+        modelo.addRow(new Object[]{
+            Integer.toString(mat.getId()),
+            mat.getNombre(),
+            Integer.toString(mat.getAnioMateria()),       
+        });       
+    }
+ public void limpiar() {
+        jTFCodigo.setText("");
+        jTFAño.setText("");
+        jTFNombre.setText("");
+       
+    }
+ private void limpiarTabla(){
+        int filas=modelo.getRowCount()-1;
+        for (int i = filas; i >= 0; i--) {
+            modelo.removeRow(i);
+            
+        }
+    }
+
+
+
+
+
+
+
+
 }

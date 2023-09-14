@@ -78,29 +78,6 @@ public class AlumnoData {
 
         } return registro;
     }
-
-    public void eliminarAlumno(int id) {
-        String query = "DELETE FROM `alumno` WHERE idAlumno=?";
-        try {
-            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-
-            ps.setInt(1, id);
-            int registro = ps.executeUpdate();
-
-            if (registro == 1) {
-                JOptionPane.showMessageDialog(null, "El alumno ha sido borrado");
-            } else {
-                JOptionPane.showMessageDialog(null,"No se pudo borrar al alumno");
-            }
-            ps.close();
-
-        } catch (SQLException e) {
-            System.out.println("Error al borrar al alumno" + e.getMessage());
-
-        }
-
-    }
-
     public int editarAlumno(Alumno alumno) {
         String query = "UPDATE `alumno` SET `dni`=?,`apellido`=?,`nombre`=?,`fechaNacimiento`=? WHERE idAlumno=?";
         int registro = 0;

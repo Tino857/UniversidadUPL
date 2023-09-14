@@ -244,7 +244,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 
                 cargarDatos();
             } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "En la casilla de Telefono solo deben ir numeros");
+                JOptionPane.showMessageDialog(this, "En la casilla de Dni solo deben ir numeros");
             }
             //JOptionPane.showMessageDialog(this, "El alumno ha sido actualizado con exito");
             limpiar();
