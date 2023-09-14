@@ -88,9 +88,8 @@ public Alumno(int idAlumno, int dni, String nombre, String apellido, LocalDate f
     
     @Override
     public String toString(){
-        return "Nombre: "+nombre+""
-                + "Apellido: "+apellido+""
-                + "Dni: "+dni;
+        return dni+" - "+apellido+", "+nombre;
+                
                 
     }
     

@@ -119,8 +119,18 @@ private DefaultTableModel modelo=new DefaultTableModel();
         jMenuBar1.add(jMenu3);
 
         jMenu1.setText("Administracion");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
 
         jMenuItem3.setText("Manejo de Inscripciones");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem4.setText("Manejo de Notas");
@@ -221,6 +231,19 @@ private DefaultTableModel modelo=new DefaultTableModel();
         escritorio.add(exit);
         escritorio.moveToFront(exit);
     }//GEN-LAST:event_jMSalirMouseClicked
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+     
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        FormularioDeInscripciones FDI = new FormularioDeInscripciones();
+        FDI.setVisible(true);
+        escritorio.add(FDI);
+        escritorio.moveToFront(FDI);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments

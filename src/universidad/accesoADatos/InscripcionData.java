@@ -28,7 +28,8 @@ public class InscripcionData {
         this.matData = matData;
     }
 //Guardar inscripciones
-    public void guardarInscripcion(Inscripcion insc) {
+    public int guardarInscripcion(Inscripcion insc) {
+        int registro=0;
         String query = "INSERT INTO `inscripcion`(`nota`, `idAlumno`, `idMateria`) "
                 + "VALUES (?,?,?)";
         try {
@@ -41,6 +42,7 @@ public class InscripcionData {
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
                 insc.setIdInscripcion(rs.getInt(1));
+                registro=rs.getInt(1);
             } else {
                 System.out.println("No se pudo recuperar el ID");
             }
@@ -50,7 +52,7 @@ public class InscripcionData {
             System.out.println("Error al guardar la inscripcion: " + e.getMessage());
 
         }
-
+return registro;
     }
 //Listar inscripciones 
     public ArrayList<Inscripcion> listarInscripciones() {
@@ -160,26 +162,28 @@ public class InscripcionData {
         return listaDeMateriasNoCursadas;
     }
 //Borrar inscripcion
-    public void borarInscripcionPorMateriaAlumno(int idAl,int idMat){
+    public int borarInscripcionPorMateriaAlumno(int idAl,int idMat){
         String query="DELETE FROM `inscripcion` WHERE idMateria=? and idAlumno=?;";
+        int registro=0;
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, idMat);
             ps.setInt(2,idAl);
-            int registro = ps.executeUpdate();
+             registro = ps.executeUpdate();
 
-            if (registro == 1) {
-                System.out.println("La inscripcion ha sido borrada");
-            } else {
-                System.out.println("No se pudo borrar la inscripcion");
-            }
+//            if (registro == 1) {
+//                System.out.println("La inscripcion ha sido borrada");
+//            } else {
+//                System.out.println("No se pudo borrar la inscripcion");
+//            }
             ps.close();
 
         } catch (SQLException e) {
             System.out.println("Error al borrar la inscripcion" + e.getMessage());
 
         }
+    return registro;
     }
     //Actualizar nota 
     public void actualizarNota(int idAl,int idMat, double nota){

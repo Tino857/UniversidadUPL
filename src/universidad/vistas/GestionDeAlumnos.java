@@ -77,6 +77,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jRBEstado.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jRBEstado.setForeground(new java.awt.Color(51, 51, 51));
         jRBEstado.setBorderPainted(true);
+        jRBEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRBEstadoActionPerformed(evt);
+            }
+        });
 
         jBLimpiar.setText("Limpiar");
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -290,6 +295,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         }
 
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jRBEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
