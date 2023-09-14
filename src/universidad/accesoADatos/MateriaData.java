@@ -32,6 +32,14 @@ public class MateriaData {
            String query = "INSERT INTO `materia`(`nombre`, `año`, `estado`) "
                 + "VALUES (?,?,?)";
         try {
+            Materia mat= Vista.getMD().buscarMateriaPorNombre(M.getNombre());
+            if (mat!=null)
+            {if (mat.getId()!= M.getId()) {
+                    
+                return registro;
+                }
+               
+            }
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, M.getNombre());
             ps.setInt(2, M.getAnioMateria());
@@ -85,8 +93,7 @@ public class MateriaData {
             {if (mat.getId()!= M.getId()) {
                      JOptionPane.showMessageDialog(null, "El nombre está en uso");
                 return registro;
-                }
-               
+                }              
             }
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
            ps.setString(1, M.getNombre());

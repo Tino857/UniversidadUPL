@@ -32,6 +32,13 @@ public class AlumnoData {
                 + "VALUES (?,?,?,?,?)";
         int registro = 0;
         try {
+             Alumno al= Vista.getAD().buscarAlumnoPorDni(alumno.getDni());
+            if (al!=null)
+            {if (al.getId()!= alumno.getId()) {
+                    
+                return registro;
+                }              
+            }
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
