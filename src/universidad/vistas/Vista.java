@@ -59,13 +59,12 @@ private DefaultTableModel modelo=new DefaultTableModel();
         jMenuItem7 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        jMIManejoDeNotas = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -133,13 +132,13 @@ private DefaultTableModel modelo=new DefaultTableModel();
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setText("Manejo de Notas");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jMIManejoDeNotas.setText("Manejo de Notas");
+        jMIManejoDeNotas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jMIManejoDeNotasActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        jMenu1.add(jMIManejoDeNotas);
 
         jMenuBar1.add(jMenu1);
 
@@ -188,9 +187,14 @@ private DefaultTableModel modelo=new DefaultTableModel();
         escritorio.moveToFront(GDM);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void jMIManejoDeNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMIManejoDeNotasActionPerformed
+        escritorio.removeAll();
+        escritorio.repaint();
+        ManejoDeNotas MDN = new ManejoDeNotas();
+        MDN.setVisible(true);
+        escritorio.add(MDN);
+        escritorio.moveToFront(MDN);
+    }//GEN-LAST:event_jMIManejoDeNotasActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         // TODO add your handling code here:
@@ -282,6 +286,7 @@ private DefaultTableModel modelo=new DefaultTableModel();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenuItem jMIManejoDeNotas;
     private javax.swing.JMenu jMSalir;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -291,7 +296,6 @@ private DefaultTableModel modelo=new DefaultTableModel();
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;

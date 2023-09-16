@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import universidad.entidades.Alumno;
 import universidad.entidades.Materia;
+import universidad.vistas.Vista;
 
 
 public class InscripcionData {
@@ -83,17 +84,21 @@ return registro;
     public ArrayList<Inscripcion> listarInscripcionesPorAlumno(int id) {
         ArrayList<Inscripcion> listaDeInscripciones = new ArrayList();
         String query = "SELECT * FROM inscripcion WHERE idAlumno=?";
+        
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
             Inscripcion insc = null;
-
+            Materia mat = null;
+            Alumno alu = null;
             while (rs.next()) {
                 insc = new Inscripcion();
                 insc.setIdInscripcion(rs.getInt("idInscripcion"));
-                insc.setIdMateria(rs.getInt("idMateria"));
-                insc.setIdAlumno(rs.getInt("idAlumno"));
+                mat = Vista.getMD().buscarMateriaPorID(rs.getInt("idMateria"));
+                alu = Vista.getAD().buscarAlumnoPorId(rs.getInt("idAlumno"));
+                insc.setMateria(mat);
+                insc.setAlumno(alu);
                 insc.setNota(rs.getDouble("nota"));
                 listaDeInscripciones.add(insc);
             }
@@ -186,27 +191,23 @@ return registro;
     return registro;
     }
     //Actualizar nota 
-    public void actualizarNota(int idAl,int idMat, double nota){
-        String query = "UPDATE `inscripcion` SET nota=? WHERE`idAlumno`=?AND`idMateria`=?;";
+    public int actualizarNota(int idAl,int idMat, double nota){
+        String query = "UPDATE `inscripcion` SET nota=? WHERE `idAlumno`=? AND `idMateria`=?;";
+        int registro = 0;
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setDouble(1, nota);
-            ps.setInt(2,idAl);
+            ps.setInt(2, idAl);
             ps.setInt(3, idMat);
           
-            int resultado = ps.executeUpdate();
-            if (resultado == 1) {
-                System.out.println("La nota de la inscripcion fue editada correctamente");
-            } else {
-                System.out.println("La nota de la inscripcion no pudo ser editada");
-            }
-
+            registro = ps.executeUpdate();
             ps.close();
 
         } catch (SQLException e) {
             System.out.println("Error editar la nota : "+e.getMessage());
 
         }
+        return registro;
     }
     //Listar alumnos por materia
     public ArrayList<Alumno> listarAlumnoxMateria(int idMat){

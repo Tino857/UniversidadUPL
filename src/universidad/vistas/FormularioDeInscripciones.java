@@ -19,22 +19,23 @@ import universidad.entidades.Materia;
  */
 public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
-   private DefaultTableModel modelo = new DefaultTableModel(){
+    private DefaultTableModel modelo = new DefaultTableModel(){
     
         @Override
         public boolean isCellEditable (int f, int c){
             return false;
         }
     };
+   
     public FormularioDeInscripciones() {
         initComponents();
         cargarCB();
         armarTabla();
         jTFNota.setEditable(false);
-      jTFNota.setVisible(false);
-      jLNota.setVisible(false);
-      jBAnular.setEnabled(false);
-      jBInscribir.setEnabled(false);
+        jTFNota.setVisible(false);
+        jLNota.setVisible(false);
+        jBAnular.setEnabled(false);
+        jBInscribir.setEnabled(false);
     }
 
     /**
@@ -208,9 +209,9 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAlumnosActionPerformed
-     limpiarTabla();  
+        limpiarTabla();  
         Alumno al=(Alumno)jCBAlumnos.getSelectedItem();
-      cargarDatos(al.getId());
+        cargarDatos(al.getId());
     }//GEN-LAST:event_jCBAlumnosActionPerformed
 
     private void jBAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnularActionPerformed
@@ -249,25 +250,24 @@ dispose();        // TODO add your handling code here:
     private void jRBInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBInscriptasMouseClicked
         limpiarTabla();  
         Alumno al=(Alumno)jCBAlumnos.getSelectedItem();
-      cargarDatos(al.getId());
-      jBInscribir.setEnabled(false);
-      jBAnular.setEnabled(true);
-      
-      jTFNota.setText("");
-      jTFNota.setEditable(false);
-      jTFNota.setVisible(false);
-      jLNota.setVisible(false);
+        cargarDatos(al.getId());
+        jBInscribir.setEnabled(false);
+        jBAnular.setEnabled(true);
+        jTFNota.setText("");
+        jTFNota.setEditable(false);
+        jTFNota.setVisible(false);
+        jLNota.setVisible(false);
     }//GEN-LAST:event_jRBInscriptasMouseClicked
 
     private void jRBNoInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBNoInscriptasMouseClicked
-            limpiarTabla(); 
+        limpiarTabla(); 
         Alumno al=(Alumno)jCBAlumnos.getSelectedItem();
-      cargarDatos(al.getId());
-      jBAnular.setEnabled(false);
-       jBInscribir.setEnabled(true);
+        cargarDatos(al.getId());
+        jBAnular.setEnabled(false);
+        jBInscribir.setEnabled(true);
         jTFNota.setEditable(true);
-         jTFNota.setVisible(true);
-         jLNota.setVisible(true);
+        jTFNota.setVisible(true);
+        jLNota.setVisible(true);
     }//GEN-LAST:event_jRBNoInscriptasMouseClicked
 
     private void jBInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInscribirActionPerformed
@@ -318,27 +318,28 @@ jTFNota.setText("");
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-private void cargarCB(){
-    ArrayList <Alumno> Lista=Vista.getAD().listarAlumnos();
-    for (Iterator<Alumno> iterator = Lista.iterator(); iterator.hasNext();) {
-        Alumno al = iterator.next();
-        jCBAlumnos.addItem(al);
+    private void cargarCB(){
+        ArrayList <Alumno> Lista=Vista.getAD().listarAlumnos();
+        for (Iterator<Alumno> iterator = Lista.iterator(); iterator.hasNext();) {
+            Alumno al = iterator.next();
+            jCBAlumnos.addItem(al);
+        }
     }
-}
- private void armarTabla() {
+    
+    private void armarTabla() {
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
         jTable1.setModel(modelo);
     }
+    
     private void cargarTabla(Materia mat) {
-
         modelo.addRow(new Object[]{
             mat.getId(),
             mat.getNombre(),
-            Integer.toString(mat.getAnioMateria()),});
-        
+            Integer.toString(mat.getAnioMateria()),});   
     }
+    
     private void limpiarTabla(){
         int fila=modelo.getRowCount()-1;
         for (int i = fila; i >=0; i--) {
