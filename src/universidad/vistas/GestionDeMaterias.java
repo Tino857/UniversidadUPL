@@ -204,14 +204,14 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-if (jTFNombre.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "La casilla Nombre no debe estar vacia si desea eliminar la materia.");
-                return;
-            }
+        if (jTFNombre.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un nombre de materia.");
+            return;
+        }
         try {
-            String nombre =jTFNombre.getText();
+            String nombre = jTFNombre.getText();
             Materia materia = Vista.getMD().buscarMateriaPorNombre(nombre);
-            jTFCodigo.setText(""+materia.getId());
+            jTFCodigo.setText("" + materia.getId());
             jTFNombre.setText(materia.getNombre());
             jTFAño.setText(materia.getAnioMateria() + "");
             jRBEstado.setSelected(materia.isActivo());
@@ -219,7 +219,7 @@ if (jTFNombre.getText().isEmpty()) {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
         } catch (NullPointerException e) {
-
+            JOptionPane.showMessageDialog(this, "No existe la materia");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
@@ -228,37 +228,37 @@ if (jTFNombre.getText().isEmpty()) {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        
+
         if (jTFNombre.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "La casilla Nombre no debe estar vacia si desea eliminar la materia.");
-                return;
+            JOptionPane.showMessageDialog(this, "La casilla Nombre no debe estar vacia.");
+            return;
+        }
+        if (!Vista.getMD().buscarMateriaPorNombre(jTFNombre.getText()).isActivo()) {
+            JOptionPane.showMessageDialog(this, "La materia ya ha sido borrada");
+        } else {
+            try {
+                String nombre = jTFNombre.getText();
+                int registro = Vista.getMD().eliminarMateriaLogico(nombre);
+                if (registro == 1) {
+                    JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo borrar a la materia");
+                }
+                jRBEstado.setSelected(false);
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
             }
-         if (!Vista.getMD().buscarMateriaPorNombre(jTFNombre.getText()).isActivo()) {
-             JOptionPane.showMessageDialog(this, "La materia ya ha sido borrada");
-        }else{
-           try {
-            String nombre= jTFNombre.getText();
-            int registro = Vista.getMD().eliminarMateriaLogico(nombre);
-            if (registro == 1) {
-                JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo borrar a la materia");
-            }
-            jRBEstado.setSelected(false);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
-        }   
-         }
-        
+        }
+
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-     try {
+        try {
             if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
                 return;
             }
-            Materia mat =new Materia(Integer.parseInt(jTFAño.getText()),jTFNombre.getText(), true);
+            Materia mat = new Materia(Integer.parseInt(jTFAño.getText()), jTFNombre.getText(), true);
             int registro = Vista.getMD().guardarMateria(mat);
             if (registro > 0) {
                 JOptionPane.showMessageDialog(this, "La materia ha sido guardada");

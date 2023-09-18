@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.accesoADatos;
 
 import universidad.entidades.Alumno;
@@ -17,7 +12,7 @@ import universidad.vistas.Vista;
 
 /**
  *
- * @author valen
+ * @author Grupo61
  */
 public class AlumnoData {
 
@@ -26,19 +21,21 @@ public class AlumnoData {
     public AlumnoData() {
         this.con = Conexion.buscarConexion();
     }
-
+    
+    
+    //GUARDAR ALUMNO
     public int guardarAlumno(Alumno alumno) {
         String query = "INSERT INTO alumno(dni,apellido, nombre, fechaNacimiento,estado) "
                 + "VALUES (?,?,?,?,?)";
         int registro = 0;
         try {
-             Alumno al= Vista.getAD().buscarAlumnoPorDni(alumno.getDni());
-            if (al!=null)
-            {if (al.getId()!= alumno.getId()) {
-                    
-                return registro;
-                }              
+            Alumno al = Vista.getAD().buscarAlumnoPorDni(alumno.getDni());
+            if (al != null) {
+                if (al.getId() != alumno.getId()) {
+                    return registro;
+                }
             }
+
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
@@ -47,7 +44,7 @@ public class AlumnoData {
             ps.setBoolean(5, alumno.isActivo());
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
-            
+
             if (rs.next()) {
                 alumno.setId(rs.getInt(1));
                 registro = rs.getInt(1);
@@ -55,48 +52,42 @@ public class AlumnoData {
                 System.out.println("No se pudo recuperar el ID");
             }
             ps.close();
-
         } catch (SQLException e) {
             System.out.println("Error al guardar al alumno: " + alumno.getNombre() + " " + alumno.getApellido() + " " + e.getMessage());
-
         }
         return registro;
-
     }
-
+    
+    //ELIMINAR ALUMNO (DAR DE BAJA)
     public int eliminarAlumnoLogico(int dni) {
         String query = "UPDATE alumno SET estado=0 WHERE dni=?";
         int registro = 0;
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            ps.setInt(1,dni);
-             registro = ps.executeUpdate();
+            ps.setInt(1, dni);
+            registro = ps.executeUpdate();
 
-           /* if (registro == 1) {
-                System.out.println("El alumno ha sido borrado");
-            } else {
-                System.out.println("No se pudo borrar al alumno");
-            }*/
             ps.close();
-
         } catch (SQLException e) {
             System.out.println("Error al borrar al alumno" + e.getMessage());
-
-        } return registro;
+        }
+        return registro;
     }
+    
+    //EDITAR ALUMNO
     public int editarAlumno(Alumno alumno) {
         String query = "UPDATE `alumno` SET `dni`=?,`apellido`=?,`nombre`=?,`fechaNacimiento`=? WHERE idAlumno=?";
         int registro = 0;
         try {
-            Alumno al= Vista.getAD().buscarAlumnoPorDni(alumno.getDni());
-            if (al!=null)
-            {if (al.getId()!= alumno.getId()) {
-                     JOptionPane.showMessageDialog(null, "El dni está en uso");
-                return registro;
+            Alumno al = Vista.getAD().buscarAlumnoPorDni(alumno.getDni());
+            if (al != null) {
+                if (al.getId() != alumno.getId()) {
+                    JOptionPane.showMessageDialog(null, "El dni está en uso");
+                    return registro;
                 }
-               
             }
+            
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, alumno.getDni());
             ps.setString(2, alumno.getApellido());
@@ -104,24 +95,17 @@ public class AlumnoData {
             ps.setString(4, alumno.getfN().toString());
             ps.setInt(5, alumno.getId());
             registro = ps.executeUpdate();
-            if (registro == 1) {
-                System.out.println("El alumno fue editado correctamente");
-            } else {
-                System.out.println("El alumno no pudo ser editado");
-            }
-
+            
             ps.close();
-
         } catch (SQLException e) {
             System.out.println("Error editar al alumno : " + alumno.getNombre() + " " + alumno.getApellido() + " " + e.getMessage());
-
-        }return registro;
-
+        }
+        return registro;
     }
 
-    //  BUSCAR ALUMNO POR ID Y POR DNI
+    //  BUSCAR ALUMNO POR ID
     public Alumno buscarAlumnoPorId(int id) {
-        Alumno al =null; 
+        Alumno al = null;
         String query = "SELECT * FROM alumno WHERE idAlumno=? and estado=1";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -136,21 +120,19 @@ public class AlumnoData {
                 al.setApellido(rs.getString("apellido"));
                 al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
                 al.setActivo(rs.getBoolean("estado"));
-
             } else {
                 JOptionPane.showMessageDialog(null, "No existe el alumno");
             }
             ps.close();
-
         } catch (SQLException e) {
             System.out.println("Error al buscar el alumno" + e.getMessage());
-
         }
         return al;
     }
 
+    //  BUSCAR ALUMNO POR DNI
     public Alumno buscarAlumnoPorDni(int dni) {
-        Alumno al =null; 
+        Alumno al = null;
         String query = "SELECT * FROM alumno WHERE dni=?"; //and estado=1";
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
@@ -165,13 +147,10 @@ public class AlumnoData {
                 al.setApellido(rs.getString("apellido"));
                 al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
                 al.setActivo(rs.getBoolean("estado"));
-  
-            } 
+            }
             ps.close();
-
         } catch (SQLException e) {
             System.out.println("Error al buscar el alumno" + e.getMessage());
-
         }
         return al;
     }
@@ -184,9 +163,9 @@ public class AlumnoData {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
             ResultSet rs = ps.executeQuery();
-           Alumno al = null;
+            Alumno al = null;
             while (rs.next()) {
-             al = new Alumno();
+                al = new Alumno();
                 al.setId(rs.getInt("idAlumno"));
                 al.setNombre(rs.getString("nombre"));
                 al.setDni(rs.getInt("dni"));
@@ -196,10 +175,8 @@ public class AlumnoData {
                 listaDeAlumno.add(al);
             }
             ps.close();
-
         } catch (SQLException e) {
             System.out.println("Error al encontrar al alumno" + e.getMessage());
-
         }
         return listaDeAlumno;
     }

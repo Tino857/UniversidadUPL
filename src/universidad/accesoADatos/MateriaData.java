@@ -101,12 +101,8 @@ public class MateriaData {
             ps.setInt(2, M.getAnioMateria());
             ps.setInt(3, M.getId());
 
-            int resultado = ps.executeUpdate();
-            if (resultado == 1) {
-                System.out.println("La materia fue editada correctamente");
-            } else {
-                System.out.println("La materia no pudo ser editada");
-            }
+            registro = ps.executeUpdate();
+            
 
             ps.close();
 
@@ -132,8 +128,6 @@ public class MateriaData {
                 mat.setAnioMateria(rs.getInt("año"));
                 mat.setNombre(nombre);
                 mat.setActivo(rs.getBoolean("estado"));
-            } else {
-                JOptionPane.showMessageDialog(null, "No existe la materia");
             }
 
             ps.close();
