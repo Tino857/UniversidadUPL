@@ -34,7 +34,7 @@ public class MateriaData {
         String query = "INSERT INTO `materia`(`nombre`, `año`, `estado`) "
                 + "VALUES (?,?,?)";
         try {
-            Materia mat = Vista.getMD().buscarMateriaPorNombre(M.getNombre());
+            Materia mat = Vista.getMD().buscarMateriaPorID(M.getId());
             if (mat != null) {
                 if (mat.getId() != M.getId()) {
 
@@ -159,7 +159,7 @@ public class MateriaData {
                 mat.setNombre(rs.getString("nombre"));
                 mat.setActivo(rs.getBoolean("estado"));
             } else {
-                JOptionPane.showMessageDialog(null, "No existe la materia");
+                //JOptionPane.showMessageDialog(null, "No existe la materia");
             }
 
             ps.close();

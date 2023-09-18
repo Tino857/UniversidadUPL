@@ -68,7 +68,7 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         jLabel1.setText("Manipulacion de notas");
 
         jLNota.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLNota.setText("Ingrese la nota del alumno");
+        jLNota.setText("Ingrese la nueva nota");
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabel2.setText("Seleccione un alumno:");
@@ -98,16 +98,6 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(64, 64, 64))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLNota)
-                .addGap(18, 18, 18)
-                .addComponent(jTFNota, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -123,6 +113,17 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
                         .addGap(172, 172, 172)
                         .addComponent(jBSalir)
                         .addGap(78, 78, 78))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jLNota)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTFNota, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,17 +162,20 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         if (jTFNota.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "La nota no puede estar vacia");
+            JOptionPane.showMessageDialog(this, "La casilla Nota no puede estar vacia");
             return;
         }
         if (jCBAlumnos.getSelectedIndex() == -1) {
             JOptionPane.showMessageDialog(this, "Debe seleccionar una materia");
             return;
+        }if (jTable1.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione una materia en la que quiera actualizar la nota.");
+            return; 
         }
         try {
             Alumno alu = (Alumno)jCBAlumnos.getSelectedItem();
             int fila = jTable1.getSelectedRow();
-            int idMateria = (int)modelo.getValueAt(fila , 0);
+            int idMateria =Integer.parseInt((String)modelo.getValueAt(fila , 0));
             double nota = Double.parseDouble(jTFNota.getText());
             int registro = Vista.getID().actualizarNota(alu.getId(), idMateria, nota);
             
@@ -217,7 +221,7 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     
     private void cargarTabla(Inscripcion insc) {
         modelo.addRow(new Object[]{
-            insc.getIdMateria(),
+            insc.getIdMateria()+"",
             insc.getMateria().getNombre(),
             Double.toString(insc.getNota())
         });   

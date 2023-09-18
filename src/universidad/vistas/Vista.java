@@ -197,7 +197,12 @@ private DefaultTableModel modelo=new DefaultTableModel();
     }//GEN-LAST:event_jMIManejoDeNotasActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        // TODO add your handling code here:
+       escritorio.removeAll();
+        escritorio.repaint();
+        ListadoDeAlumnoPorMateria LAM = new ListadoDeAlumnoPorMateria();
+        LAM.setVisible(true);
+        escritorio.add(LAM);
+        escritorio.moveToFront(LAM);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed

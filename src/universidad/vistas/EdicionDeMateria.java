@@ -189,7 +189,7 @@ dispose();        // TODO add your handling code here:
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
        if (jTable1.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+            JOptionPane.showMessageDialog(this, "Seleccione una materia que quiera editar");
             return;
         } else {
             int filaSelec = jTable1.getSelectedRow();

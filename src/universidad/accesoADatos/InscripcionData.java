@@ -66,7 +66,7 @@ return registro;
             Inscripcion insc = null;
             while (rs.next()) {
                 insc=new Inscripcion();
-                insc.setIdInscripcion(rs.getInt("idInscripcion"));
+                insc.setIdInscripcion(rs.getInt("idInscripto"));
                 insc.setIdMateria(rs.getInt("idMateria"));
                 insc.setIdAlumno(rs.getInt("idAlumno"));
                 insc.setNota(rs.getDouble("nota"));
@@ -94,7 +94,7 @@ return registro;
             Alumno alu = null;
             while (rs.next()) {
                 insc = new Inscripcion();
-                insc.setIdInscripcion(rs.getInt("idInscripcion"));
+                insc.setIdInscripcion(rs.getInt("idInscripto"));
                 mat = Vista.getMD().buscarMateriaPorID(rs.getInt("idMateria"));
                 alu = Vista.getAD().buscarAlumnoPorId(rs.getInt("idAlumno"));
                 insc.setMateria(mat);
@@ -216,7 +216,7 @@ String query = "SELECT alumno.idAlumno,alumno.dni,alumno.apellido,alumno.nombre,
         + "join inscripcion ON(inscripcion.idAlumno=alumno.idAlumno) WHERE inscripcion.idMateria=? and alumno.estado=1; ";
       try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-
+            ps.setInt(1, idMat); 
             ResultSet rs = ps.executeQuery();
             Alumno al =null;
             while (rs.next()) {
