@@ -54,18 +54,26 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setForeground(new java.awt.Color(255, 102, 102));
 
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Documento:");
 
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Apellido:");
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nombre:");
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Estado:");
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Fecha de nacimiento:");
 
+        jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
+        jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
         jBBuscar.setText("Buscar");
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -73,9 +81,18 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
+        JTFDni.setBackground(new java.awt.Color(102, 102, 102));
+        JTFDni.setForeground(new java.awt.Color(255, 255, 255));
+
+        jTFApellido.setBackground(new java.awt.Color(102, 102, 102));
+        jTFApellido.setForeground(new java.awt.Color(255, 255, 255));
+
+        jTFNombre.setBackground(new java.awt.Color(102, 102, 102));
+        jTFNombre.setForeground(new java.awt.Color(255, 255, 255));
+
         jRBEstado.setBackground(new java.awt.Color(102, 102, 102));
         jRBEstado.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jRBEstado.setForeground(new java.awt.Color(51, 51, 51));
+        jRBEstado.setForeground(new java.awt.Color(255, 255, 255));
         jRBEstado.setBorderPainted(true);
         jRBEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +100,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
+        jDCCalendario.setBackground(new java.awt.Color(102, 102, 102));
+        jDCCalendario.setForeground(new java.awt.Color(255, 255, 255));
+
+        jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
+        jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         jBLimpiar.setText("Limpiar");
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +112,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
+        jBEliminar.setBackground(new java.awt.Color(51, 51, 51));
+        jBEliminar.setForeground(new java.awt.Color(255, 255, 255));
         jBEliminar.setText("Eliminar");
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -97,6 +121,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             }
         });
 
+        jBGuardar.setBackground(new java.awt.Color(51, 51, 51));
+        jBGuardar.setForeground(new java.awt.Color(255, 255, 255));
         jBGuardar.setText("Guardar");
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,8 +131,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Alumnos");
 
+        jBSalir.setBackground(new java.awt.Color(51, 51, 51));
+        jBSalir.setForeground(new java.awt.Color(255, 255, 255));
         jBSalir.setText("Salir");
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,30 +168,33 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(212, 212, 212))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(JTFDni)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBBuscar)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(JTFDni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)
+                                .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jBLimpiar)
+                                .addGap(40, 40, 40)
+                                .addComponent(jBEliminar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBGuardar)
+                                .addGap(26, 26, 26)))))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jBSalir)
+                    .addComponent(jBBuscar))
                 .addGap(32, 32, 32))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jBLimpiar)
-                .addGap(50, 50, 50)
-                .addComponent(jBEliminar)
-                .addGap(53, 53, 53)
-                .addComponent(jBGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(jBSalir)
-                .addGap(18, 18, 18))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -189,13 +221,13 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBLimpiar)
                     .addComponent(jBEliminar)
                     .addComponent(jBGuardar)
                     .addComponent(jBSalir))
-                .addContainerGap())
+                .addGap(28, 28, 28))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -203,15 +235,16 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 422, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,40 +253,6 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
-
-    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-        limpiar();
-    }//GEN-LAST:event_jBLimpiarActionPerformed
-
-    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
-        if (JTFDni.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
-            return;
-        }
-
-        try {
-            int dni = Integer.parseInt(JTFDni.getText());
-            if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
-                JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
-                return;
-            }
-            int registro = Vista.getAD().eliminarAlumnoLogico(dni);
-            if (registro == 1) {
-                JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
-            } else {
-                JOptionPane.showMessageDialog(this, "No se pudo borrar al alumno");
-            }
-            jRBEstado.setSelected(false);
-
-            //Despues hay que llamar a limpiar();
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
-        } catch (NullPointerException e) {
-            JOptionPane.showMessageDialog(this, "No existe el alumno");
-        }
-
-
-    }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
@@ -278,6 +277,46 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
+    private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+
+        if (JTFDni.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
+            return;
+        }
+
+        try {
+            int dni = Integer.parseInt(JTFDni.getText());
+            if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
+                JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
+                return;
+            }
+
+            int registro = Vista.getAD().eliminarAlumnoLogico(dni);
+            if (registro == 1) {
+                JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo borrar al alumno");
+            }
+            jRBEstado.setSelected(false);
+
+            //Despues hay que llamar a limpiar();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
+        } catch (NullPointerException e) {
+            JOptionPane.showMessageDialog(this, "No existe el alumno");
+        }
+
+    }//GEN-LAST:event_jBEliminarActionPerformed
+
+    private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+       
+        limpiar();
+    }//GEN-LAST:event_jBLimpiarActionPerformed
+
+    private void jRBEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBEstadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRBEstadoActionPerformed
+
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         try {
             int dni = Integer.parseInt(JTFDni.getText());
@@ -293,12 +332,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
-
     }//GEN-LAST:event_jBBuscarActionPerformed
-
-    private void jRBEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRBEstadoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -328,4 +362,5 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jDCCalendario.setDate(null);
         jRBEstado.setSelected(false);
     }
+   
 }

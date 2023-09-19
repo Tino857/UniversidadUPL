@@ -20,13 +20,11 @@ import universidad.vistas.Vista;
 public class InscripcionData {
 
     private Connection con = null;
-    private final AlumnoData aluData;
-    private final MateriaData matData;
+   
 
-    public InscripcionData(AlumnoData aluData, MateriaData matData) {
+    public InscripcionData() {
         this.con = Conexion.buscarConexion();
-        this.aluData = aluData;
-        this.matData = matData;
+        
     }
 //Guardar inscripciones
     public int guardarInscripcion(Inscripcion insc) {

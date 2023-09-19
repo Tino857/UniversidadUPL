@@ -24,7 +24,7 @@ private DefaultTableModel modelo=new DefaultTableModel();
         initComponents();
         AD = new AlumnoData();
         MD = new MateriaData();
-        ID = new InscripcionData(AD, MD);
+        ID = new InscripcionData();
 
     }
 
@@ -168,7 +168,7 @@ private DefaultTableModel modelo=new DefaultTableModel();
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
