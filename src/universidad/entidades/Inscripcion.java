@@ -1,40 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.entidades;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class Inscripcion {
 
     private int idInscripcion = -1;
+    private double nota;
     private Alumno alumno;
     private Materia materia;
-    private double nota;
 
     public Inscripcion() {
     }
 
     public Inscripcion(double nota) {
+
         this.nota = nota;
     }
 
-    public Inscripcion(int id, Alumno alumno, Materia materia, double nota) {
-        this.idInscripcion = id;
+    public Inscripcion(Alumno alumno, Materia materia, double nota) {
+
         this.alumno = alumno;
         this.materia = materia;
         this.nota = nota;
     }
 
-public Inscripcion(Alumno alumno, Materia materia, double nota) {
-    this.alumno = alumno;
-    this.materia = materia;
-    this.nota = nota;
-}
+    public Inscripcion(int id, Alumno alumno, Materia materia, double nota) {
+
+        this.idInscripcion = id;
+        this.alumno = alumno;
+        this.materia = materia;
+        this.nota = nota;
+    }
 
     public int getIdMateria() {
         return materia.getId();
@@ -83,5 +81,4 @@ public Inscripcion(Alumno alumno, Materia materia, double nota) {
     public void setNota(double nota) {
         this.nota = nota;
     }
-
 }

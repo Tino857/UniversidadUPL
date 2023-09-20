@@ -249,7 +249,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
             
-            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
             return;
         }
 
@@ -259,10 +259,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             int registro = Vista.getAD().guardarAlumno(al);
             if (registro > 0) {
                 
-                JOptionPane.showMessageDialog(this, "El alumno ha sido agregado");
+                JOptionPane.showMessageDialog(this, "El alumno ha sido agregado.");
             } else {
                 
-                JOptionPane.showMessageDialog(this, "No se pudo agregar al alumno, el DNI ya existe");
+                JOptionPane.showMessageDialog(this, "No se pudo agregar al alumno, el DNI ya existe.");
             }
             limpiar();
         } catch (NumberFormatException e) {
@@ -270,7 +270,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
         } catch (NullPointerException e) {
             
-            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 

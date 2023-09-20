@@ -240,7 +240,8 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 
                 JOptionPane.showMessageDialog(this, "Datos actualizados");
             } else {
-                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos");
+                
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl dni está en uso");
             }
 
             limpiarTabla();

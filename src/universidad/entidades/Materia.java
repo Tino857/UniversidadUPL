@@ -1,34 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.entidades;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class Materia {
 
     private int id = -1;
     private int anioMateria;
-    private String nombre;
     private boolean activo;
-
-    public Materia(int id, int anioMateria, String nombre, boolean activo) {
-        this.id = id;
-
-        this.anioMateria = anioMateria;
-        this.nombre = nombre;
-        this.activo = activo;
-    }
+    private String nombre;
 
     public Materia() {
     }
 
     public Materia(int anioMateria, String nombre, boolean activo) {
 
+        this.anioMateria = anioMateria;
+        this.nombre = nombre;
+        this.activo = activo;
+    }
+
+    public Materia(int id, int anioMateria, String nombre, boolean activo) {
+
+        this.id = id;
         this.anioMateria = anioMateria;
         this.nombre = nombre;
         this.activo = activo;
@@ -65,8 +60,9 @@ public class Materia {
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+
     @Override
-    public String toString(){
-    return nombre+" - "+anioMateria;
-}
+    public String toString() {
+        return nombre + " - " + anioMateria;
+    }
 }

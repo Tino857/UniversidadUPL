@@ -223,9 +223,9 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
             int registro = Vista.getMD().editarMateria(mat);
             if (registro > 0) {
-                JOptionPane.showMessageDialog(this, "Datos actualizados");
+                JOptionPane.showMessageDialog(this, "Datos actualizados.");
             } else {
-                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos");
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl nombre está en uso.");
             }
 
             limpiarTabla();
