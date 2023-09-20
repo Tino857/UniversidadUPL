@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.vistas;
 
-import java.sql.Date;
-import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import universidad.entidades.Alumno;
 import universidad.entidades.Materia;
 
 /**
@@ -20,17 +11,19 @@ import universidad.entidades.Materia;
  */
 public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
-     private DefaultTableModel modelo = new DefaultTableModel(){
-    
+    private final DefaultTableModel modelo = new DefaultTableModel() {
+
         @Override
-        public boolean isCellEditable (int f, int c){
+        public boolean isCellEditable(int f, int c) {
+
             return false;
         }
     };
-     
+
     public EdicionDeMateria() {
+
         initComponents();
-         armarTabla();
+        armarTabla();
         cargarDatos();
     }
 
@@ -184,58 +177,64 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-dispose();        // TODO add your handling code here:
+
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-       if (jTable1.getSelectedRow() == -1) {
+
+        if (jTable1.getSelectedRow() == -1) {
+
             JOptionPane.showMessageDialog(this, "Seleccione una materia que quiera editar");
             return;
-        } else {
-            int filaSelec = jTable1.getSelectedRow();
-            String codigo = (String) modelo.getValueAt(filaSelec, 0);
-            String nombre = (String) modelo.getValueAt(filaSelec, 1);
-            String anio = (String) modelo.getValueAt(filaSelec, 2);
-            jTFCodigo.setText(codigo);
-            jTFNombre.setText(nombre);
-            jTFAño.setText(anio);
         }
+
+        int filaSelec = jTable1.getSelectedRow();
+        String codigo = (String) modelo.getValueAt(filaSelec, 0);
+        String nombre = (String) modelo.getValueAt(filaSelec, 1);
+        String anio = (String) modelo.getValueAt(filaSelec, 2);
+        jTFCodigo.setText(codigo);
+        jTFNombre.setText(nombre);
+        jTFAño.setText(anio);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
-       if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
+
+        if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
+            
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
             return;
-        } else if (jTable1.getSelectedRow() == -1) {
+        }
+
+        if (jTable1.getSelectedRow() == -1) {
+            
             JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
             return;
-        } else {
-
-            try {
-                int filaSelec = jTable1.getSelectedRow();  
-                Materia mat=Vista.getMD().buscarMateriaPorNombre((String) modelo.getValueAt(filaSelec, 1));
-               
-                mat.setId(Integer.parseInt(jTFCodigo.getText()));
-               mat.setAnioMateria(Integer.parseInt(jTFAño.getText()));
-                mat.setNombre(jTFNombre.getText());
-                
-                int registro=Vista.getMD().editarMateria(mat);
-                if (registro>0) {
-                    JOptionPane.showMessageDialog(this,"Datos actualizados");
-                    
-                }
-
-                limpiarTabla();
-                
-                cargarDatos();
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "En la casilla de Año solo deben ir numeros");
-            }
-            //JOptionPane.showMessageDialog(this, "El alumno ha sido actualizado con exito");
-            limpiar();
-
-            return;
         }
+
+        try {
+            
+            int filaSelec = jTable1.getSelectedRow();
+            Materia mat = Vista.getMD().buscarMateriaPorNombre((String) modelo.getValueAt(filaSelec, 1));
+
+            mat.setId(Integer.parseInt(jTFCodigo.getText()));
+            mat.setAnioMateria(Integer.parseInt(jTFAño.getText()));
+            mat.setNombre(jTFNombre.getText());
+
+            int registro = Vista.getMD().editarMateria(mat);
+            if (registro > 0) {
+                JOptionPane.showMessageDialog(this, "Datos actualizados");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos");
+            }
+
+            limpiarTabla();
+            cargarDatos();
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(this, "En la casilla de Año solo deben ir numeros");
+        }
+        limpiar();
     }//GEN-LAST:event_JBEditarActionPerformed
 
 
@@ -254,47 +253,43 @@ dispose();        // TODO add your handling code here:
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
- private void armarTabla() {
+    private void armarTabla() {
+        
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
-      
         jTable1.setModel(modelo);
     }
-private void cargarDatos() {
+
+    private void cargarDatos() {
+        
         ArrayList<Materia> ListaDeMaterias = Vista.getMD().listarMaterias();
-        for (Iterator<Materia> iterator = ListaDeMaterias.iterator(); iterator.hasNext();) {
-        Materia next = iterator.next();
-        cargarTabla(next);
+        for (Materia next : ListaDeMaterias) {
+            cargarTabla(next);
+        }
     }
-    }
- private void cargarTabla(Materia mat) {
+
+    private void cargarTabla(Materia mat) {
 
         modelo.addRow(new Object[]{
             Integer.toString(mat.getId()),
             mat.getNombre(),
-            Integer.toString(mat.getAnioMateria()),       
-        });       
+            Integer.toString(mat.getAnioMateria())
+        });
     }
- public void limpiar() {
+
+    public void limpiar() {
+        
         jTFCodigo.setText("");
         jTFAño.setText("");
         jTFNombre.setText("");
-       
     }
- private void limpiarTabla(){
-        int filas=modelo.getRowCount()-1;
+
+    private void limpiarTabla() {
+        
+        int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
-            
         }
     }
-
-
-
-
-
-
-
-
 }

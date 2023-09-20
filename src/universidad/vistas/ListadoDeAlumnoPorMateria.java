@@ -1,30 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.vistas;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.table.DefaultTableModel;
 import universidad.entidades.Alumno;
-import universidad.entidades.Inscripcion;
 import universidad.entidades.Materia;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class ListadoDeAlumnoPorMateria extends javax.swing.JInternalFrame {
-private DefaultTableModel modelo = new DefaultTableModel(){
+    
+    private final DefaultTableModel modelo = new DefaultTableModel(){
     
         @Override
         public boolean isCellEditable (int f, int c){
+            
             return false;
         }
     };
+    
     public ListadoDeAlumnoPorMateria() {
+        
         initComponents();
         cargarCB();
         armarTabla();
@@ -111,11 +108,13 @@ private DefaultTableModel modelo = new DefaultTableModel(){
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-       dispose();
+        
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jCBMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMateriaActionPerformed
-         limpiarTabla();
+        
+        limpiarTabla();
         Materia mat = (Materia) jCBMateria.getSelectedItem();
         cargarDatos(mat.getId());
     }//GEN-LAST:event_jCBMateriaActionPerformed
@@ -128,49 +127,47 @@ private DefaultTableModel modelo = new DefaultTableModel(){
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
-private void cargarCB() {
+
+    private void cargarCB() {
+        
         ArrayList<Materia> Lista = Vista.getMD().listarMaterias();
-        for (Iterator<Materia> iterator = Lista.iterator(); iterator.hasNext();) {
-            Materia mat = iterator.next();
+        for (Materia mat : Lista) {
             jCBMateria.addItem(mat);
         }
     }
-private void armarTabla() {
+
+    private void armarTabla() {
+        
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         jTable1.setModel(modelo);
     }
- private void cargarTabla(Alumno al) {
+
+    private void cargarTabla(Alumno al) {
+        
         modelo.addRow(new Object[]{
             al.getId()+"",
             al.getDni()+"",
             al.getApellido(),
-            al.getNombre(),
-            
+            al.getNombre(),   
         });   
     }
- private void limpiarTabla(){
+
+    private void limpiarTabla(){
+        
         int fila=modelo.getRowCount()-1;
         for (int i = fila; i >=0; i--) {
             modelo.removeRow(i);
         }
     }
-private void cargarDatos(int id){
+
+    private void cargarDatos(int id){
+        
         ArrayList <Alumno> lista = Vista.getID().listarAlumnoxMateria(id);
         for (Alumno al : lista) {
             cargarTabla(al);
         } 
     }
-
-
-
-
-
-
-
-
-
-
 }

@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.vistas;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidad.entidades.Alumno;
@@ -15,19 +9,21 @@ import universidad.entidades.Materia;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel(){
-    
+    private final DefaultTableModel modelo = new DefaultTableModel() {
+
         @Override
-        public boolean isCellEditable (int f, int c){
+        public boolean isCellEditable(int f, int c) {
+
             return false;
         }
     };
-   
+
     public FormularioDeInscripciones() {
+
         initComponents();
         cargarCB();
         armarTabla();
@@ -108,11 +104,6 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         jRBInscriptas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jRBInscriptasMouseClicked(evt);
-            }
-        });
-        jRBInscriptas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBInscriptasActionPerformed(evt);
             }
         });
 
@@ -209,95 +200,110 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAlumnosActionPerformed
-        limpiarTabla();  
-        Alumno al=(Alumno)jCBAlumnos.getSelectedItem();
+
+        limpiarTabla();
+        Alumno al = (Alumno) jCBAlumnos.getSelectedItem();
         cargarDatos(al.getId());
     }//GEN-LAST:event_jCBAlumnosActionPerformed
 
     private void jBAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBAnularActionPerformed
-       if (jTable1.getSelectedRow() == -1) {
+
+        if (jTable1.getSelectedRow() == -1) {
+
             JOptionPane.showMessageDialog(this, "Seleccione una materia de la tabla");
             return;
         }
-        try{
-            Alumno al=(Alumno)jCBAlumnos.getSelectedItem();
-        int filaS=jTable1.getSelectedRow();
-        String nombre=(String)modelo.getValueAt(filaS, 1);
-        Materia mat=Vista.getMD().buscarMateriaPorNombre(nombre);
-        
-        
-        int registro=Vista.getID().borarInscripcionPorMateriaAlumno(al.getId(), mat.getId());
-        if (registro>0) {
-            JOptionPane.showMessageDialog(this, "Se borro la inscripcion con exito");
-        }else{
-              JOptionPane.showMessageDialog(this, "No se pudo realizar esta operacion");
-        }
-           limpiarTabla();
-       cargarDatos(al.getId());    
-        }catch (NumberFormatException e){
+
+        try {
+            
+            Alumno al = (Alumno) jCBAlumnos.getSelectedItem();
+            int filaS = jTable1.getSelectedRow();
+            String nombre = (String) modelo.getValueAt(filaS, 1);
+            Materia mat = Vista.getMD().buscarMateriaPorNombre(nombre);
+            int registro = Vista.getID().borarInscripcionPorMateriaAlumno(al.getId(), mat.getId());
+            if (registro > 0) {
+                
+                JOptionPane.showMessageDialog(this, "Se borro la inscripcion con exito");
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "No se pudo realizar esta operacion");
+            }
+            limpiarTabla();
+            cargarDatos(al.getId());
+        } catch (NumberFormatException e) {
+            
             JOptionPane.showMessageDialog(this, "En el casillero nota solo deben ir numeros");
         }
     }//GEN-LAST:event_jBAnularActionPerformed
 
-    private void jRBInscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBInscriptasActionPerformed
-    
-    }//GEN-LAST:event_jRBInscriptasActionPerformed
-
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-dispose();        // TODO add your handling code here:
+        
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jRBInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBInscriptasMouseClicked
-        limpiarTabla();  
-        Alumno al=(Alumno)jCBAlumnos.getSelectedItem();
+        
+        limpiarTabla();
+        Alumno al = (Alumno) jCBAlumnos.getSelectedItem();
         cargarDatos(al.getId());
+        
+        jTFNota.setText("");
         jBInscribir.setEnabled(false);
         jBAnular.setEnabled(true);
-        jTFNota.setText("");
         jTFNota.setEditable(false);
         jTFNota.setVisible(false);
         jLNota.setVisible(false);
     }//GEN-LAST:event_jRBInscriptasMouseClicked
 
     private void jRBNoInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBNoInscriptasMouseClicked
-        limpiarTabla(); 
-        Alumno al=(Alumno)jCBAlumnos.getSelectedItem();
+        
+        limpiarTabla();
+        Alumno al = (Alumno) jCBAlumnos.getSelectedItem();
         cargarDatos(al.getId());
-        jBAnular.setEnabled(false);
+        
         jBInscribir.setEnabled(true);
+        jBAnular.setEnabled(false);
         jTFNota.setEditable(true);
         jTFNota.setVisible(true);
         jLNota.setVisible(true);
     }//GEN-LAST:event_jRBNoInscriptasMouseClicked
 
     private void jBInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInscribirActionPerformed
+        
         if (jTFNota.getText().isEmpty()) {
+            
             JOptionPane.showMessageDialog(this, "El casillero Nota no debe estar vacio");
             return;
         } else if (jTable1.getSelectedRow() == -1) {
+            
             JOptionPane.showMessageDialog(this, "Seleccione una materia de la tabla");
             return;
         }
-        try{
-            Alumno al=(Alumno)jCBAlumnos.getSelectedItem();
-        int filaS=jTable1.getSelectedRow();
-        String nombre=(String)modelo.getValueAt(filaS, 1);
-        Materia mat=Vista.getMD().buscarMateriaPorNombre(nombre);
-        double nota=Double.parseDouble(jTFNota.getText());
-        Inscripcion insc=new Inscripcion(al, mat, nota);
-        int registro=Vista.getID().guardarInscripcion(insc);
-        if (registro>0) {
-            JOptionPane.showMessageDialog(this, "La inscripcion se realizo con exito");
-        }else{
-              JOptionPane.showMessageDialog(this, "La inscripcion ya esta realiza");
-        }
-           limpiarTabla();
-       cargarDatos(al.getId());    
-        }catch (NumberFormatException e){
+        
+        try {
+            
+            Alumno al = (Alumno) jCBAlumnos.getSelectedItem();
+            int filaS = jTable1.getSelectedRow();
+            String nombre = (String) modelo.getValueAt(filaS, 1);
+            Materia mat = Vista.getMD().buscarMateriaPorNombre(nombre);
+            double nota = Double.parseDouble(jTFNota.getText());
+            Inscripcion insc = new Inscripcion(al, mat, nota);
+            int registro = Vista.getID().guardarInscripcion(insc);
+            if (registro > 0) {
+                
+                JOptionPane.showMessageDialog(this, "La inscripcion se realizo con exito");
+            } else {
+                
+                JOptionPane.showMessageDialog(this, "La inscripcion ya esta realiza");
+            }
+            limpiarTabla();
+            cargarDatos(al.getId());
+        } catch (NumberFormatException e) {
+            
             JOptionPane.showMessageDialog(this, "En el casillero nota solo deben ir numeros");
         }
-       
-jTFNota.setText("");
+
+        jTFNota.setText("");
     }//GEN-LAST:event_jBInscribirActionPerformed
 
 
@@ -318,51 +324,52 @@ jTFNota.setText("");
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarCB(){
-        ArrayList <Alumno> Lista=Vista.getAD().listarAlumnos();
-        for (Iterator<Alumno> iterator = Lista.iterator(); iterator.hasNext();) {
-            Alumno al = iterator.next();
+    private void cargarCB() {
+        
+        ArrayList<Alumno> Lista = Vista.getAD().listarAlumnos();
+        for (Alumno al : Lista) {
             jCBAlumnos.addItem(al);
         }
     }
-    
+
     private void armarTabla() {
+        
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
         jTable1.setModel(modelo);
     }
-    
+
     private void cargarTabla(Materia mat) {
+        
         modelo.addRow(new Object[]{
             mat.getId(),
             mat.getNombre(),
-            Integer.toString(mat.getAnioMateria()),});   
+            Integer.toString(mat.getAnioMateria()),});
     }
-    
-    private void limpiarTabla(){
-        int fila=modelo.getRowCount()-1;
-        for (int i = fila; i >=0; i--) {
+
+    private void limpiarTabla() {
+        
+        int fila = modelo.getRowCount() - 1;
+        for (int i = fila; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-    private void cargarDatos(int id){
+
+    private void cargarDatos(int id) {
+        
         if (jRBInscriptas.isSelected()) {
-            ArrayList<Materia> Lista=Vista.getID().listarMateriasCursadas(id);
-            for (Iterator<Materia> iterator = Lista.iterator(); iterator.hasNext();) {
-                Materia mat = iterator.next();
-               
+            
+            ArrayList<Materia> Lista = Vista.getID().listarMateriasCursadas(id);
+            for (Materia mat : Lista) {
                 cargarTabla(mat);
             }
-        }else if (jRBNoInscriptas.isSelected()){
-             ArrayList<Materia> Lista=Vista.getID().listarMateriasNoCursadas(id);
-            for (Iterator<Materia> iterator = Lista.iterator(); iterator.hasNext();) {
-                Materia mat = iterator.next();
-             
+        } else if (jRBNoInscriptas.isSelected()) {
+            
+            ArrayList<Materia> Lista = Vista.getID().listarMateriasNoCursadas(id);
+            for (Materia mat : Lista) {
                 cargarTabla(mat);
             }
-        }else{
-            return;
         }
     }
 }

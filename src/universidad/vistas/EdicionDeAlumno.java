@@ -1,14 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.vistas;
 
 import java.sql.Date;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 
 import javax.swing.table.DefaultTableModel;
@@ -16,19 +10,21 @@ import universidad.entidades.Alumno;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
-    private DefaultTableModel modelo = new DefaultTableModel(){
-    
+    private final DefaultTableModel modelo = new DefaultTableModel() {
+
         @Override
-        public boolean isCellEditable (int f, int c){
+        public boolean isCellEditable(int f, int c) {
+
             return false;
         }
     };
 
     public EdicionDeAlumno() {
+
         initComponents();
         armarTabla();
         cargarDatos();
@@ -195,62 +191,65 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();        // TODO add your handling code here:
+
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
         if (jTable1.getSelectedRow() == -1) {
+
             JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
             return;
-        } else {
-            int filaSelec = jTable1.getSelectedRow();
-            String dni = (String) modelo.getValueAt(filaSelec, 1);
-            String apellido = (String) modelo.getValueAt(filaSelec, 2);
-            String nombre = (String) modelo.getValueAt(filaSelec, 3);
-            String FN = (String) modelo.getValueAt(filaSelec, 4);
-            jTFDni.setText(dni);
-            jTFApellido.setText(apellido);
-            jTFNombre.setText(nombre);
-            jDCCalendario.setDate(Date.valueOf(FN));
         }
+
+        int filaSelec = jTable1.getSelectedRow();
+        String dni = (String) modelo.getValueAt(filaSelec, 1);
+        String apellido = (String) modelo.getValueAt(filaSelec, 2);
+        String nombre = (String) modelo.getValueAt(filaSelec, 3);
+        String FN = (String) modelo.getValueAt(filaSelec, 4);
+        jTFDni.setText(dni);
+        jTFApellido.setText(apellido);
+        jTFNombre.setText(nombre);
+        jDCCalendario.setDate(Date.valueOf(FN));
     }//GEN-LAST:event_jTable1MouseClicked
 
 
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
+
         if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || jTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
             return;
-        } else if (jTable1.getSelectedRow() == -1) {
+        }
+
+        if (jTable1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
             return;
-        } else {
-
-            try {
-                int filaSelec = jTable1.getSelectedRow();  
-
-                Alumno al = Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
-                al.setDni(Integer.parseInt(jTFDni.getText()));
-                al.setApellido(jTFApellido.getText());
-                al.setNombre(jTFNombre.getText());
-                al.setfN(jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-                int registro=Vista.getAD().editarAlumno(al);
-                if (registro>0) {
-                    JOptionPane.showMessageDialog(this,"Datos actualizados");
-                    
-                }
-
-                limpiarTabla();
-                
-                cargarDatos();
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "En la casilla de Dni solo deben ir numeros");
-            }
-            //JOptionPane.showMessageDialog(this, "El alumno ha sido actualizado con exito");
-            limpiar();
-
-            return;
         }
+
+        try {
+            
+            int filaSelec = jTable1.getSelectedRow();
+            Alumno al = Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
+            al.setDni(Integer.parseInt(jTFDni.getText()));
+            al.setApellido(jTFApellido.getText());
+            al.setNombre(jTFNombre.getText());
+            al.setfN(jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            int registro = Vista.getAD().editarAlumno(al);
+            if (registro > 0) {
+                
+                JOptionPane.showMessageDialog(this, "Datos actualizados");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos");
+            }
+
+            limpiarTabla();
+            cargarDatos();
+        } catch (NumberFormatException e) {
+            
+            JOptionPane.showMessageDialog(this, "En la casilla de Dni solo deben ir numeros");
+        }
+        limpiar();
     }//GEN-LAST:event_JBEditarActionPerformed
 
 
@@ -270,7 +269,9 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    
     private void armarTabla() {
+        
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
@@ -280,9 +281,9 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     }
 
     private void cargarDatos() {
+        
         ArrayList<Alumno> ListaDeAlumnos = Vista.getAD().listarAlumnos();
-        for (Iterator<Alumno> al = ListaDeAlumnos.iterator(); al.hasNext();) {
-            Alumno next = al.next();
+        for (Alumno next : ListaDeAlumnos) {
             cargarTabla(next);
         }
     }
@@ -295,22 +296,22 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             al.getApellido(),
             al.getNombre(),
             al.getfN().toString()
-                
         });
-        
     }
 
     public void limpiar() {
+        
         jTFDni.setText("");
         jTFApellido.setText("");
         jTFNombre.setText("");
         jDCCalendario.setDate(null);
     }
-    private void limpiarTabla(){
-        int filas=modelo.getRowCount()-1;
+
+    private void limpiarTabla() {
+        
+        int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
-            
         }
     }
 }

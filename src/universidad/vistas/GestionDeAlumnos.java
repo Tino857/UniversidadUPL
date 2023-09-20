@@ -1,8 +1,3 @@
-        /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.vistas;
 
 import java.sql.Date;
@@ -12,7 +7,7 @@ import universidad.entidades.Alumno;
 
 /**
  *
- * @author user
+ * @author Grupo 61
  */
 public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
@@ -20,9 +15,9 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
      * Creates new form GestionDeAlumnos
      */
     public GestionDeAlumnos() {
+
         initComponents();
         jRBEstado.setEnabled(false);
-
     }
 
     /**
@@ -94,11 +89,6 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jRBEstado.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jRBEstado.setForeground(new java.awt.Color(255, 255, 255));
         jRBEstado.setBorderPainted(true);
-        jRBEstado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRBEstadoActionPerformed(evt);
-            }
-        });
 
         jDCCalendario.setBackground(new java.awt.Color(102, 102, 102));
         jDCCalendario.setForeground(new java.awt.Color(255, 255, 255));
@@ -251,28 +241,35 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
+
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
+        if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
+            
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            return;
+        }
+
         try {
-            if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
-                JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
-                return;
-            }
 
             Alumno al = new Alumno(Integer.parseInt(JTFDni.getText()), jTFNombre.getText(), jTFApellido.getText(), jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
             int registro = Vista.getAD().guardarAlumno(al);
             if (registro > 0) {
+                
                 JOptionPane.showMessageDialog(this, "El alumno ha sido agregado");
             } else {
+                
                 JOptionPane.showMessageDialog(this, "No se pudo agregar al alumno, el DNI ya existe");
             }
             limpiar();
         } catch (NumberFormatException e) {
+            
             JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
         } catch (NullPointerException e) {
+            
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
@@ -280,6 +277,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
 
         if (JTFDni.getText().isEmpty()) {
+            
             JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
             return;
         }
@@ -287,14 +285,17 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         try {
             int dni = Integer.parseInt(JTFDni.getText());
             if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
+                
                 JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
                 return;
             }
 
             int registro = Vista.getAD().eliminarAlumnoLogico(dni);
             if (registro == 1) {
+                
                 JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
             } else {
+                
                 JOptionPane.showMessageDialog(this, "No se pudo borrar al alumno");
             }
             jRBEstado.setSelected(false);
@@ -305,20 +306,16 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         } catch (NullPointerException e) {
             JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
-
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
-       
+
         limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
-    private void jRBEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRBEstadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRBEstadoActionPerformed
-
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
         try {
+            
             int dni = Integer.parseInt(JTFDni.getText());
             Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
             jTFNombre.setText(al.getNombre());
@@ -326,10 +323,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             JTFDni.setText(Integer.toString(dni));
             jRBEstado.setSelected(al.isActivo());
             jDCCalendario.setDate(Date.valueOf(al.getfN()));
-
         } catch (NumberFormatException e) {
+            
             JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
         } catch (NullPointerException e) {
+            
             JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
@@ -356,11 +354,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public void limpiar() {
+        
         JTFDni.setText("");
         jTFApellido.setText("");
         jTFNombre.setText("");
         jDCCalendario.setDate(null);
         jRBEstado.setSelected(false);
     }
-   
 }

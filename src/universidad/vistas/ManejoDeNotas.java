@@ -1,32 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.vistas;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidad.entidades.Alumno;
 import universidad.entidades.Inscripcion;
 /**
  *
- * @author user
+ * @author Grupo 61
  */
 public class ManejoDeNotas extends javax.swing.JInternalFrame {
     
 
-    private DefaultTableModel modelo = new DefaultTableModel(){
-    
+    private final DefaultTableModel modelo = new DefaultTableModel(){
+        
         @Override
         public boolean isCellEditable (int f, int c){
+            
             return false;
         }
     };
     
     public ManejoDeNotas() {
+        
         initComponents();
         cargarCB();
         armarTabla();
@@ -185,28 +181,38 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCBAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAlumnosActionPerformed
+        
         limpiarTabla();
         Alumno al = (Alumno) jCBAlumnos.getSelectedItem();
         cargarDatos(al.getId());
     }//GEN-LAST:event_jCBAlumnosActionPerformed
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();        // TODO add your handling code here:
+        
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        
         if (jTFNota.getText().isEmpty()) {
+            
             JOptionPane.showMessageDialog(this, "La casilla Nota no puede estar vacia");
             return;
         }
+        
         if (jCBAlumnos.getSelectedIndex() == -1) {
+            
             JOptionPane.showMessageDialog(this, "Debe seleccionar una materia");
             return;
+            
         }if (jTable1.getSelectedRow() == -1) {
+            
             JOptionPane.showMessageDialog(this, "Seleccione una materia en la que quiera actualizar la nota.");
             return; 
         }
+        
         try {
+            
             Alumno alu = (Alumno)jCBAlumnos.getSelectedItem();
             int fila = jTable1.getSelectedRow();
             int idMateria =Integer.parseInt((String)modelo.getValueAt(fila , 0));
@@ -214,14 +220,17 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
             int registro = Vista.getID().actualizarNota(alu.getId(), idMateria, nota);
             
             if (registro > 0) {
+                
                 JOptionPane.showMessageDialog(this, "La nota se cargo correctamente");
             } else {
+                
                 JOptionPane.showMessageDialog(this, "No se pudo cargar la nota");
             }
             
             limpiarTabla();
             cargarDatos(alu.getId());
         } catch (NumberFormatException ex) {
+            
             JOptionPane.showMessageDialog(this, "El campo nota solo admite números");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
@@ -241,13 +250,15 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
    
     private void cargarCB() {
+        
         ArrayList<Alumno> Lista = Vista.getAD().listarAlumnos();
-        for (Iterator<Alumno> iterator = Lista.iterator(); iterator.hasNext();) {
-            Alumno al = iterator.next();
+        for (Alumno al : Lista) {
             jCBAlumnos.addItem(al);
         }
     }
+    
     private void armarTabla() {
+        
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Nota");
@@ -255,6 +266,7 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     }
     
     private void cargarTabla(Inscripcion insc) {
+        
         modelo.addRow(new Object[]{
             insc.getIdMateria()+"",
             insc.getMateria().getNombre(),
@@ -263,6 +275,7 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     }
     
     private void limpiarTabla(){
+        
         int fila=modelo.getRowCount()-1;
         for (int i = fila; i >=0; i--) {
             modelo.removeRow(i);
@@ -270,10 +283,10 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     }
     
     private void cargarDatos(int id){
+        
         ArrayList <Inscripcion> lista = Vista.getID().listarInscripcionesPorAlumno(id);
         for (Inscripcion inscripcion : lista) {
             cargarTabla(inscripcion);
         } 
     }
-
 }

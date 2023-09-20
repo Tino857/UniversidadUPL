@@ -2,7 +2,7 @@ package universidad.vistas;
 
 /**
  *
- * @author Juan Pablo
+ * @author Grupo 61
  */
 public class SalirView extends javax.swing.JInternalFrame {
 
@@ -10,6 +10,7 @@ public class SalirView extends javax.swing.JInternalFrame {
      * Creates new form SalirView
      */
     public SalirView() {
+        
         initComponents();
     }
 
@@ -32,13 +33,11 @@ public class SalirView extends javax.swing.JInternalFrame {
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("¿Desea salir?");
 
         jbAceptar.setBackground(new java.awt.Color(51, 51, 51));
-        jbAceptar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jbAceptar.setForeground(new java.awt.Color(204, 204, 204));
         jbAceptar.setText("Aceptar");
         jbAceptar.setPreferredSize(new java.awt.Dimension(90, 32));
@@ -49,7 +48,6 @@ public class SalirView extends javax.swing.JInternalFrame {
         });
 
         jbCancelar.setBackground(new java.awt.Color(51, 51, 51));
-        jbCancelar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jbCancelar.setForeground(new java.awt.Color(204, 204, 204));
         jbCancelar.setText("Cancelar");
         jbCancelar.setPreferredSize(new java.awt.Dimension(90, 32));
@@ -75,7 +73,7 @@ public class SalirView extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 102, Short.MAX_VALUE)
+            .addGap(0, 103, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(20, 20, 20)
@@ -102,10 +100,12 @@ public class SalirView extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
+        
         System.exit(0);
     }//GEN-LAST:event_jbAceptarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
+        
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
 

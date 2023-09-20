@@ -1,19 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package universidad.vistas;
 
-import java.sql.Date;
-import java.time.ZoneId;
 import javax.swing.JOptionPane;
-import universidad.entidades.Alumno;
 import universidad.entidades.Materia;
 
 /**
  *
- * @author valen
+ * @author Grupo 61
  */
 public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
@@ -21,6 +13,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
      * Creates new form GestionDeMaterias
      */
     public GestionDeMaterias() {
+
         initComponents();
         jRBEstado.setEnabled(false);
     }
@@ -195,75 +188,97 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        dispose();        // TODO add your handling code here:
+
+        dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+
         if (jTFNombre.getText().isEmpty()) {
+
             JOptionPane.showMessageDialog(this, "Ingrese un nombre de materia.");
             return;
         }
+
         try {
+
             String nombre = jTFNombre.getText();
             Materia materia = Vista.getMD().buscarMateriaPorNombre(nombre);
             jTFCodigo.setText("" + materia.getId());
             jTFNombre.setText(materia.getNombre());
             jTFAño.setText(materia.getAnioMateria() + "");
             jRBEstado.setSelected(materia.isActivo());
-
         } catch (NumberFormatException e) {
+
             JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
         } catch (NullPointerException e) {
+
             JOptionPane.showMessageDialog(this, "No existe la materia");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
+
         limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
 
         if (jTFNombre.getText().isEmpty()) {
+
             JOptionPane.showMessageDialog(this, "La casilla Nombre no debe estar vacia.");
             return;
         }
+
         if (!Vista.getMD().buscarMateriaPorNombre(jTFNombre.getText()).isActivo()) {
+
             JOptionPane.showMessageDialog(this, "La materia ya ha sido borrada");
-        } else {
-            try {
-                String nombre = jTFNombre.getText();
-                int registro = Vista.getMD().eliminarMateriaLogico(nombre);
-                if (registro == 1) {
-                    JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
-                } else {
-                    JOptionPane.showMessageDialog(this, "No se pudo borrar a la materia");
-                }
-                jRBEstado.setSelected(false);
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
-            }
+            return;
         }
 
+        try {
+
+            String nombre = jTFNombre.getText();
+            int registro = Vista.getMD().eliminarMateriaLogico(nombre);
+            if (registro == 1) {
+
+                JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
+            } else {
+
+                JOptionPane.showMessageDialog(this, "No se pudo borrar a la materia");
+            }
+            jRBEstado.setSelected(false);
+        } catch (NumberFormatException e) {
+
+            JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
+        }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
+        
+        if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            return;
+        }
+
         try {
-            if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
-                JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
-                return;
-            }
+
             Materia mat = new Materia(Integer.parseInt(jTFAño.getText()), jTFNombre.getText(), true);
             int registro = Vista.getMD().guardarMateria(mat);
             if (registro > 0) {
+                
                 JOptionPane.showMessageDialog(this, "La materia ha sido guardada");
             } else {
+                
                 JOptionPane.showMessageDialog(this, "No se pudo agregar la materia, el nombre ya existe");
             }
             limpiar();
         } catch (NumberFormatException e) {
+            
             JOptionPane.showMessageDialog(this, "En la casilla año debe ir solo numeros.");
         } catch (NullPointerException e) {
+            
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
@@ -288,11 +303,10 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void limpiar() {
+        
         jTFAño.setText("");
         jTFCodigo.setText("");
         jTFNombre.setText("");
         jRBEstado.setSelected(false);
-
     }
-
 }
