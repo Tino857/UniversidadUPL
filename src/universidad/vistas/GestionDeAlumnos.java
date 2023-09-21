@@ -180,7 +180,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                                                 .addGap(18, 18, 18)
                                                 .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(40, 40, 40)))))
-                .addContainerGap())
+                .addGap(4, 4, 4))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,54 +326,24 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField JTFDni;
     private javax.swing.JButton jBBuscar;
-    private javax.swing.JButton jBBuscar1;
-    private javax.swing.JButton jBBuscar2;
     private javax.swing.JButton jBEliminar;
-    private javax.swing.JButton jBEliminar1;
-    private javax.swing.JButton jBEliminar2;
     private javax.swing.JButton jBGuardar;
-    private javax.swing.JButton jBGuardar1;
-    private javax.swing.JButton jBGuardar2;
     private javax.swing.JButton jBLimpiar;
-    private javax.swing.JButton jBLimpiar1;
-    private javax.swing.JButton jBLimpiar2;
     private javax.swing.JButton jBSalir;
-    private javax.swing.JButton jBSalir1;
-    private javax.swing.JButton jBSalir2;
     private com.toedter.calendar.JDateChooser jDCCalendario;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JRadioButton jRBEstado;
-    private javax.swing.JRadioButton jRBEstado1;
-    private javax.swing.JRadioButton jRBEstado2;
     private javax.swing.JTextField jTFApellido;
-    private javax.swing.JTextField jTFAño;
-    private javax.swing.JTextField jTFAño1;
-    private javax.swing.JTextField jTFCodigo;
-    private javax.swing.JTextField jTFCodigo1;
     private javax.swing.JTextField jTFNombre;
-    private javax.swing.JTextField jTFNombre1;
-    private javax.swing.JTextField jTFNombre2;
     // End of variables declaration//GEN-END:variables
 
-    public void limpiar() {
+    private void limpiar() {
         
         JTFDni.setText("");
         jTFApellido.setText("");

@@ -373,7 +373,8 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         modelo.addRow(new Object[]{
             mat.getId(),
             mat.getNombre(),
-            Integer.toString(mat.getAnioMateria()),});
+            Integer.toString(mat.getAnioMateria())
+        });
     }
 
     private void limpiarTabla() {
