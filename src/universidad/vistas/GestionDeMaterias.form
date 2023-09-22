@@ -39,6 +39,9 @@
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JDesktopPane" name="jDPEscritorio">
+      <Events>
+        <EventHandler event="componentRemoved" listener="java.awt.event.ContainerListener" parameters="java.awt.event.ContainerEvent" handler="jDPEscritorioComponentRemoved"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">

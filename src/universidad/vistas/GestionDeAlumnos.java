@@ -50,6 +50,12 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         setClosable(true);
 
+        jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jDPEscritorioComponentRemoved(evt);
+            }
+        });
+
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -300,7 +306,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             eliminar.setVisible(true);
             jDPEscritorio.add(eliminar);
             jDPEscritorio.moveToFront(eliminar);
-            limpiar();
+            
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
         } catch (NullPointerException e) {
@@ -331,6 +337,12 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
+
+    private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
+        int dni = Integer.parseInt(JTFDni.getText());
+        Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
+        jRBEstado.setSelected(al.isActivo());
+    }//GEN-LAST:event_jDPEscritorioComponentRemoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

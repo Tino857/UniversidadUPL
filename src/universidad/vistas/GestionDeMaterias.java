@@ -47,6 +47,12 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(500, 350));
 
+        jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jDPEscritorioComponentRemoved(evt);
+            }
+        });
+
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 400));
@@ -291,8 +297,7 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
             eliminar.setVisible(true);
             jDPEscritorio.add(eliminar);
             jDPEscritorio.moveToFront(eliminar);
-            Materia mat = Vista.getMD().buscarMateriaPorNombre(nombre);
-            jRBEstado.setSelected(mat.isActivo());
+            
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
@@ -327,6 +332,12 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
+
+    private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
+        String nombre = jTFNombre.getText();
+        Materia mat = Vista.getMD().buscarMateriaPorNombre(nombre);
+        jRBEstado.setSelected(mat.isActivo());
+    }//GEN-LAST:event_jDPEscritorioComponentRemoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
