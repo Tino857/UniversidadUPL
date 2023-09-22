@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import universidad.entidades.Materia;
 import universidad.vistas.Vista;
 
@@ -114,7 +113,7 @@ public class MateriaData {
     //BUSCAR MATERIA POR NOMBRE
     public Materia buscarMateriaPorNombre(String nombre) {
         
-        String query = "SELECT * FROM `materia` WHERE nombre=?";// and estado=1";
+        String query = "SELECT * FROM `materia` WHERE nombre=?";
         Materia mat = null;
         try {
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);

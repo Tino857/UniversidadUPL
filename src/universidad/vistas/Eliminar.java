@@ -1,16 +1,31 @@
 package universidad.vistas;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Grupo 61
  */
 public class Eliminar extends javax.swing.JInternalFrame {
-
+    
+    private int dni = 0;
+    private String nombre = "";
+    private final int clase;
     /**
      * Creates new form Eliminar
+     * @param dni
      */
-    public Eliminar() {
+    public Eliminar(int dni) {
         
+        this.dni = dni;
+        this.clase = 1;
+        initComponents();
+    }
+    
+    public Eliminar(String nombre) {
+        
+        this.nombre = nombre;
+        this.clase = 2;
         initComponents();
     }
 
@@ -107,7 +122,31 @@ public class Eliminar extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-        //Agregar codigo
+        int registro = 0;
+        switch (clase) {
+            case 1:
+                registro = Vista.getAD().eliminarAlumnoLogico(dni);
+                if (registro == 1) {
+                
+                   JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
+                } else {
+                
+                    JOptionPane.showMessageDialog(this, "No se pudo borrar al alumno");
+                }
+                dispose();
+                break;
+            case 2:
+                registro = Vista.getMD().eliminarMateriaLogico(nombre);
+                if (registro == 1) {
+                    
+                    JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "No se pudo borrar a la materia");
+                }
+                dispose();
+                break;
+        }
     }//GEN-LAST:event_jbAceptarActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
