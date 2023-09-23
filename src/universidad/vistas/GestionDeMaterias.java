@@ -248,15 +248,22 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
 
-        if (jTFNombre.getText().isEmpty()) {
+        
+          String nombre=jTFNombre.getText();
+         
+
+         
+        if (nombre.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Ingrese un nombre de materia.");
             return;
         }
-
+        if (especial(nombre)) {
+            return;
+        }
         try {
 
-            String nombre = jTFNombre.getText();
+            nombre = jTFNombre.getText();
             Materia materia = Vista.getMD().buscarMateriaPorNombre(nombre);
             jTFCodigo.setText("" + materia.getId());
             jTFNombre.setText(materia.getNombre());
@@ -277,10 +284,14 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
+       
 
         if (jTFNombre.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "La casilla Nombre no debe estar vacia.");
+            return;
+        }
+         if (especial(jTFNombre.getText())) {
             return;
         }
 
@@ -306,14 +317,21 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         
+      
         if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
             
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
             return;
         }
-
+ 
+        if (especial(jTFNombre.getText())) {
+            return;
+        }
         try {
-
+            if (Integer.parseInt(jTFAño.getText()) <= 0 || Integer.parseInt(jTFAño.getText()) >= 15) {
+                JOptionPane.showMessageDialog(this, "En la casilla Año debe ir un dato valido");
+                return;
+            }
             Materia mat = new Materia(Integer.parseInt(jTFAño.getText()), jTFNombre.getText(), true);
             int registro = Vista.getMD().guardarMateria(mat);
             if (registro > 0) {
@@ -365,5 +383,16 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jTFCodigo.setText("");
         jTFNombre.setText("");
         jRBEstado.setSelected(false);
+    }
+    private boolean especial(String cadena){
+         int cant=cadena.length();
+          String sup="ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
+           for (int i = 0; i < cant; i++) {
+        String letra=cadena.substring(i, i+1);
+                if (sup.contains(letra)) {
+                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion o especiales.");
+            return true;}
+        }
+           return false;
     }
 }

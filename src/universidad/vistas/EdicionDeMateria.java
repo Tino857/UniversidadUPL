@@ -205,9 +205,15 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
 
+        
+        
+        
         if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
             
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            return;
+        }
+        if (especial(jTFNombre.getText())) {
             return;
         }
 
@@ -218,7 +224,10 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         }
 
         try {
-            
+            if (Integer.parseInt(jTFAño.getText()) <= 0 || Integer.parseInt(jTFAño.getText()) >= 15) {
+                JOptionPane.showMessageDialog(this, "En la casilla Año debe ir un dato valido");
+                return;
+            }
             int filaSelec = jTable1.getSelectedRow();
             Materia mat = Vista.getMD().buscarMateriaPorNombre((String) modelo.getValueAt(filaSelec, 1));
 
@@ -296,5 +305,16 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
         }
+    }
+    private boolean especial(String cadena){
+         int cant=cadena.length();
+          String sup="ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
+           for (int i = 0; i < cant; i++) {
+        String letra=cadena.substring(i, i+1);
+                if (sup.contains(letra)) {
+                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion o especiales.");
+            return true;}
+        }
+           return false;
     }
 }

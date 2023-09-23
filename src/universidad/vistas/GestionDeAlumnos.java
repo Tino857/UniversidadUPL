@@ -259,14 +259,21 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
+       
         if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
             
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
             return;
         }
-
+         if (especial(jTFNombre.getText())||especial(jTFApellido.getText())) {
+            return;
+        }
         try {
-
+            int dni=Integer.parseInt(JTFDni.getText());
+            if (dni<=10000000 || dni>=99999999) {
+              JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");  
+              return;
+            }
             Alumno al = new Alumno(Integer.parseInt(JTFDni.getText()), jTFNombre.getText(), jTFApellido.getText(), jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
             int registro = Vista.getAD().guardarAlumno(al);
             if (registro > 0) {
@@ -293,9 +300,13 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
             return;
         }
-
+  
         try {
             int dni = Integer.parseInt(JTFDni.getText());
+             if (dni<=10000000 || dni>=99999999) {
+              JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");  
+              return;
+            }
             if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
                 
                 JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
@@ -320,9 +331,19 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+      if (JTFDni.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea buscar al alumno.");
+            return;
+        }
+        
         try {
             
             int dni = Integer.parseInt(JTFDni.getText());
+            if (dni<=10000000 || dni>=99999999) {
+              JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");  
+              return;
+            }
             Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
             jTFNombre.setText(al.getNombre());
             jTFApellido.setText(al.getApellido());
@@ -373,5 +394,16 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jTFNombre.setText("");
         jDCCalendario.setDate(null);
         jRBEstado.setSelected(false);
+    }
+     private boolean especial(String cadena){
+         int cant=cadena.length();
+          String sup="ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
+           for (int i = 0; i < cant; i++) {
+        String letra=cadena.substring(i, i+1);
+                if (sup.contains(letra)) {
+                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion o especiales.");
+            return true;}
+        }
+           return false;
     }
 }

@@ -235,7 +235,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
             return;
         }
-
+        
         if (jTable1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
             return;
@@ -244,6 +244,11 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         try {
             
             int filaSelec = jTable1.getSelectedRow();
+            int dni=Integer.parseInt(jTFDni.getText());
+            if (dni<=10000000 || dni>=99999999) {
+              JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");  
+              return;
+            }
             Alumno al = Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
             al.setDni(Integer.parseInt(jTFDni.getText()));
             al.setApellido(jTFApellido.getText());
@@ -328,5 +333,16 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
         }
+    }
+    private boolean especial(String cadena){
+         int cant=cadena.length();
+          String sup="ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
+           for (int i = 0; i < cant; i++) {
+        String letra=cadena.substring(i, i+1);
+                if (sup.contains(letra)) {
+                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion o especiales.");
+            return true;}
+        }
+           return false;
     }
 }
