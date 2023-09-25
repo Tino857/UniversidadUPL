@@ -187,7 +187,7 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "La casilla Nota no puede estar vacia");
             return;
         }
-        if (Integer.parseInt(jTFNota.getText())<0||Integer.parseInt(jTFNota.getText())>10) {
+        if (Double.parseDouble(jTFNota.getText())<0||Double.parseDouble(jTFNota.getText())>10) {
             
             JOptionPane.showMessageDialog(this, "En la casilla Nota debe ir un dato valido");
             return;
