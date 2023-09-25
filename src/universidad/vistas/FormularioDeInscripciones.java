@@ -264,6 +264,11 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione una materia de la tabla");
             return;
         }
+        if (Double.parseDouble(jTFNota.getText())<0||Double.parseDouble(jTFNota.getText())>10) {
+            
+            JOptionPane.showMessageDialog(this, "En la casilla Nota debe ir un dato valido");
+            return;
+        }
 
         try {
 
