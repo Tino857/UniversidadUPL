@@ -187,7 +187,11 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "La casilla Nota no puede estar vacia");
             return;
         }
-        
+        if (Integer.parseInt(jTFNota.getText())<0||Integer.parseInt(jTFNota.getText())>10) {
+            
+            JOptionPane.showMessageDialog(this, "En la casilla Nota debe ir un dato valido");
+            return;
+        }
         if (jCBAlumnos.getSelectedIndex() == -1) {
             
             JOptionPane.showMessageDialog(this, "Debe seleccionar una materia");
