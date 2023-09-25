@@ -275,6 +275,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             return;
         }
         if (especial(jTFNombre.getText())||especial(jTFApellido.getText())) {
+           
             return;
         }
         try {
@@ -398,15 +399,16 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jDCCalendario.setDate(null);
         jRBEstado.setSelected(false);
     }
-     private boolean especial(String cadena){
-         int cant=cadena.length();
-          String sup="ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
-           for (int i = 0; i < cant; i++) {
-        String letra=cadena.substring(i, i+1);
-                if (sup.contains(letra)) {
-                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion o especiales.");
-            return true;}
+     private boolean especial(String cadena) {
+        int cant = cadena.length();
+        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>1234567890";
+        for (int i = 0; i < cant; i++) {
+            String letra = cadena.substring(i, i + 1);
+            if (sup.contains(letra)) {
+                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion, especiales o numeros.");
+                return true;
+            }
         }
-           return false;
+        return false;
     }
 }

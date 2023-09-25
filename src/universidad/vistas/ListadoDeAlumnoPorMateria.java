@@ -23,6 +23,14 @@ public class ListadoDeAlumnoPorMateria extends javax.swing.JInternalFrame {
     public ListadoDeAlumnoPorMateria() {
         
         initComponents();
+        Materia mat=new Materia(){
+          @Override
+          public String toString(){
+            return "Seleccione una materia";
+          }  
+        };
+        jCBMateria.addItem(mat);
+        jCBMateria.setSelectedItem(mat);
         cargarCB();
         armarTabla();
     }

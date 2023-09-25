@@ -271,7 +271,10 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
             return;
         }
-
+        if (especial(jTFNombre.getText())||especial(jTFApellido.getText())) {
+            
+            return;
+        }
         try {
 
             int filaSelec = jTable1.getSelectedRow();
@@ -377,11 +380,11 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
     private boolean especial(String cadena) {
         int cant = cadena.length();
-        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
+        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>1234567890";
         for (int i = 0; i < cant; i++) {
             String letra = cadena.substring(i, i + 1);
             if (sup.contains(letra)) {
-                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion o especiales.");
+                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion, especiales o numeros.");
                 return true;
             }
         }

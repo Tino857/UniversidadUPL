@@ -24,6 +24,14 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     public ManejoDeNotas() {
         
         initComponents();
+        Alumno al=new Alumno(){
+          @Override
+          public String toString(){
+            return "Seleccione un alumno";
+          }  
+        };
+        jCBAlumnos.addItem(al);
+        jCBAlumnos.setSelectedItem(al);
         cargarCB();
         armarTabla();
     }
@@ -183,17 +191,16 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBSalirActionPerformed
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-        
+          if (jCBAlumnos.getSelectedIndex()==0) {
+           JOptionPane.showMessageDialog(this, "Para actualizar la nota de una inscripcion debe seleccionar un alumno de la lista");
+            return;
+        }
         if (jTFNota.getText().isEmpty()) {
             
             JOptionPane.showMessageDialog(this, "La casilla Nota no puede estar vacia");
             return;
         }
-        if (Double.parseDouble(jTFNota.getText())<0||Double.parseDouble(jTFNota.getText())>10) {
-            
-            JOptionPane.showMessageDialog(this, "En la casilla Nota debe ir un dato valido");
-            return;
-        }
+      
         if (jCBAlumnos.getSelectedIndex() == -1) {
             
             JOptionPane.showMessageDialog(this, "Debe seleccionar una materia");
@@ -206,7 +213,11 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         }
         
         try {
+              if (Double.parseDouble(jTFNota.getText())<0||Double.parseDouble(jTFNota.getText())>10) {
             
+            JOptionPane.showMessageDialog(this, "En la casilla Nota debe ir un dato valido");
+            return;
+        }
             Alumno alu = (Alumno)jCBAlumnos.getSelectedItem();
             int fila = jTable1.getSelectedRow();
             int idMateria =Integer.parseInt((String)modelo.getValueAt(fila , 0));

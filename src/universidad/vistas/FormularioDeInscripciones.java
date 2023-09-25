@@ -1,8 +1,11 @@
 package universidad.vistas;
 
+
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import universidad.entidades.Alumno;
 import universidad.entidades.Inscripcion;
 import universidad.entidades.Materia;
@@ -25,13 +28,23 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     public FormularioDeInscripciones() {
 
         initComponents();
+        Alumno al=new Alumno(){
+          @Override
+          public String toString(){
+            return "Seleccione un alumno";
+          }  
+        };
+        jCBAlumnos.addItem(al);
+        jCBAlumnos.setSelectedItem(al);
         cargarCB();
         armarTabla();
+        jRBInscriptas.setSelected(false);
         jTFNota.setEditable(false);
         jTFNota.setVisible(false);
         jLNota.setVisible(false);
         jBAnular.setEnabled(false);
         jBInscribir.setEnabled(false);
+       
     }
 
     /**
@@ -233,7 +246,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRBInscriptasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jRBInscriptasMouseClicked
-
+      
         limpiarTabla();
         Alumno al = (Alumno) jCBAlumnos.getSelectedItem();
         cargarDatos(al.getId());
@@ -260,7 +273,10 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRBNoInscriptasMouseClicked
 
     private void jBInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBInscribirActionPerformed
-
+        if (jCBAlumnos.getSelectedIndex()==0) {
+           JOptionPane.showMessageDialog(this, "Para realizar una inscripcion debe seleccionar un alumno de la lista");
+            return;
+        }
         if (jTFNota.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "El casillero Nota no debe estar vacio");
@@ -377,6 +393,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
         jTable1.setModel(modelo);
+      
     }
 
     private void cargarTabla(Materia mat) {
