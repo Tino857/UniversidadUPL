@@ -11,23 +11,23 @@ import javax.swing.JOptionPane;
  */
 public class Conexion {
 
-    private static final String URL = "jdbc:mariadb://localhost/";
-    private static final String USUARIO = "root";
-    private static final String PASSWORD = "";
-    private static final String DB = "Universidad";
-    private static Connection conection = null;
+    private static final String URL = "jdbc:mariadb://localhost/";//direccion de la base de datos
+    private static final String USUARIO = "root";//nombre de usuario para  autenticar la base de datos
+    private static final String PASSWORD = "";//contraseña para autenticar
+    private static final String DB = "Universidad";//nombre de la base de datos
+    private static Connection conection = null;//variable ded tipo Connection que almacena la coneccion.
 
     private Conexion() {
     }
 
     public static Connection buscarConexion() {
         
-        if (conection == null) {
+        if (conection == null) {//se deja establecido que si conection es = null entonces entra en el try
             
             try {
                 
                 Class.forName("org.mariadb.jdbc.Driver");
-                conection = DriverManager.getConnection(URL + DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC" + "&user=" + USUARIO + "&password=" + PASSWORD);
+                conection = DriverManager.getConnection(URL + DB + "?useLegacyDatetimeCode=false&serverTimezone=UTC" + "&user=" + USUARIO + "&password=" + PASSWORD);//Establece la conexión a la base de datos.
             } catch (SQLException ex) {
                 
                 JOptionPane.showMessageDialog(null, "Error al conectarse a la Base de Datos: \n - " + ex.getMessage());
@@ -36,6 +36,6 @@ public class Conexion {
                 JOptionPane.showMessageDialog(null, "Error al cargar el Driver de conexión: \n - " + ex.getMessage());
             }
         }
-        return conection;
+        return conection;//retorna una  coneccion
     }
 }

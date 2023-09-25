@@ -178,14 +178,14 @@ public class AlumnoData {
     //LISTAR ALUMNOS
     public ArrayList<Alumno> listarAlumnos() {
         
-        ArrayList<Alumno> listaDeAlumno = new ArrayList();
-        String query = "SELECT * FROM alumno WHERE estado=1";
+        ArrayList<Alumno> listaDeAlumno = new ArrayList();//se  creo una lista paraa almacenar Alumnos
+        String query = "SELECT * FROM alumno WHERE estado=1";//se define consulta
         try {
             
             PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = ps.executeQuery();
-            Alumno al = null;
-            while (rs.next()) {
+            ResultSet rs = ps.executeQuery();//se ejecuta la consulta, para un conjunto de resultados(resulset)
+            Alumno al = null;// se inicializa un alumno en null
+            while (rs.next()) {//se inicializa un bucle para modificar al alumno(al)
                 al = new Alumno();
                 al.setId(rs.getInt("idAlumno"));
                 al.setNombre(rs.getString("nombre"));
@@ -193,13 +193,13 @@ public class AlumnoData {
                 al.setApellido(rs.getString("apellido"));
                 al.setfN(rs.getDate("fechaNacimiento").toLocalDate());
                 al.setActivo(rs.getBoolean("estado"));
-                listaDeAlumno.add(al);
+                listaDeAlumno.add(al);//se agrega a la lista
             }
-            ps.close();
+            ps.close();//cierra  el PS
         } catch (SQLException e) {
             
             System.out.println("Error al encontrar al alumno" + e.getMessage());
         }
-        return listaDeAlumno;
+        return listaDeAlumno;//retorna una lista de alumnos
     }
 }
