@@ -3,6 +3,8 @@ package universidad.vistas;
 import java.sql.Date;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import universidad.entidades.Alumno;
@@ -52,9 +54,32 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
 
         setClosable(true);
         setPreferredSize(new java.awt.Dimension(550, 500));
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameActivated(evt);
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -72,6 +97,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
         JBEditar.setBackground(new java.awt.Color(51, 51, 51));
         JBEditar.setForeground(new java.awt.Color(204, 204, 204));
+        JBEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/editar-w.png"))); // NOI18N
         JBEditar.setText("Editar");
         JBEditar.setPreferredSize(new java.awt.Dimension(90, 32));
         JBEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -94,6 +120,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
         jBSalir.setForeground(new java.awt.Color(204, 204, 204));
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setPreferredSize(new java.awt.Dimension(90, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -130,35 +157,38 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel6)))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTFDni, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTFApellido)
+                            .addComponent(jTFNombre)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(logo)
+                                .addGap(128, 128, 128)
+                                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jDCCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
+                                .addGap(108, 108, 108))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel6)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTFDni, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTFApellido)
-                    .addComponent(jTFNombre)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jDCCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                        .addGap(108, 108, 108)))
-                .addGap(20, 20, 20))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane1)
+                        .addComponent(jScrollPane1)))
                 .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
@@ -186,7 +216,8 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(logo))
                 .addGap(20, 20, 20))
         );
 
@@ -235,19 +266,19 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
             return;
         }
-        
+
         if (jTable1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
             return;
         }
 
         try {
-            
+
             int filaSelec = jTable1.getSelectedRow();
-            int dni=Integer.parseInt(jTFDni.getText());
-            if (dni<=10000000 || dni>=99999999) {
-              JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");  
-              return;
+            int dni = Integer.parseInt(jTFDni.getText());
+            if (dni <= 10000000 || dni >= 99999999) {
+                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
+                return;
             }
             Alumno al = Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
             al.setDni(Integer.parseInt(jTFDni.getText()));
@@ -256,21 +287,29 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             al.setfN(jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             int registro = Vista.getAD().editarAlumno(al);
             if (registro > 0) {
-                
+
                 JOptionPane.showMessageDialog(this, "Datos actualizados");
             } else {
-                
+
                 JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl dni está en uso");
             }
 
             limpiarTabla();
             cargarDatos();
         } catch (NumberFormatException e) {
-            
+
             JOptionPane.showMessageDialog(this, "En la casilla de Dni solo deben ir numeros");
         }
         limpiar();
     }//GEN-LAST:event_JBEditarActionPerformed
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        
+    }//GEN-LAST:event_formComponentResized
+
+    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
+        
+    }//GEN-LAST:event_formInternalFrameActivated
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -288,10 +327,11 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFDni;
     private javax.swing.JTextField jTFNombre;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
-    
+
     private void armarTabla() {
-        
+
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
@@ -301,7 +341,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     }
 
     private void cargarDatos() {
-        
+
         ArrayList<Alumno> ListaDeAlumnos = Vista.getAD().listarAlumnos();
         for (Alumno next : ListaDeAlumnos) {
             cargarTabla(next);
@@ -320,7 +360,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     }
 
     public void limpiar() {
-        
+
         jTFDni.setText("");
         jTFApellido.setText("");
         jTFNombre.setText("");
@@ -328,21 +368,24 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     }
 
     private void limpiarTabla() {
-        
+
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-    private boolean especial(String cadena){
-         int cant=cadena.length();
-          String sup="ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
-           for (int i = 0; i < cant; i++) {
-        String letra=cadena.substring(i, i+1);
-                if (sup.contains(letra)) {
+
+    private boolean especial(String cadena) {
+        int cant = cadena.length();
+        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>";
+        for (int i = 0; i < cant; i++) {
+            String letra = cadena.substring(i, i + 1);
+            if (sup.contains(letra)) {
                 JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion o especiales.");
-            return true;}
+                return true;
+            }
         }
-           return false;
+        return false;
     }
+
 }

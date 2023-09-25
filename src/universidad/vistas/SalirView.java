@@ -29,14 +29,15 @@ public class SalirView extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setToolTipText("");
-        setPreferredSize(new java.awt.Dimension(250, 130));
+        setPreferredSize(new java.awt.Dimension(300, 130));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         jbAceptar.setBackground(new java.awt.Color(51, 51, 51));
         jbAceptar.setForeground(new java.awt.Color(204, 204, 204));
+        jbAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/aceptar-c.png"))); // NOI18N
         jbAceptar.setText("Aceptar");
-        jbAceptar.setPreferredSize(new java.awt.Dimension(90, 32));
+        jbAceptar.setPreferredSize(new java.awt.Dimension(110, 32));
         jbAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbAceptarActionPerformed(evt);
@@ -45,8 +46,9 @@ public class SalirView extends javax.swing.JInternalFrame {
 
         jbCancelar.setBackground(new java.awt.Color(51, 51, 51));
         jbCancelar.setForeground(new java.awt.Color(204, 204, 204));
+        jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/cancelar-c.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
-        jbCancelar.setPreferredSize(new java.awt.Dimension(90, 32));
+        jbCancelar.setPreferredSize(new java.awt.Dimension(110, 32));
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbCancelarActionPerformed(evt);
@@ -64,10 +66,10 @@ public class SalirView extends javax.swing.JInternalFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(

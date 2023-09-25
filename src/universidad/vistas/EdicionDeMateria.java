@@ -56,6 +56,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
         JBEditar.setBackground(new java.awt.Color(51, 51, 51));
         JBEditar.setForeground(new java.awt.Color(204, 204, 204));
+        JBEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/editar-w.png"))); // NOI18N
         JBEditar.setText("Editar");
         JBEditar.setPreferredSize(new java.awt.Dimension(90, 32));
         JBEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +67,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
         jBSalir.setForeground(new java.awt.Color(204, 204, 204));
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setPreferredSize(new java.awt.Dimension(90, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {

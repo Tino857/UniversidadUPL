@@ -77,6 +77,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
         jBSalir.setForeground(new java.awt.Color(204, 204, 204));
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
         jBSalir.setPreferredSize(new java.awt.Dimension(90, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +88,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
         jBAnular.setBackground(new java.awt.Color(51, 51, 51));
         jBAnular.setForeground(new java.awt.Color(204, 204, 204));
+        jBAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/cancelar-w.png"))); // NOI18N
         jBAnular.setText("Anular Inscripcion");
         jBAnular.setPreferredSize(new java.awt.Dimension(140, 32));
         jBAnular.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +99,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
 
         jBInscribir.setBackground(new java.awt.Color(51, 51, 51));
         jBInscribir.setForeground(new java.awt.Color(204, 204, 204));
+        jBInscribir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/aceptar-w.png"))); // NOI18N
         jBInscribir.setText("Inscribir");
         jBInscribir.setPreferredSize(new java.awt.Dimension(90, 32));
         jBInscribir.addActionListener(new java.awt.event.ActionListener() {
@@ -172,16 +175,19 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                                     .addComponent(jRBInscriptas)
                                     .addComponent(jRBNoInscriptas))
                                 .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBAnular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, Short.MAX_VALUE)
-                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLNota)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTFNota, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jBInscribir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLNota)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTFNota, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jBAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(

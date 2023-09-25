@@ -1,6 +1,11 @@
 package universidad.vistas;
 
 import java.awt.Component;
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import universidad.accesoADatos.AlumnoData;
 import universidad.accesoADatos.InscripcionData;
 import universidad.accesoADatos.MateriaData;
@@ -44,7 +49,13 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        escritorio = new javax.swing.JDesktopPane();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Background.jpg"));
+        Image image = icon.getImage();
+        escritorio = new javax.swing.JDesktopPane(){
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         jMIFormularioDeAlumno = new javax.swing.JMenuItem();
@@ -60,7 +71,12 @@ public class Vista extends javax.swing.JFrame {
         jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        escritorio.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                escritorioComponentResized(evt);
+            }
+        });
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -220,6 +236,12 @@ public class Vista extends javax.swing.JFrame {
         abrirVentana(FDI);
     }//GEN-LAST:event_jMIManejoDeInscripcionesActionPerformed
 
+    private void escritorioComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_escritorioComponentResized
+        escritorio.removeAll();
+        escritorio.repaint();
+        colocarLogo();
+    }//GEN-LAST:event_escritorioComponentResized
+
     /**
      * @param args the command line arguments
      */
@@ -278,5 +300,18 @@ public class Vista extends javax.swing.JFrame {
         cpm.setVisible(true);
         escritorio.add(cpm);
         escritorio.moveToFront(cpm);
+        colocarLogo();
     }
+
+    private void colocarLogo(){
+        JLabel logo = new JLabel();
+        Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP.png")).getImage());
+        logo.setText("");
+        logo.setSize(290,113);
+        logo.setLocation(escritorio.getWidth()-300,escritorio.getHeight()-120);
+        logo.setIcon(icono);
+        escritorio.add(logo);
+        escritorio.moveToFront(logo);
+    }
+
 }

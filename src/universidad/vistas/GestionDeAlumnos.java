@@ -49,6 +49,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
+        setPreferredSize(new java.awt.Dimension(550, 400));
 
         jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentRemoved(java.awt.event.ContainerEvent evt) {
@@ -75,8 +76,9 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
         jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/buscar-w.png"))); // NOI18N
         jBBuscar.setText("Buscar");
-        jBBuscar.setPreferredSize(new java.awt.Dimension(90, 32));
+        jBBuscar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBBuscarActionPerformed(evt);
@@ -103,8 +105,9 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
         jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/limpiar-w.png"))); // NOI18N
         jBLimpiar.setText("Limpiar");
-        jBLimpiar.setPreferredSize(new java.awt.Dimension(90, 32));
+        jBLimpiar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBLimpiarActionPerformed(evt);
@@ -113,8 +116,9 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         jBEliminar.setBackground(new java.awt.Color(51, 51, 51));
         jBEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/eliminar-w.png"))); // NOI18N
         jBEliminar.setText("Eliminar");
-        jBEliminar.setPreferredSize(new java.awt.Dimension(90, 32));
+        jBEliminar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEliminarActionPerformed(evt);
@@ -123,8 +127,9 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         jBGuardar.setBackground(new java.awt.Color(51, 51, 51));
         jBGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/guardar-w.png"))); // NOI18N
         jBGuardar.setText("Guardar");
-        jBGuardar.setPreferredSize(new java.awt.Dimension(90, 32));
+        jBGuardar.setPreferredSize(new java.awt.Dimension(110, 32));
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
@@ -133,8 +138,9 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
         jBSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
-        jBSalir.setPreferredSize(new java.awt.Dimension(90, 32));
+        jBSalir.setPreferredSize(new java.awt.Dimension(110, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
@@ -151,41 +157,38 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(40, 40, 40)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
+                        .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(68, 68, 68)
+                        .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+                        .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel5)))
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jDCCalendario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jTFApellido)
-                            .addComponent(jTFNombre)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 6, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(JTFDni, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jBBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jRBEstado)
-                                            .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jBSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jBLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                        .addGap(40, 40, 40)))
-                .addGap(4, 4, 4))
+                                .addComponent(jRBEstado)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jTFNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTFApellido, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jDCCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(JTFDni))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jBBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jBLimpiar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(40, 40, 40))
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,15 +208,16 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                     .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRBEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                    .addComponent(jRBEstado)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +231,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jDPEscritorio.setLayout(jDPEscritorioLayout);
         jDPEscritorioLayout.setHorizontalGroup(
             jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 498, Short.MAX_VALUE)
+            .addGap(0, 548, Short.MAX_VALUE)
             .addGroup(jDPEscritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -252,6 +256,12 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
+        int dni = Integer.parseInt(JTFDni.getText());
+        Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
+        jRBEstado.setSelected(al.isActivo());
+    }//GEN-LAST:event_jDPEscritorioComponentRemoved
+
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
         dispose();
@@ -259,36 +269,35 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
 
-       
         if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
-            
+
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
             return;
         }
-         if (especial(jTFNombre.getText())||especial(jTFApellido.getText())) {
+        if (especial(jTFNombre.getText())||especial(jTFApellido.getText())) {
             return;
         }
         try {
             int dni=Integer.parseInt(JTFDni.getText());
             if (dni<=10000000 || dni>=99999999) {
-              JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");  
-              return;
+                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
+                return;
             }
             Alumno al = new Alumno(Integer.parseInt(JTFDni.getText()), jTFNombre.getText(), jTFApellido.getText(), jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
             int registro = Vista.getAD().guardarAlumno(al);
             if (registro > 0) {
-                
+
                 JOptionPane.showMessageDialog(this, "El alumno ha sido agregado.");
             } else {
-                
+
                 JOptionPane.showMessageDialog(this, "No se pudo agregar al alumno, el DNI ya existe.");
             }
             limpiar();
         } catch (NumberFormatException e) {
-            
+
             JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
         } catch (NullPointerException e) {
-            
+
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
@@ -296,28 +305,28 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
 
         if (JTFDni.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
             return;
         }
-  
+
         try {
             int dni = Integer.parseInt(JTFDni.getText());
-             if (dni<=10000000 || dni>=99999999) {
-              JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");  
-              return;
+            if (dni<=10000000 || dni>=99999999) {
+                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
+                return;
             }
             if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
-                
+
                 JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
                 return;
             }
-            
+
             Eliminar eliminar = new Eliminar(dni);
             eliminar.setVisible(true);
             jDPEscritorio.add(eliminar);
             jDPEscritorio.moveToFront(eliminar);
-            
+
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
         } catch (NullPointerException e) {
@@ -331,18 +340,18 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
-      if (JTFDni.getText().isEmpty()) {
-            
+        if (JTFDni.getText().isEmpty()) {
+
             JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea buscar al alumno.");
             return;
         }
-        
+
         try {
-            
+
             int dni = Integer.parseInt(JTFDni.getText());
             if (dni<=10000000 || dni>=99999999) {
-              JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");  
-              return;
+                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
+                return;
             }
             Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
             jTFNombre.setText(al.getNombre());
@@ -351,19 +360,13 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
             jRBEstado.setSelected(al.isActivo());
             jDCCalendario.setDate(Date.valueOf(al.getfN()));
         } catch (NumberFormatException e) {
-            
+
             JOptionPane.showMessageDialog(this, "En la casilla DNI debe ir solo numeros.");
         } catch (NullPointerException e) {
-            
+
             JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
-
-    private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
-        int dni = Integer.parseInt(JTFDni.getText());
-        Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
-        jRBEstado.setSelected(al.isActivo());
-    }//GEN-LAST:event_jDPEscritorioComponentRemoved
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
