@@ -1,6 +1,7 @@
 package universidad.vistas;
 
 import javax.swing.JOptionPane;
+import universidad.accesoADatos.ValidarData;
 import universidad.entidades.Materia;
 
 /**
@@ -248,32 +249,45 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
 
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //BOTON BUSCAR
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
 
-        
-          String nombre=jTFNombre.getText();
-         
-
-         
+        //Se controla que no haya campos vacios
+        String nombre=jTFNombre.getText();
         if (nombre.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "Ingrese un nombre de materia.");
             return;
         }
-        if (especial(nombre)) {
+        
+        //Se controla que el nombre de la materia no contenga caracteres especiales
+        if (ValidarData.caracteresEspeciales(nombre)) {
             
+            JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
             return;
         }
+        
         try {
 
-            nombre = jTFNombre.getText();
+            //Se busca la materia en la base de datos y se guarda
             Materia materia = Vista.getMD().buscarMateriaPorNombre(nombre);
-            jTFCodigo.setText("" + materia.getId());
+            
+            //Si la materia recibida tiene valor nulo significa que no se encuentra en la DB
+            //Se muestra el mensaje al usuario y se finaliza la ejecucion
+            if (materia == null) {
+                JOptionPane.showMessageDialog(this, "No existe la materia");
+                return;
+            }
+            
+            //Si la materia se encontraba en la DB, se setean los campos correspondientes con los valores obtenidos de la materia
+            jTFCodigo.setText(materia.getId()+"");
             jTFNombre.setText(materia.getNombre());
             jTFAño.setText(materia.getAnioMateria() + "");
             jRBEstado.setSelected(materia.isActivo());
@@ -286,24 +300,42 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBBuscarActionPerformed
 
+    //BOTON LIMPIAR
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
 
+        //Resetea todos los textfield
         limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
+    //BOTON ELIMINAR
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
        
-
-        if (jTFNombre.getText().isEmpty()) {
+        //Se controla que el campo de nombre no se encuentre vacio
+        String nombre = jTFNombre.getText();
+        if (nombre.isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "La casilla Nombre no debe estar vacia.");
             return;
         }
-         if (especial(jTFNombre.getText())) {
+        
+        //Se controla que el nombre de la materia no contenga caracteres especiales
+        if (ValidarData.caracteresEspeciales(nombre)) {
+            
+            JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
             return;
         }
-
-        if (!Vista.getMD().buscarMateriaPorNombre(jTFNombre.getText()).isActivo()) {
+        
+        //Se crea una materia y se busca en la base de datos para confirmar que la materia existe
+        //En caso que la materia no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
+        Materia mat = Vista.getMD().buscarMateriaPorNombre(jTFNombre.getText());
+        if (mat == null) {
+                
+            JOptionPane.showMessageDialog(this, "No existe la materia");
+            return;
+        }
+            
+        //Si la materia se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
+        if (!mat.isActivo()) {
 
             JOptionPane.showMessageDialog(this, "La materia ya ha sido borrada");
             return;
@@ -311,37 +343,53 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
         try {
 
-            String nombre = jTFNombre.getText();
+            //Habiendo confirmado que el nombre de la materia es correcto, que la materia existe en la DB y que su estado es activo
+            //Se crea una ventana de confirmacion para eliminar la materia, esta ventana recibe como parametro el nombre de la materia
             Eliminar eliminar = new Eliminar(nombre);
             eliminar.setVisible(true);
             jDPEscritorio.add(eliminar);
             jDPEscritorio.moveToFront(eliminar);
-            
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "El código de la materia es incorrecto.");
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
+    //BOTON GUARDAR
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
         
-      
-        if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
+        //Controla que no hayan campos vacios
+        String nombre = jTFNombre.getText();
+        if (nombre.isEmpty() || jTFAño.getText().isEmpty()) {
             
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
             return;
         }
  
-        if (especial(jTFNombre.getText())) {
-            return;
-        }
         try {
-            if (Integer.parseInt(jTFAño.getText()) <= 0 || Integer.parseInt(jTFAño.getText()) >= 15) {
+            
+            //Se intenta parsear el año de la materia y realizar su validacion
+            int anio = Integer.parseInt(jTFAño.getText());
+            if (ValidarData.validarAnio(anio)) {
+                
                 JOptionPane.showMessageDialog(this, "En la casilla Año debe ir un dato valido");
                 return;
             }
-            Materia mat = new Materia(Integer.parseInt(jTFAño.getText()), jTFNombre.getText(), true);
+            
+            //Se controla que el nombre de la materia no contenga caracteres especiales
+            if (ValidarData.caracteresEspeciales(nombre)) {
+
+                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
+                return;
+            }
+            
+            //Llegado el punto en que todos los valores son correctos, se crea una materia
+            Materia mat = new Materia(anio, nombre, true);
+            
+            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarMateria
             int registro = Vista.getMD().guardarMateria(mat);
+            
+            //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
             if (registro > 0) {
                 
                 JOptionPane.showMessageDialog(this, "La materia ha sido guardada");
@@ -349,6 +397,8 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                 
                 JOptionPane.showMessageDialog(this, "No se pudo agregar la materia, el nombre ya existe");
             }
+            
+            //Se limpian los campos
             limpiar();
         } catch (NumberFormatException e) {
             
@@ -360,6 +410,12 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jBGuardarActionPerformed
 
     private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
+        
+        /**
+         * Se captura el evento de cierre de ventana de confirmacion al eliminar una materia.
+         * Luego se busca la materia que se intento eliminar y se recupera su estado.
+         * Por ultimo se setea el componente radioButton estado con el valor de estado de la materia.
+         */
         String nombre = jTFNombre.getText();
         Materia mat = Vista.getMD().buscarMateriaPorNombre(nombre);
         jRBEstado.setSelected(mat.isActivo());
@@ -385,23 +441,12 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
 
+    //Este metodo limpia los textfields y resetea el campo de estado
     private void limpiar() {
         
         jTFAño.setText("");
         jTFCodigo.setText("");
         jTFNombre.setText("");
         jRBEstado.setSelected(false);
-    }
-    private boolean especial(String cadena) {
-        int cant = cadena.length();
-        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>1234567890";
-        for (int i = 0; i < cant; i++) {
-            String letra = cadena.substring(i, i + 1);
-            if (sup.contains(letra)) {
-                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion, especiales o numeros.");
-                return true;
-            }
-        }
-        return false;
     }
 }

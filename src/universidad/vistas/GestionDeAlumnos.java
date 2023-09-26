@@ -1,8 +1,10 @@
 package universidad.vistas;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import javax.swing.JOptionPane;
+import universidad.accesoADatos.ValidarData;
 import universidad.entidades.Alumno;
 
 /**
@@ -257,35 +259,75 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jDPEscritorioComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jDPEscritorioComponentRemoved
+        
+        /**
+         * Se captura el evento de cierre de ventana de confirmacion al eliminar un alumno.
+         * Luego se busca al alumno que se intento eliminar y se recupera su estado.
+         * Por ultimo se setea el componente radioButton estado con el valor de estado del alumno.
+         */
         int dni = Integer.parseInt(JTFDni.getText());
         Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
         jRBEstado.setSelected(al.isActivo());
     }//GEN-LAST:event_jDPEscritorioComponentRemoved
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-
+        
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //BOTON GUARDAR
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-
+        
+        //Controla que no hayan campos vacios
         if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || JTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
 
             JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio.");
             return;
         }
-        if (especial(jTFNombre.getText())||especial(jTFApellido.getText())) {
-           
-            return;
-        }
+        
         try {
-            int dni=Integer.parseInt(JTFDni.getText());
-            if (dni<=10000000 || dni>=99999999) {
+            
+            //Se intenta parsear el dni y se realiza su validacion
+            int dni = Integer.parseInt(JTFDni.getText());
+            if (ValidarData.validarDNI(dni)) {
+                
                 JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
                 return;
             }
-            Alumno al = new Alumno(Integer.parseInt(JTFDni.getText()), jTFNombre.getText(), jTFApellido.getText(), jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), true);
+            
+            //Se valida si los campos de nombre y apellido no contienen caracteres especiales
+            String nombre = jTFNombre.getText();
+            String apellido = jTFApellido.getText();
+            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido)) {
+                
+                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
+                return;
+            }
+            
+            //Se valida si los campos de nombre y apellido cumplen con un largo determinado
+            if (ValidarData.largoCadena(nombre) || ValidarData.largoCadena(apellido)) {
+                
+                JOptionPane.showMessageDialog(this, "El nombre o el apellido son incorrectos");
+                return;
+            }
+            
+            //Se valida si la fecha es correcta
+            LocalDate fecha = jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (ValidarData.validarFecha(fecha)) {
+                
+                JOptionPane.showMessageDialog(this, "Fecha incorrecta");
+                return;
+            }
+            
+            //Llegado el punto en que todos los valores son correctos, se crea un alumno
+            Alumno al = new Alumno(dni, nombre, apellido, fecha, true);
+            
+            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo guardarAlumno
             int registro = Vista.getAD().guardarAlumno(al);
+            
+            //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
             if (registro > 0) {
 
                 JOptionPane.showMessageDialog(this, "El alumno ha sido agregado.");
@@ -293,6 +335,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
                 JOptionPane.showMessageDialog(this, "No se pudo agregar al alumno, el DNI ya existe.");
             }
+            
+            //Se limpian los campos
             limpiar();
         } catch (NumberFormatException e) {
 
@@ -303,8 +347,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_jBGuardarActionPerformed
 
+    //BOTON ELIMINAR
     private void jBEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBEliminarActionPerformed
 
+        //Se controla que el campo que contiene el dni no esté vacío
         if (JTFDni.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea eliminar al alumno.");
@@ -312,35 +358,53 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         }
 
         try {
+            
+            //Se intenta parsear el valor del campo dni
             int dni = Integer.parseInt(JTFDni.getText());
-            if (dni<=10000000 || dni>=99999999) {
-                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
+            
+            //Se crea un alumno y se busca en la base de datos para confirmar que el alumno existe
+            //En caso que el alumno no se encuentre en la base de datos, se muestra un mensaje al usuario y se finaliza la ejecucion
+            Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
+            if (al == null) {
+                
+                JOptionPane.showMessageDialog(this, "No existe el alumno");
                 return;
             }
-            if (!Vista.getAD().buscarAlumnoPorDni(Integer.parseInt(JTFDni.getText())).isActivo()) {
+            
+            //Si el alumno se encontraba en la base de datos, se recupera su estado para confirmar que no haya sido eliminado anteriormente
+            if (!al.isActivo()) {
 
                 JOptionPane.showMessageDialog(this, "El alumno ya ha sido borrado");
                 return;
             }
 
+            //Habiendo confirmado que el dni del alumno es correcto, que el alumno existe en la DB y que su estado es activo
+            //Se crea una ventana de confirmacion para eliminar al alumno, esta ventana recibe como parametro el dni del alumno
             Eliminar eliminar = new Eliminar(dni);
             eliminar.setVisible(true);
             jDPEscritorio.add(eliminar);
             jDPEscritorio.moveToFront(eliminar);
 
         } catch (NumberFormatException e) {
+            
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
         } catch (NullPointerException e) {
+            
             JOptionPane.showMessageDialog(this, "No existe el alumno");
         }
     }//GEN-LAST:event_jBEliminarActionPerformed
 
+    //BOTON LIMPIAR
     private void jBLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBLimpiarActionPerformed
 
+        //Resetea todos los textfield
         limpiar();
     }//GEN-LAST:event_jBLimpiarActionPerformed
 
+    //BOTON BUSCAR
     private void jBBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBuscarActionPerformed
+        
+        //Se controla que el campo dni no este vacio
         if (JTFDni.getText().isEmpty()) {
 
             JOptionPane.showMessageDialog(this, "La casilla DNI no debe estar vacia si desea buscar al alumno.");
@@ -348,13 +412,22 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         }
 
         try {
-
+            
+            //Se intenta parsear el dni
             int dni = Integer.parseInt(JTFDni.getText());
-            if (dni<=10000000 || dni>=99999999) {
-                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
+            
+            //Se recupera el alumno que posee el dni en la DB
+            Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
+            
+            //Si el alumno recibido tiene valor nulo significa que no se encuentra en la DB
+            //Se muestra el mensaje al usuario y se finaliza la ejecucion
+            if (al == null) {
+                
+                JOptionPane.showMessageDialog(this, "No existe el alumno");
                 return;
             }
-            Alumno al = Vista.getAD().buscarAlumnoPorDni(dni);
+            
+            //Si el alumno se encontraba en la DB, se setean los campos correspondientes con los valores obtenidos del alumno
             jTFNombre.setText(al.getNombre());
             jTFApellido.setText(al.getApellido());
             JTFDni.setText(Integer.toString(dni));
@@ -391,6 +464,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTFNombre;
     // End of variables declaration//GEN-END:variables
 
+    //Este metodo limpia los textfields y resetea los campos de estado y fecha
     private void limpiar() {
         
         JTFDni.setText("");
@@ -398,17 +472,5 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jTFNombre.setText("");
         jDCCalendario.setDate(null);
         jRBEstado.setSelected(false);
-    }
-     private boolean especial(String cadena) {
-        int cant = cadena.length();
-        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>1234567890";
-        for (int i = 0; i < cant; i++) {
-            String letra = cadena.substring(i, i + 1);
-            if (sup.contains(letra)) {
-                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion, especiales o numeros.");
-                return true;
-            }
-        }
-        return false;
     }
 }

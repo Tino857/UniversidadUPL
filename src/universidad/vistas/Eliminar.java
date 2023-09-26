@@ -11,27 +11,29 @@ public class Eliminar extends javax.swing.JInternalFrame {
     private int dni = 0;
     private String nombre = "";
     private final int clase;
+    
     /**
      * Creates new form Eliminar
      * @param dni
      */
-    
     public Eliminar(int dni) {
         
         this.dni = dni;
         this.clase = 1;
-        
         initComponents();
         jLTitulo.setText("¿Desea eliminar a este alumno?");
     }
     
+    /**
+     * Creates new form Eliminar
+     * @param nombre
+     */
     public Eliminar(String nombre) {
         
         this.nombre = nombre;
         this.clase = 2;
-        
         initComponents();
-        jLTitulo.setText("¿Desea eliminar a esta materia?");
+        jLTitulo.setText("¿Desea eliminar esta materia?");
     }
 
     /**
@@ -79,7 +81,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("(Esta acción es definitiva)");
 
@@ -95,11 +97,11 @@ public class Eliminar extends javax.swing.JInternalFrame {
             .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(20, 20, 20)
                 .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40))
+                .addGap(20, 20, 20))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,25 +113,30 @@ public class Eliminar extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 306, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void jbAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbAceptarActionPerformed
-        int registro = 0;
+        
+        //Dependiendo del constructor con el que sea creada esta ventana, tendra un valor la variable "clase"
+        //Si recibe un entero (dni), la variable clase toma valor 1 y se ejecuta el metodo eliminarAlumno de AlumnoData
+        //Si recibe un String (nombre), la variable clase toma valor 2 y se ejecuta eliminarMateriaLogico de MateriaData
+        int registro;
         switch (clase) {
             case 1:
                 registro = Vista.getAD().eliminarAlumnoLogico(dni);
@@ -158,6 +165,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
         
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jbCancelarActionPerformed
 

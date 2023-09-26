@@ -2,6 +2,7 @@ package universidad.vistas;
 
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import universidad.entidades.Alumno;
 import universidad.entidades.Materia;
 
@@ -11,6 +12,7 @@ import universidad.entidades.Materia;
  */
 public class ListadoDeAlumnoPorMateria extends javax.swing.JInternalFrame {
     
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel(){
     
         @Override
@@ -23,15 +25,8 @@ public class ListadoDeAlumnoPorMateria extends javax.swing.JInternalFrame {
     public ListadoDeAlumnoPorMateria() {
         
         initComponents();
-        Materia mat=new Materia(){
-          @Override
-          public String toString(){
-            return "Seleccione una materia";
-          }  
-        };
-        jCBMateria.addItem(mat);
-        jCBMateria.setSelectedItem(mat);
         cargarCB();
+        jCBMateria.setSelectedIndex(0);
         armarTabla();
     }
 
@@ -146,13 +141,17 @@ public class ListadoDeAlumnoPorMateria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //COMBOBOX AP
     private void jCBMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBMateriaActionPerformed
         
+        //Registra el cambio de materia seleccionada, la recupera y en base a ésta, actualiza los datos de los alumnos en la tabla
         limpiarTabla();
         Materia mat = (Materia) jCBMateria.getSelectedItem();
         cargarDatos(mat.getId());
@@ -169,23 +168,69 @@ public class ListadoDeAlumnoPorMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 
+    //Este metodo permite cargar las materias activas al comboBox
     private void cargarCB() {
         
+        //Agregamos en el primer lugar una materia vacia
+        Materia vacio=new Materia(){
+          @Override
+          public String toString(){
+            return "Seleccione una materia...";
+          }  
+        };
+        jCBMateria.addItem(vacio);
+        
+        //Se recupera una lista de materias
         ArrayList<Materia> Lista = Vista.getMD().listarMaterias();
+        
+        //Se recorre la lista y cada materia se agrega al CB
         for (Materia mat : Lista) {
             jCBMateria.addItem(mat);
         }
     }
 
+    //Este metodo permite setear un modelo de tabla personalizado
     private void armarTabla() {
         
+        //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
+        
+        //Se setea el modelo de tabla a la tabla de alumnos
         jTable1.setModel(modelo);
+        
+        //Se recupera el modelo de columnas
+        TableColumnModel columnas = jTable1.getColumnModel();
+        
+        //Se llama al metodo que se encarga de setear el ancho de las columnas
+        anchoColumna(columnas, 0, 60);
+        anchoColumna(columnas, 1, 90);
+    }
+    
+    //Este metodo se usa para setear el ancho de una columna
+    //Recibe por parametro el modelo de columna de la tabla, el indice de la columna a modificar y el ancho deseado
+    private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho){
+        
+        modeloTabla.getColumn(indice).setWidth(ancho);
+        modeloTabla.getColumn(indice).setMaxWidth(ancho+30);
+        modeloTabla.getColumn(indice).setMinWidth(ancho-10);
+        modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
 
+    //Se cargan las filas en la tabla
+    private void cargarDatos(int id){
+        
+        //Se recupera una lista de alumnos
+        ArrayList <Alumno> lista = Vista.getID().listarAlumnoxMateria(id);
+        //Se recorre la lista de alumnos y por cada uno, se llama al metodo cargarTabla y se le pasa el alumno por parametro
+        for (Alumno al : lista) {
+            cargarTabla(al);
+        } 
+    }
+    
+    //Este metodo se encarga de recibir un alumno y desglosar su informacion en una fila para agregarla a la tabla de alumnos
     private void cargarTabla(Alumno al) {
         
         modelo.addRow(new Object[]{
@@ -195,20 +240,13 @@ public class ListadoDeAlumnoPorMateria extends javax.swing.JInternalFrame {
             al.getNombre(),   
         });   
     }
-
+    
+    //Este metodo elimina todas las filas de la tabla
     private void limpiarTabla(){
         
         int fila=modelo.getRowCount()-1;
         for (int i = fila; i >=0; i--) {
             modelo.removeRow(i);
         }
-    }
-
-    private void cargarDatos(int id){
-        
-        ArrayList <Alumno> lista = Vista.getID().listarAlumnoxMateria(id);
-        for (Alumno al : lista) {
-            cargarTabla(al);
-        } 
     }
 }

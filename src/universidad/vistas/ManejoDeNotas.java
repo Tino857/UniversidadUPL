@@ -3,6 +3,8 @@ package universidad.vistas;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import universidad.accesoADatos.ValidarData;
 import universidad.entidades.Alumno;
 import universidad.entidades.Inscripcion;
 /**
@@ -11,7 +13,7 @@ import universidad.entidades.Inscripcion;
  */
 public class ManejoDeNotas extends javax.swing.JInternalFrame {
     
-
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel(){
         
         @Override
@@ -24,15 +26,8 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     public ManejoDeNotas() {
         
         initComponents();
-        Alumno al=new Alumno(){
-          @Override
-          public String toString(){
-            return "Seleccione un alumno";
-          }  
-        };
-        jCBAlumnos.addItem(al);
-        jCBAlumnos.setSelectedItem(al);
         cargarCB();
+        jCBAlumnos.setSelectedIndex(0);
         armarTabla();
     }
 
@@ -178,52 +173,66 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    //COMBOBOX AP
     private void jCBAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCBAlumnosActionPerformed
         
+        //Registra el cambio de alumno seleccionado, lo recupera y en base a éste, actualiza los datos de las materias en la tabla
         limpiarTabla();
         Alumno al = (Alumno) jCBAlumnos.getSelectedItem();
         cargarDatos(al.getId());
     }//GEN-LAST:event_jCBAlumnosActionPerformed
 
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
         
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //BOTON GUARDAR
     private void jBGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBGuardarActionPerformed
-          if (jCBAlumnos.getSelectedIndex()==0) {
-           JOptionPane.showMessageDialog(this, "Para actualizar la nota de una inscripcion debe seleccionar un alumno de la lista");
+        
+        //Se controla que el alumno seleccionado en el CB no se encuentre en el indice 0
+        if (jCBAlumnos.getSelectedIndex()<=0) {
+            
+            JOptionPane.showMessageDialog(this, "Debe seleccionar un alumno de la lista");
             return;
         }
+        
+        //Controla que el campo de nota no se encuentre vacio
         if (jTFNota.getText().isEmpty()) {
             
             JOptionPane.showMessageDialog(this, "La casilla Nota no puede estar vacia");
             return;
         }
       
-        if (jCBAlumnos.getSelectedIndex() == -1) {
+        //Se controla que una materia de la lista este seleccionada
+        if (jTable1.getSelectedRow() == -1) {
             
             JOptionPane.showMessageDialog(this, "Debe seleccionar una materia");
             return;
-            
-        }if (jTable1.getSelectedRow() == -1) {
-            
-            JOptionPane.showMessageDialog(this, "Seleccione una materia en la que quiera actualizar la nota.");
-            return; 
         }
         
         try {
-              if (Double.parseDouble(jTFNota.getText())<0||Double.parseDouble(jTFNota.getText())>10) {
+            //Se intenta parsear la nota y realizar su validacion
+            double nota = Double.parseDouble(jTFNota.getText());
+            if (ValidarData.validarNota(nota)) {
             
-            JOptionPane.showMessageDialog(this, "En la casilla Nota debe ir un dato valido");
-            return;
-        }
+                JOptionPane.showMessageDialog(this, "En la casilla Nota debe ir un dato valido");
+                return;
+            }
+            
+            //Se recupera el alumno seleccionado del CB
             Alumno alu = (Alumno)jCBAlumnos.getSelectedItem();
+            
+            //Se recupera la materia seleccionada de la tabla
             int fila = jTable1.getSelectedRow();
             int idMateria =Integer.parseInt((String)modelo.getValueAt(fila , 0));
-            double nota = Double.parseDouble(jTFNota.getText());
+            
+            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo actualizarNota
             int registro = Vista.getID().actualizarNota(alu.getId(), idMateria, nota);
             
+            //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
             if (registro > 0) {
                 
                 JOptionPane.showMessageDialog(this, "La nota se cargo correctamente");
@@ -232,6 +241,7 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se pudo cargar la nota");
             }
             
+            //Se limpia la tabla y se vuelven a cargar los datos de las materias
             limpiarTabla();
             cargarDatos(alu.getId());
         } catch (NumberFormatException ex) {
@@ -254,22 +264,69 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
    
+    //Este metodo permite cargar los alumnos activos al comboBox
     private void cargarCB() {
         
+        //Agregamos en el primer lugar un alumno vacio
+        Alumno vacio=new Alumno(){
+          @Override
+          public String toString(){
+            return "Seleccione un alumno...";
+          }  
+        };
+        jCBAlumnos.addItem(vacio);
+        
+        //Se recupera una lista de alumnos
         ArrayList<Alumno> Lista = Vista.getAD().listarAlumnos();
+        
+        //Se recorre la lista y cada alumno se agrega al CB
         for (Alumno al : Lista) {
             jCBAlumnos.addItem(al);
         }
     }
     
+    //Este metodo permite setear un modelo de tabla personalizado
     private void armarTabla() {
-        
+                
+        //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("ID");
         modelo.addColumn("Nombre");
         modelo.addColumn("Nota");
+        
+        //Se setea el modelo de tabla a la tabla de materias
         jTable1.setModel(modelo);
+        
+        //Se recupera el modelo de columnas
+        TableColumnModel columnas = jTable1.getColumnModel();
+        
+        //Se llama al metodo que se encarga de setear el ancho de las columnas
+        anchoColumna(columnas, 0, 60);
+        anchoColumna(columnas, 2, 60);
     }
     
+    //Este metodo se usa para setear el ancho de una columna
+    //Recibe por parametro el modelo de columna de la tabla, el indice de la columna a modificar y el ancho deseado
+    private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho){
+        
+        modeloTabla.getColumn(indice).setWidth(ancho);
+        modeloTabla.getColumn(indice).setMaxWidth(ancho+30);
+        modeloTabla.getColumn(indice).setMinWidth(ancho-10);
+        modeloTabla.getColumn(indice).setPreferredWidth(ancho);
+    }
+    
+    //Se cargan las filas en la tabla
+    private void cargarDatos(int id){
+        
+        //Se recupera una lista de inscripciones
+        ArrayList <Inscripcion> lista = Vista.getID().listarInscripcionesPorAlumno(id);
+        
+        //Se recorre la lista de inscripciones y por cada una, se llama al metodo cargarTabla y se le pasa la inscripcion por parametro
+        for (Inscripcion inscripcion : lista) {
+            cargarTabla(inscripcion);
+        } 
+    }
+    
+    //Este metodo se encarga de recibir una inscripcion y desglosar su informacion en una fila para agregarla a la tabla de inscripciones
     private void cargarTabla(Inscripcion insc) {
         
         modelo.addRow(new Object[]{
@@ -279,19 +336,12 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         });   
     }
     
+    //Este metodo elimina todas las filas de la tabla
     private void limpiarTabla(){
         
         int fila=modelo.getRowCount()-1;
         for (int i = fila; i >=0; i--) {
             modelo.removeRow(i);
         }
-    }
-    
-    private void cargarDatos(int id){
-        
-        ArrayList <Inscripcion> lista = Vista.getID().listarInscripcionesPorAlumno(id);
-        for (Inscripcion inscripcion : lista) {
-            cargarTabla(inscripcion);
-        } 
     }
 }

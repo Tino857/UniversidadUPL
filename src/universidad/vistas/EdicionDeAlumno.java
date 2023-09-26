@@ -1,12 +1,13 @@
 package universidad.vistas;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
+import universidad.accesoADatos.ValidarData;
 import universidad.entidades.Alumno;
 
 /**
@@ -15,6 +16,7 @@ import universidad.entidades.Alumno;
  */
 public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
+    //Se crea el modelo que usaremos en la tabla, y se impide que se puedan modificar los valores de las celdas
     private final DefaultTableModel modelo = new DefaultTableModel() {
 
         @Override
@@ -57,29 +59,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         logo = new javax.swing.JLabel();
 
         setClosable(true);
-        setPreferredSize(new java.awt.Dimension(550, 500));
-        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
-            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
-                formInternalFrameActivated(evt);
-            }
-            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
-            }
-            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
-            }
-        });
-        addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                formComponentResized(evt);
-            }
-        });
+        setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -234,61 +214,98 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-
+        
+        //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
 
+    //ACCION CLICK EN TABLA
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
-        if (jTable1.getSelectedRow() == -1) {
-
-            JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
-            return;
-        }
-
+        //Se captura el evento de click en una fila de la tabla y se recupera el indice de la misma
         int filaSelec = jTable1.getSelectedRow();
+        
+        //Se obtienen los datos del alumno almacenado en la fila seleccionada
         String dni = (String) modelo.getValueAt(filaSelec, 1);
         String apellido = (String) modelo.getValueAt(filaSelec, 2);
         String nombre = (String) modelo.getValueAt(filaSelec, 3);
         String FN = (String) modelo.getValueAt(filaSelec, 4);
+        
+        //Se setean los valores recuperados anteriormente en los campos correspondientes
         jTFDni.setText(dni);
         jTFApellido.setText(apellido);
         jTFNombre.setText(nombre);
         jDCCalendario.setDate(Date.valueOf(FN));
     }//GEN-LAST:event_jTable1MouseClicked
 
-
+    //BOTON EDITAR
     private void JBEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBEditarActionPerformed
 
+        //Se controla que no hayan campos vacios
         if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || jTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Ningun casillero debe estar vacio");
+            JOptionPane.showMessageDialog(this, "No pude haber campos vacíos.");
             return;
         }
-
+        
+        //Se controla que un alumno de la tabla esté seleccionado
         if (jTable1.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un contacto que quiera editar");
+            JOptionPane.showMessageDialog(this, "Seleccione un alumno de la lista.");
             return;
         }
-        if (especial(jTFNombre.getText())||especial(jTFApellido.getText())) {
-            
-            return;
-        }
+        
         try {
-
+            
+            //Se recupera la fila seleccionada
             int filaSelec = jTable1.getSelectedRow();
+            
+            //Se intenta parsear el nuevo dni a guardar en el alumno y se realiza su validacion
             int dni = Integer.parseInt(jTFDni.getText());
-            if (dni <= 10000000 || dni >= 99999999) {
+            if (ValidarData.validarDNI(dni)) {
+                
                 JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
                 return;
             }
+            
+            //Se valida si los campos de nombre y apellido no contienen caracteres especiales
+            String nombre = jTFNombre.getText();
+            String apellido = jTFApellido.getText();
+            if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido)) {
+                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
+                return;
+            }
+            
+            //Se valida si los campos de nombre y apellido cumplen con un largo determinado
+            if (ValidarData.largoCadena(nombre) || ValidarData.largoCadena(apellido)) {
+                
+                JOptionPane.showMessageDialog(this, "El nombre o apellido es incorrecto");
+                return;
+            }
+            
+            //Se valida si la fecha es correcta
+            LocalDate fecha = jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            if (ValidarData.validarFecha(fecha)){
+                
+                JOptionPane.showMessageDialog(this, "La fecha es incorrecta");
+                return;
+            }
+            
+            //Llegado el punto en que todos los valores son correctos, se crea un alumno
+            //En este alumno guardamos el resultado de la busqueda por medio del dni que figura en la tabla
             Alumno al = Vista.getAD().buscarAlumnoPorDni(Integer.parseInt((String) modelo.getValueAt(filaSelec, 1)));
-            al.setDni(Integer.parseInt(jTFDni.getText()));
-            al.setApellido(jTFApellido.getText());
-            al.setNombre(jTFNombre.getText());
-            al.setfN(jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            
+            //Seteamos al alumno con la informacion nueva
+            al.setDni(dni);
+            al.setApellido(apellido);
+            al.setNombre(nombre);
+            al.setfN(fecha);
+            
+            //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarAlumno
             int registro = Vista.getAD().editarAlumno(al);
+            
+            //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
             if (registro > 0) {
 
                 JOptionPane.showMessageDialog(this, "Datos actualizados");
@@ -297,23 +314,16 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl dni está en uso");
             }
 
+            //Se limpia la tabla y se vuelven a cargar los datos de los alumnos
             limpiarTabla();
             cargarDatos();
         } catch (NumberFormatException e) {
 
             JOptionPane.showMessageDialog(this, "En la casilla de Dni solo deben ir numeros");
         }
+        //Se limpian los textfields
         limpiar();
     }//GEN-LAST:event_JBEditarActionPerformed
-
-    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
-        
-    }//GEN-LAST:event_formComponentResized
-
-    private void formInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameActivated
-        
-    }//GEN-LAST:event_formInternalFrameActivated
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBEditar;
@@ -333,24 +343,51 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 
+    //Este metodo permite setear un modelo de tabla personalizado
     private void armarTabla() {
 
+        //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("ID");
         modelo.addColumn("DNI");
         modelo.addColumn("Apellido");
         modelo.addColumn("Nombre");
         modelo.addColumn("Fecha de Nacimiento");
+        
+        //Se setea el modelo de tabla a la tabla de alumnos
         jTable1.setModel(modelo);
+        
+        //Se recupera el modelo de columnas
+        TableColumnModel columnas = jTable1.getColumnModel();
+        
+        //Se llama al metodo que se encarga de setear el ancho de las columnas
+        anchoColumna(columnas, 0, 40);
+        anchoColumna(columnas, 1, 80);
+        anchoColumna(columnas, 4, 90);
+    }
+    
+    //Este metodo se usa para setear el ancho de una columna
+    //Recibe por parametro el modelo de columna de la tabla, el indice de la columna a modificar y el ancho deseado
+    private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho){
+        
+        modeloTabla.getColumn(indice).setWidth(ancho);
+        modeloTabla.getColumn(indice).setMaxWidth(ancho+30);
+        modeloTabla.getColumn(indice).setMinWidth(ancho-10);
+        modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
 
+    //Se cargan las filas en la tabla
     private void cargarDatos() {
-
+        
+        //Se recupera una lista de alumnos
         ArrayList<Alumno> ListaDeAlumnos = Vista.getAD().listarAlumnos();
+        
+        //Se recorre la lista y por cada alumno, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicho alumno
         for (Alumno next : ListaDeAlumnos) {
             cargarTabla(next);
         }
     }
 
+    //Este metodo se encarga de recibir un alumno y desglosar su informacion en una fila para agregarla a la tabla de alumnos
     private void cargarTabla(Alumno al) {
 
         modelo.addRow(new Object[]{
@@ -362,6 +399,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         });
     }
 
+    //Este metodo limpia los textfields y resetea los campos de estado y fecha
     public void limpiar() {
 
         jTFDni.setText("");
@@ -370,6 +408,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jDCCalendario.setDate(null);
     }
 
+    //Este metodo elimina todas las filas de la tabla
     private void limpiarTabla() {
 
         int filas = modelo.getRowCount() - 1;
@@ -377,18 +416,4 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             modelo.removeRow(i);
         }
     }
-
-    private boolean especial(String cadena) {
-        int cant = cadena.length();
-        String sup = "ºª!|@·#$~%€&¬/()=?¿¡'`^[*+]´¨{çÇ},;:.-_<>1234567890";
-        for (int i = 0; i < cant; i++) {
-            String letra = cadena.substring(i, i + 1);
-            if (sup.contains(letra)) {
-                JOptionPane.showMessageDialog(this, "No puede ingresar signos de puntuacion, especiales o numeros.");
-                return true;
-            }
-        }
-        return false;
-    }
-
 }
