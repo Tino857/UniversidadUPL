@@ -1,5 +1,8 @@
 package universidad.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,7 +48,14 @@ public class Eliminar extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Fondito.png"));
+        Image image = icon.getImage();
+        jPBackground = new javax.swing.JPanel(){
+
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jbAceptar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -55,9 +65,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
         setPreferredSize(new java.awt.Dimension(300, 170));
         setVisible(true);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setName(""); // NOI18N
-        jPanel1.setPreferredSize(new java.awt.Dimension(300, 130));
+        jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
         jbAceptar.setBackground(new java.awt.Color(51, 51, 51));
         jbAceptar.setForeground(new java.awt.Color(204, 204, 204));
@@ -90,41 +98,41 @@ public class Eliminar extends javax.swing.JInternalFrame {
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("Titulo");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
+        jPBackground.setLayout(jPBackgroundLayout);
+        jPBackgroundLayout.setHorizontalGroup(
+            jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPBackgroundLayout.setVerticalGroup(
+            jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
         );
 
         pack();
@@ -173,7 +181,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPBackground;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;
     // End of variables declaration//GEN-END:variables

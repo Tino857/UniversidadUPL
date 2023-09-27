@@ -49,7 +49,7 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/4.jpg"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Background.png"));
         Image image = icon.getImage();
         escritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -57,20 +57,21 @@ public class Vista extends javax.swing.JFrame {
             }
         };
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        jMAlumnos = new javax.swing.JMenu();
         jMIFormularioDeAlumno = new javax.swing.JMenuItem();
         jMIEdicionDeAlumno = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        jMMaterias = new javax.swing.JMenu();
         jMIFormularioDeMateria = new javax.swing.JMenuItem();
         jMIEdicionDeMateria = new javax.swing.JMenuItem();
-        jMenu1 = new javax.swing.JMenu();
+        jMAdministracion = new javax.swing.JMenu();
         jMIManejoDeInscripciones = new javax.swing.JMenuItem();
         jMIManejoDeNotas = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        jMConsultas = new javax.swing.JMenu();
         jMIAlumnosPorMateria = new javax.swing.JMenuItem();
         jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
         escritorio.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -92,7 +93,7 @@ public class Vista extends javax.swing.JFrame {
         jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
         jMenuBar1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
 
-        jMenu2.setText("Alumnos");
+        jMAlumnos.setText("Alumnos");
 
         jMIFormularioDeAlumno.setText("Formulario de Alumno");
         jMIFormularioDeAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +101,7 @@ public class Vista extends javax.swing.JFrame {
                 jMIFormularioDeAlumnoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMIFormularioDeAlumno);
+        jMAlumnos.add(jMIFormularioDeAlumno);
 
         jMIEdicionDeAlumno.setText("Edicion de Alumno");
         jMIEdicionDeAlumno.addActionListener(new java.awt.event.ActionListener() {
@@ -108,11 +109,11 @@ public class Vista extends javax.swing.JFrame {
                 jMIEdicionDeAlumnoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMIEdicionDeAlumno);
+        jMAlumnos.add(jMIEdicionDeAlumno);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(jMAlumnos);
 
-        jMenu3.setText("Materias");
+        jMMaterias.setText("Materias");
 
         jMIFormularioDeMateria.setText("Formulario de Materia ");
         jMIFormularioDeMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +121,7 @@ public class Vista extends javax.swing.JFrame {
                 jMIFormularioDeMateriaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMIFormularioDeMateria);
+        jMMaterias.add(jMIFormularioDeMateria);
 
         jMIEdicionDeMateria.setText("Edicion de Materia");
         jMIEdicionDeMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -128,11 +129,11 @@ public class Vista extends javax.swing.JFrame {
                 jMIEdicionDeMateriaActionPerformed(evt);
             }
         });
-        jMenu3.add(jMIEdicionDeMateria);
+        jMMaterias.add(jMIEdicionDeMateria);
 
-        jMenuBar1.add(jMenu3);
+        jMenuBar1.add(jMMaterias);
 
-        jMenu1.setText("Administracion");
+        jMAdministracion.setText("Administracion");
 
         jMIManejoDeInscripciones.setText("Manejo de Inscripciones");
         jMIManejoDeInscripciones.addActionListener(new java.awt.event.ActionListener() {
@@ -140,7 +141,7 @@ public class Vista extends javax.swing.JFrame {
                 jMIManejoDeInscripcionesActionPerformed(evt);
             }
         });
-        jMenu1.add(jMIManejoDeInscripciones);
+        jMAdministracion.add(jMIManejoDeInscripciones);
 
         jMIManejoDeNotas.setText("Manejo de Notas");
         jMIManejoDeNotas.addActionListener(new java.awt.event.ActionListener() {
@@ -148,11 +149,11 @@ public class Vista extends javax.swing.JFrame {
                 jMIManejoDeNotasActionPerformed(evt);
             }
         });
-        jMenu1.add(jMIManejoDeNotas);
+        jMAdministracion.add(jMIManejoDeNotas);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMAdministracion);
 
-        jMenu4.setText("Consultas");
+        jMConsultas.setText("Consultas");
 
         jMIAlumnosPorMateria.setText("Alumnos por Materia");
         jMIAlumnosPorMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -160,9 +161,9 @@ public class Vista extends javax.swing.JFrame {
                 jMIAlumnosPorMateriaActionPerformed(evt);
             }
         });
-        jMenu4.add(jMIAlumnosPorMateria);
+        jMConsultas.add(jMIAlumnosPorMateria);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMConsultas);
 
         jMSalir.setText("Salir");
         jMSalir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -237,6 +238,8 @@ public class Vista extends javax.swing.JFrame {
     }//GEN-LAST:event_jMIManejoDeInscripcionesActionPerformed
 
     private void escritorioComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_escritorioComponentResized
+        
+        //Captura el evento de redimension de la ventana, quita el logo y lo vuelve a colocar en la esquina inferior izquierda
         escritorio.removeAll();
         escritorio.repaint();
         colocarLogo();
@@ -279,6 +282,9 @@ public class Vista extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorio;
+    private javax.swing.JMenu jMAdministracion;
+    private javax.swing.JMenu jMAlumnos;
+    private javax.swing.JMenu jMConsultas;
     private javax.swing.JMenuItem jMIAlumnosPorMateria;
     private javax.swing.JMenuItem jMIEdicionDeAlumno;
     private javax.swing.JMenuItem jMIEdicionDeMateria;
@@ -286,24 +292,25 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMIFormularioDeMateria;
     private javax.swing.JMenuItem jMIManejoDeInscripciones;
     private javax.swing.JMenuItem jMIManejoDeNotas;
+    private javax.swing.JMenu jMMaterias;
     private javax.swing.JMenu jMSalir;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 
+    //Recibe un componente por parametro y realiza las tareas de remover las ventanas activas, repintar el fondo y colocar la ventana nueva
     private void abrirVentana(Component cpm){
+        
         escritorio.removeAll();
         escritorio.repaint();
         cpm.setVisible(true);
         escritorio.add(cpm);
-        escritorio.moveToFront(cpm);
         colocarLogo();
+        escritorio.moveToFront(cpm);
     }
 
+    //Crea un label y coloca el logo de la ULP, y lo posiciona en la esquina inferior izquierda
     private void colocarLogo(){
+        
         JLabel logo = new JLabel();
         Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP.png")).getImage());
         logo.setText("");
@@ -313,5 +320,4 @@ public class Vista extends javax.swing.JFrame {
         escritorio.add(logo);
         escritorio.moveToFront(logo);
     }
-
 }

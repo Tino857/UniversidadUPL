@@ -12,7 +12,7 @@
         </Property>
       </Properties>
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="jMenu2">
+        <Menu class="javax.swing.JMenu" name="jMAlumnos">
           <Properties>
             <Property name="text" type="java.lang.String" value="Alumnos"/>
           </Properties>
@@ -35,7 +35,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu3">
+        <Menu class="javax.swing.JMenu" name="jMMaterias">
           <Properties>
             <Property name="text" type="java.lang.String" value="Materias"/>
           </Properties>
@@ -58,7 +58,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu1">
+        <Menu class="javax.swing.JMenu" name="jMAdministracion">
           <Properties>
             <Property name="text" type="java.lang.String" value="Administracion"/>
           </Properties>
@@ -81,7 +81,7 @@
             </MenuItem>
           </SubComponents>
         </Menu>
-        <Menu class="javax.swing.JMenu" name="jMenu4">
+        <Menu class="javax.swing.JMenu" name="jMConsultas">
           <Properties>
             <Property name="text" type="java.lang.String" value="Consultas"/>
           </Properties>
@@ -109,6 +109,9 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[900, 600]"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -146,7 +149,7 @@
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){&#xa;    public void paintComponent(Graphics g){&#xa;        g.drawImage(image,0,0,getWidth(),getHeight(),this);&#xa;    }&#xa;}"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon = new ImageIcon(getClass().getResource(&quot;/universidad/imagenes/4.jpg&quot;));&#xa;Image image = icon.getImage();"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon = new ImageIcon(getClass().getResource(&quot;/universidad/imagenes/Background.png&quot;));&#xa;Image image = icon.getImage();"/>
       </AuxValues>
 
       <Layout>

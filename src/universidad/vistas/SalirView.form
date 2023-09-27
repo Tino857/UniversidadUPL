@@ -4,7 +4,7 @@
   <Properties>
     <Property name="toolTipText" type="java.lang.String" value=""/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[300, 130]"/>
+      <Dimension value="[300, 140]"/>
     </Property>
   </Properties>
   <SyntheticProperties>
@@ -41,6 +41,10 @@
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;&#xa;    public void paintComponent(Graphics g){&#xa;        g.drawImage(image,0,0,getWidth(),getHeight(),this);&#xa;    }&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon = new ImageIcon(getClass().getResource(&quot;/universidad/imagenes/Fondito.png&quot;));&#xa;Image image = icon.getImage();"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -48,18 +52,19 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jbAceptar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="37" max="32767" attributes="0"/>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
                   <Component id="jbCancelar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
-              <Component id="jLabel1" alignment="1" max="32767" attributes="0"/>
+              <Component id="jLTitulo" alignment="0" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="jLabel1" min="-2" pref="36" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLTitulo" min="-2" pref="38" max="-2" attributes="0"/>
+                  <EmptySpace pref="32" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -110,7 +115,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbCancelarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLTitulo">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Dialog" size="14" style="1"/>
@@ -119,7 +124,7 @@
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="&#xbf;Desea salir?"/>
+            <Property name="text" type="java.lang.String" value="&#xbf;Est&#xe1; seguro que desea salir?"/>
           </Properties>
         </Component>
       </SubComponents>

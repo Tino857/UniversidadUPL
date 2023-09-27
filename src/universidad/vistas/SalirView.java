@@ -1,5 +1,9 @@
 package universidad.vistas;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Grupo 61
@@ -23,13 +27,20 @@ public class SalirView extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Fondito.png"));
+        Image image = icon.getImage();
+        jPanel1 = new javax.swing.JPanel(){
+
+            public void paintComponent(Graphics g){
+                g.drawImage(image,0,0,getWidth(),getHeight(),this);
+            }
+        };
         jbAceptar = new javax.swing.JButton();
         jbCancelar = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLTitulo = new javax.swing.JLabel();
 
         setToolTipText("");
-        setPreferredSize(new java.awt.Dimension(300, 130));
+        setPreferredSize(new java.awt.Dimension(300, 140));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -55,10 +66,10 @@ public class SalirView extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("¿Desea salir?");
+        jLTitulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLTitulo.setText("¿Está seguro que desea salir?");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -67,16 +78,17 @@ public class SalirView extends javax.swing.JInternalFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
                 .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+            .addComponent(jLTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -109,7 +121,7 @@ public class SalirView extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton jbAceptar;
     private javax.swing.JButton jbCancelar;

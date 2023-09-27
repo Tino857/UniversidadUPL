@@ -26,26 +26,26 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="298" max="32767" attributes="0"/>
+          <Component id="jPBackground" alignment="0" pref="298" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" pref="148" max="32767" attributes="0"/>
+          <Component id="jPBackground" alignment="0" pref="133" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="jPBackground">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="33" red="33" type="rgb"/>
         </Property>
-        <Property name="name" type="java.lang.String" value="" noResource="true"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[300, 130]"/>
-        </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JPanel(){&#xa;&#xa;    public void paintComponent(Graphics g){&#xa;        g.drawImage(image,0,0,getWidth(),getHeight(),this);&#xa;    }&#xa;}"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon = new ImageIcon(getClass().getResource(&quot;/universidad/imagenes/Fondito.png&quot;));&#xa;Image image = icon.getImage();"/>
+      </AuxValues>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -55,7 +55,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jbAceptar" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="40" max="32767" attributes="0"/>
+                  <EmptySpace pref="38" max="32767" attributes="0"/>
                   <Component id="jbCancelar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
@@ -67,12 +67,12 @@
                   <Component id="jLTitulo" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace pref="21" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jbAceptar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jbCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="20" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
