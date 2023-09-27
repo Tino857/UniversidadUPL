@@ -1,5 +1,6 @@
 package universidad.vistas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -64,6 +65,8 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         jLMargen = new javax.swing.JLabel();
         jLTitulo = new javax.swing.JLabel();
         jLLogo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        JTFBuscador = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -167,6 +170,40 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 24));
+
+        JTFBuscador.setBackground(new java.awt.Color(102, 102, 102));
+        JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        JTFBuscador.setForeground(new java.awt.Color(153, 153, 153));
+        JTFBuscador.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
+        JTFBuscador.setBorder(null);
+        JTFBuscador.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        JTFBuscador.setMinimumSize(new java.awt.Dimension(0, 24));
+        JTFBuscador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                JTFBuscadorFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                JTFBuscadorFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(JTFBuscador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(JTFBuscador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
@@ -175,7 +212,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
                 .addGap(20, 20, 20)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLPCabecera, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
                         .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -192,7 +229,8 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTFAño, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTFNombre))))
+                            .addComponent(jTFNombre)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
@@ -200,7 +238,9 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -331,9 +371,24 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_JBEditarActionPerformed
 
+    private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
+        if (JTFBuscador.getText().equals("Ingrese un DNI para filtrar la tabla...")) {
+            JTFBuscador.setText("");
+        }
+        JTFBuscador.setForeground(Color.WHITE);
+    }//GEN-LAST:event_JTFBuscadorFocusGained
+
+    private void JTFBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusLost
+        if (JTFBuscador.getText().equals("")) {
+            JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
+        }
+        JTFBuscador.setForeground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_JTFBuscadorFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBEditar;
+    private javax.swing.JTextField JTFBuscador;
     private javax.swing.JButton jBSalir;
     private javax.swing.JLabel jLLogo;
     private javax.swing.JLabel jLMargen;
@@ -343,6 +398,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPBackground;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFAño;
     private javax.swing.JTextField jTFCodigo;

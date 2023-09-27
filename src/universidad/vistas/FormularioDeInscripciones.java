@@ -1,5 +1,6 @@
 package universidad.vistas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -108,7 +109,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         jBAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/cancelar-c.png"))); // NOI18N
         jBAnular.setText("Anular");
         jBAnular.setIconTextGap(10);
-        jBAnular.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBAnular.setPreferredSize(new java.awt.Dimension(110, 32));
         jBAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBAnularActionPerformed(evt);
@@ -120,7 +121,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
         jBInscribir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/aceptar-c.png"))); // NOI18N
         jBInscribir.setText("Inscribir");
         jBInscribir.setIconTextGap(10);
-        jBInscribir.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBInscribir.setPreferredSize(new java.awt.Dimension(110, 32));
         jBInscribir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBInscribirActionPerformed(evt);
@@ -226,12 +227,12 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jBAnular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jBInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jBInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLNota)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTFNota, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLPCabecera))
                 .addGap(20, 20, 20))

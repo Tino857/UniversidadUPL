@@ -1,5 +1,6 @@
 package universidad.vistas;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.sql.Date;
@@ -69,6 +70,8 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jLMargen = new javax.swing.JLabel();
         jLTitulo = new javax.swing.JLabel();
         jLLogo = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        JTFBuscador = new javax.swing.JTextField();
 
         setClosable(true);
         setMaximizable(true);
@@ -177,18 +180,52 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 .addContainerGap())
         );
 
+        jPanel1.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel1.setPreferredSize(new java.awt.Dimension(100, 24));
+
+        JTFBuscador.setBackground(new java.awt.Color(102, 102, 102));
+        JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
+        JTFBuscador.setForeground(new java.awt.Color(153, 153, 153));
+        JTFBuscador.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
+        JTFBuscador.setBorder(null);
+        JTFBuscador.setMargin(new java.awt.Insets(0, 10, 0, 10));
+        JTFBuscador.setMinimumSize(new java.awt.Dimension(0, 24));
+        JTFBuscador.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                JTFBuscadorFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                JTFBuscadorFocusLost(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(JTFBuscador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(JTFBuscador, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPBackgroundLayout = new javax.swing.GroupLayout(jPBackground);
         jPBackground.setLayout(jPBackgroundLayout);
         jPBackgroundLayout.setHorizontalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPBackgroundLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPBackgroundLayout.createSequentialGroup()
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPBackgroundLayout.createSequentialGroup()
                         .addComponent(jLNombre)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTFNombre))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLDocumento)
                             .addComponent(jLApellido))
@@ -201,20 +238,23 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTFApellido)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createSequentialGroup()
+                    .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addComponent(JBEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLPCabecera)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
+                    .addComponent(jLPCabecera, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
             jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -282,13 +322,13 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
 
         //Se controla que no hayan campos vacios
         if (jTFNombre.getText().isEmpty() || jTFApellido.getText().isEmpty() || jTFDni.getText().isEmpty() || jDCCalendario.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "No pude haber campos vacíos.");
+            JOptionPane.showMessageDialog(this, "No pude haber campos vacíos.", "",JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         //Se controla que un alumno de la tabla esté seleccionado
         if (jTable1.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un alumno de la lista.");
+            JOptionPane.showMessageDialog(this, "Seleccione un alumno de la lista.", "",JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -301,7 +341,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             int dni = Integer.parseInt(jTFDni.getText());
             if (ValidarData.validarDNI(dni)) {
                 
-                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.");
+                JOptionPane.showMessageDialog(this, "En casilla DNI debe ir un dato valido.", "",JOptionPane.WARNING_MESSAGE);
                 return;
             }
             
@@ -309,14 +349,14 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             String nombre = jTFNombre.getText();
             String apellido = jTFApellido.getText();
             if (ValidarData.caracteresEspeciales(nombre) || ValidarData.caracteresEspeciales(apellido)) {
-                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
+                JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros", "",JOptionPane.WARNING_MESSAGE);
                 return;
             }
             
             //Se valida si los campos de nombre y apellido cumplen con un largo determinado
             if (ValidarData.largoCadena(nombre) || ValidarData.largoCadena(apellido)) {
                 
-                JOptionPane.showMessageDialog(this, "El nombre o apellido es incorrecto");
+                JOptionPane.showMessageDialog(this, "El nombre o apellido es incorrecto", "",JOptionPane.WARNING_MESSAGE);
                 return;
             }
             
@@ -324,7 +364,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             LocalDate fecha = jDCCalendario.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             if (ValidarData.validarFecha(fecha)){
                 
-                JOptionPane.showMessageDialog(this, "La fecha es incorrecta");
+                JOptionPane.showMessageDialog(this, "La fecha es incorrecta", "",JOptionPane.WARNING_MESSAGE);
                 return;
             }
             
@@ -347,7 +387,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "Datos actualizados");
             } else {
 
-                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl dni está en uso");
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl dni está en uso", "",JOptionPane.ERROR_MESSAGE);
             }
 
             //Se limpia la tabla y se vuelven a cargar los datos de los alumnos
@@ -355,14 +395,29 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             cargarDatos();
         } catch (NumberFormatException e) {
 
-            JOptionPane.showMessageDialog(this, "En la casilla de Dni solo deben ir numeros");
+            JOptionPane.showMessageDialog(this, "En la casilla de Dni solo deben ir numeros", "",JOptionPane.WARNING_MESSAGE);
         }
         //Se limpian los textfields
         limpiar();
     }//GEN-LAST:event_JBEditarActionPerformed
 
+    private void JTFBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusLost
+        if (JTFBuscador.getText().equals("")) {
+            JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
+        }
+        JTFBuscador.setForeground(Color.LIGHT_GRAY);
+    }//GEN-LAST:event_JTFBuscadorFocusLost
+
+    private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
+        if (JTFBuscador.getText().equals("Ingrese un DNI para filtrar la tabla...")) {
+            JTFBuscador.setText("");
+        }
+        JTFBuscador.setForeground(Color.WHITE);
+    }//GEN-LAST:event_JTFBuscadorFocusGained
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBEditar;
+    private javax.swing.JTextField JTFBuscador;
     private javax.swing.JButton jBSalir;
     private com.toedter.calendar.JDateChooser jDCCalendario;
     private javax.swing.JLabel jLApellido;
@@ -374,6 +429,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
     private javax.swing.JLayeredPane jLPCabecera;
     private javax.swing.JLabel jLTitulo;
     private javax.swing.JPanel jPBackground;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTFApellido;
     private javax.swing.JTextField jTFDni;
