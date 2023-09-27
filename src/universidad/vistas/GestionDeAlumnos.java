@@ -64,6 +64,8 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jLLogo = new javax.swing.JLabel();
 
         setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
         setPreferredSize(new java.awt.Dimension(500, 400));
 
         jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -74,25 +76,26 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(235, 235, 235));
         jLabel2.setText("Documento:");
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(235, 235, 235));
         jLabel3.setText("Apellido:");
 
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(235, 235, 235));
         jLabel4.setText("Nombre:");
 
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(235, 235, 235));
         jLabel5.setText("Estado:");
 
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(235, 235, 235));
         jLabel6.setText("Fecha de Nac:");
 
         jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
-        jBBuscar.setForeground(new java.awt.Color(255, 255, 255));
+        jBBuscar.setForeground(new java.awt.Color(235, 235, 235));
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/buscar-w.png"))); // NOI18N
         jBBuscar.setText("Buscar");
+        jBBuscar.setIconTextGap(10);
         jBBuscar.setPreferredSize(new java.awt.Dimension(100, 32));
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,9 +122,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         jDCCalendario.setForeground(new java.awt.Color(255, 255, 255));
 
         jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
-        jBLimpiar.setForeground(new java.awt.Color(255, 255, 255));
+        jBLimpiar.setForeground(new java.awt.Color(235, 235, 235));
         jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/limpiar-w.png"))); // NOI18N
         jBLimpiar.setText("Limpiar");
+        jBLimpiar.setIconTextGap(10);
         jBLimpiar.setPreferredSize(new java.awt.Dimension(100, 32));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,10 +134,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         });
 
         jBEliminar.setBackground(new java.awt.Color(51, 51, 51));
-        jBEliminar.setForeground(new java.awt.Color(255, 255, 255));
+        jBEliminar.setForeground(new java.awt.Color(235, 235, 235));
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/eliminar-w.png"))); // NOI18N
         jBEliminar.setText("Eliminar");
-        jBEliminar.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBEliminar.setIconTextGap(10);
+        jBEliminar.setPreferredSize(new java.awt.Dimension(105, 32));
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEliminarActionPerformed(evt);
@@ -141,10 +146,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         });
 
         jBGuardar.setBackground(new java.awt.Color(51, 51, 51));
-        jBGuardar.setForeground(new java.awt.Color(255, 255, 255));
+        jBGuardar.setForeground(new java.awt.Color(235, 235, 235));
         jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/guardar-w.png"))); // NOI18N
         jBGuardar.setText("Guardar");
-        jBGuardar.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBGuardar.setIconTextGap(10);
+        jBGuardar.setPreferredSize(new java.awt.Dimension(105, 32));
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
@@ -152,9 +158,10 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         });
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
-        jBSalir.setForeground(new java.awt.Color(255, 255, 255));
+        jBSalir.setForeground(new java.awt.Color(235, 235, 235));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
+        jBSalir.setIconTextGap(10);
         jBSalir.setPreferredSize(new java.awt.Dimension(100, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -163,11 +170,11 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
         });
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("FORMULARIO DE ALUMNO");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP-vss.png"))); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP3-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -219,7 +226,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                                     .addComponent(jTFNombre, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jTFApellido, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(JTFDni)
-                                    .addComponent(jDCCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE))
+                                    .addComponent(jDCCalendario, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -231,7 +238,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                                 .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                                 .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLPCabecera))
                         .addGap(20, 20, 20))))
@@ -248,21 +255,21 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(24, 24, 24)
+                    .addComponent(jLabel3)
+                    .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jDCCalendario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jRBEstado))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

@@ -59,6 +59,8 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jLLogo = new javax.swing.JLabel();
 
         setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
         setPreferredSize(new java.awt.Dimension(500, 400));
 
         jDPEscritorio.addContainerListener(new java.awt.event.ContainerAdapter() {
@@ -69,22 +71,23 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(new java.awt.Color(235, 235, 235));
         jLabel2.setText("Codigo:");
 
-        jLabel3.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel3.setForeground(new java.awt.Color(235, 235, 235));
         jLabel3.setText("Año:");
 
-        jLabel4.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel4.setForeground(new java.awt.Color(235, 235, 235));
         jLabel4.setText("Nombre:");
 
-        jLabel5.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel5.setForeground(new java.awt.Color(235, 235, 235));
         jLabel5.setText("Estado:");
 
         jBBuscar.setBackground(new java.awt.Color(51, 51, 51));
-        jBBuscar.setForeground(new java.awt.Color(204, 204, 204));
+        jBBuscar.setForeground(new java.awt.Color(235, 235, 235));
         jBBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/buscar-w.png"))); // NOI18N
         jBBuscar.setText("Buscar");
+        jBBuscar.setIconTextGap(10);
         jBBuscar.setPreferredSize(new java.awt.Dimension(100, 32));
         jBBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,9 +106,10 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         jTFNombre.setForeground(new java.awt.Color(255, 255, 255));
 
         jBLimpiar.setBackground(new java.awt.Color(51, 51, 51));
-        jBLimpiar.setForeground(new java.awt.Color(204, 204, 204));
+        jBLimpiar.setForeground(new java.awt.Color(235, 235, 235));
         jBLimpiar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/limpiar-w.png"))); // NOI18N
         jBLimpiar.setText("Limpiar");
+        jBLimpiar.setIconTextGap(10);
         jBLimpiar.setPreferredSize(new java.awt.Dimension(100, 32));
         jBLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,10 +118,11 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jBEliminar.setBackground(new java.awt.Color(51, 51, 51));
-        jBEliminar.setForeground(new java.awt.Color(204, 204, 204));
+        jBEliminar.setForeground(new java.awt.Color(235, 235, 235));
         jBEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/eliminar-w.png"))); // NOI18N
         jBEliminar.setText("Eliminar");
-        jBEliminar.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBEliminar.setIconTextGap(10);
+        jBEliminar.setPreferredSize(new java.awt.Dimension(105, 32));
         jBEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBEliminarActionPerformed(evt);
@@ -125,10 +130,11 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jBGuardar.setBackground(new java.awt.Color(51, 51, 51));
-        jBGuardar.setForeground(new java.awt.Color(204, 204, 204));
+        jBGuardar.setForeground(new java.awt.Color(235, 235, 235));
         jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/guardar-w.png"))); // NOI18N
         jBGuardar.setText("Guardar");
-        jBGuardar.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBGuardar.setIconTextGap(10);
+        jBGuardar.setPreferredSize(new java.awt.Dimension(105, 32));
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
@@ -136,9 +142,10 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
-        jBSalir.setForeground(new java.awt.Color(204, 204, 204));
+        jBSalir.setForeground(new java.awt.Color(235, 235, 235));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
+        jBSalir.setIconTextGap(10);
         jBSalir.setPreferredSize(new java.awt.Dimension(100, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,11 +154,11 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         });
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("FORMULARIO DE MATERIA");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP-vss.png"))); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP3-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -237,14 +244,13 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTFAño, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jRBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5))
+                    .addComponent(jLabel3)
                     .addComponent(jBLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jRBEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

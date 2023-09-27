@@ -45,9 +45,10 @@ public class SalirView extends javax.swing.JInternalFrame {
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         jbAceptar.setBackground(new java.awt.Color(51, 51, 51));
-        jbAceptar.setForeground(new java.awt.Color(204, 204, 204));
+        jbAceptar.setForeground(new java.awt.Color(235, 235, 235));
         jbAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/aceptar-c.png"))); // NOI18N
         jbAceptar.setText("Aceptar");
+        jbAceptar.setIconTextGap(10);
         jbAceptar.setPreferredSize(new java.awt.Dimension(110, 32));
         jbAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,9 +57,10 @@ public class SalirView extends javax.swing.JInternalFrame {
         });
 
         jbCancelar.setBackground(new java.awt.Color(51, 51, 51));
-        jbCancelar.setForeground(new java.awt.Color(204, 204, 204));
+        jbCancelar.setForeground(new java.awt.Color(235, 235, 235));
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/cancelar-c.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
+        jbCancelar.setIconTextGap(10);
         jbCancelar.setPreferredSize(new java.awt.Dimension(110, 32));
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -67,7 +69,7 @@ public class SalirView extends javax.swing.JInternalFrame {
         });
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("¿Está seguro que desea salir?");
 
@@ -88,7 +90,7 @@ public class SalirView extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

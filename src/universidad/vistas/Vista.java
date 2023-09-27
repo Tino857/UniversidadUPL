@@ -49,7 +49,7 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Background.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Background2.png"));
         Image image = icon.getImage();
         escritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
@@ -71,7 +71,6 @@ public class Vista extends javax.swing.JFrame {
         jMSalir = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(900, 600));
 
         escritorio.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentResized(java.awt.event.ComponentEvent evt) {
@@ -312,10 +311,10 @@ public class Vista extends javax.swing.JFrame {
     private void colocarLogo(){
         
         JLabel logo = new JLabel();
-        Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP.png")).getImage());
+        Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP-w.png")).getImage());
         logo.setText("");
-        logo.setSize(290,113);
-        logo.setLocation(escritorio.getWidth()-300,escritorio.getHeight()-120);
+        logo.setSize(200,81);
+        logo.setLocation(escritorio.getWidth()-220,escritorio.getHeight()-100);
         logo.setIcon(icono);
         escritorio.add(logo);
         escritorio.moveToFront(logo);

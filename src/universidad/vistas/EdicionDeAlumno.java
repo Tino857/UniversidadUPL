@@ -71,26 +71,29 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jLLogo = new javax.swing.JLabel();
 
         setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
         setPreferredSize(new java.awt.Dimension(500, 500));
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
-        jLDocumento.setForeground(new java.awt.Color(204, 204, 204));
+        jLDocumento.setForeground(new java.awt.Color(235, 235, 235));
         jLDocumento.setText("DNI:");
 
-        jLApellido.setForeground(new java.awt.Color(204, 204, 204));
+        jLApellido.setForeground(new java.awt.Color(235, 235, 235));
         jLApellido.setText("Apellido:");
 
-        jLNombre.setForeground(new java.awt.Color(204, 204, 204));
+        jLNombre.setForeground(new java.awt.Color(235, 235, 235));
         jLNombre.setText("Nombre:");
 
-        jLFecha.setForeground(new java.awt.Color(204, 204, 204));
+        jLFecha.setForeground(new java.awt.Color(235, 235, 235));
         jLFecha.setText("Fecha de Nac:");
 
         JBEditar.setBackground(new java.awt.Color(51, 51, 51));
-        JBEditar.setForeground(new java.awt.Color(204, 204, 204));
+        JBEditar.setForeground(new java.awt.Color(235, 235, 235));
         JBEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/editar-w.png"))); // NOI18N
         JBEditar.setText("Editar");
+        JBEditar.setIconTextGap(10);
         JBEditar.setPreferredSize(new java.awt.Dimension(100, 32));
         JBEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -111,9 +114,10 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jDCCalendario.setForeground(new java.awt.Color(0, 0, 0));
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
-        jBSalir.setForeground(new java.awt.Color(204, 204, 204));
+        jBSalir.setForeground(new java.awt.Color(235, 235, 235));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
+        jBSalir.setIconTextGap(10);
         jBSalir.setPreferredSize(new java.awt.Dimension(100, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,11 +145,11 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(jTable1);
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("EDICIÓN DE ALUMNO");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP-vss.png"))); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP3-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -210,7 +214,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

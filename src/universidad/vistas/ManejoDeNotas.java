@@ -65,6 +65,8 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         jLLogo = new javax.swing.JLabel();
 
         setClosable(true);
+        setMaximizable(true);
+        setResizable(true);
         setPreferredSize(new java.awt.Dimension(500, 400));
 
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
@@ -83,10 +85,10 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
 
-        jLNota.setForeground(new java.awt.Color(204, 204, 204));
+        jLNota.setForeground(new java.awt.Color(235, 235, 235));
         jLNota.setText("Ingrese la nueva nota:");
 
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(new java.awt.Color(235, 235, 235));
         jLabel2.setText("Seleccione un alumno:");
 
         jTFNota.setBackground(new java.awt.Color(102, 102, 102));
@@ -101,10 +103,11 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         });
 
         jBSalir.setBackground(new java.awt.Color(51, 51, 51));
-        jBSalir.setForeground(new java.awt.Color(204, 204, 204));
+        jBSalir.setForeground(new java.awt.Color(235, 235, 235));
         jBSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/salir-w.png"))); // NOI18N
         jBSalir.setText("Salir");
-        jBSalir.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBSalir.setIconTextGap(10);
+        jBSalir.setPreferredSize(new java.awt.Dimension(105, 32));
         jBSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBSalirActionPerformed(evt);
@@ -112,10 +115,11 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         });
 
         jBGuardar.setBackground(new java.awt.Color(51, 51, 51));
-        jBGuardar.setForeground(new java.awt.Color(204, 204, 204));
+        jBGuardar.setForeground(new java.awt.Color(235, 235, 235));
         jBGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/guardar-w.png"))); // NOI18N
         jBGuardar.setText("Guardar");
-        jBGuardar.setPreferredSize(new java.awt.Dimension(100, 32));
+        jBGuardar.setIconTextGap(10);
+        jBGuardar.setPreferredSize(new java.awt.Dimension(105, 32));
         jBGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBGuardarActionPerformed(evt);
@@ -123,11 +127,11 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
         });
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("MANIPULACIÓN DE NOTAS");
 
-        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP-vss.png"))); // NOI18N
+        jLLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP3-w.png"))); // NOI18N
 
         jLPCabecera.setLayer(jLMargen, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLPCabecera.setLayer(jLTitulo, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -166,7 +170,7 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCBAlumnos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
                     .addGroup(jPBackgroundLayout.createSequentialGroup()
                         .addComponent(jLNota)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -188,7 +192,7 @@ public class ManejoDeNotas extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jCBAlumnos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)

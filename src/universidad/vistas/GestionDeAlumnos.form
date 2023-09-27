@@ -3,6 +3,8 @@
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
       <Dimension value="[500, 400]"/>
     </Property>
@@ -95,7 +97,7 @@
                                           <Component id="jTFNombre" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jTFApellido" alignment="0" max="32767" attributes="0"/>
                                           <Component id="JTFDni" max="32767" attributes="0"/>
-                                          <Component id="jDCCalendario" pref="293" max="32767" attributes="0"/>
+                                          <Component id="jDCCalendario" pref="255" max="32767" attributes="0"/>
                                       </Group>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="1" attributes="0">
@@ -108,14 +110,14 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <Component id="jBGuardar" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
                                       <Component id="jBEliminar" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="190" max="32767" attributes="0"/>
+                                      <EmptySpace pref="130" max="32767" attributes="0"/>
                                       <Component id="jBSalir" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jLPCabecera" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLPCabecera" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                           </Group>
@@ -137,8 +139,9 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTFApellido" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBLimpiar" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTFNombre" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -147,14 +150,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel6" min="-2" pref="29" max="-2" attributes="0"/>
                           <Component id="jDCCalendario" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBLimpiar" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel5" min="-2" pref="28" max="-2" attributes="0"/>
                           <Component id="jRBEstado" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="43" max="32767" attributes="0"/>
+                      <EmptySpace pref="32" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jBGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBEliminar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -169,7 +171,7 @@
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Documento:"/>
               </Properties>
@@ -177,7 +179,7 @@
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Apellido:"/>
               </Properties>
@@ -185,7 +187,7 @@
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nombre:"/>
               </Properties>
@@ -193,7 +195,7 @@
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Estado:"/>
               </Properties>
@@ -201,7 +203,7 @@
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Fecha de Nac:"/>
               </Properties>
@@ -212,12 +214,13 @@
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/universidad/imagenes/buscar-w.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
+                <Property name="iconTextGap" type="int" value="10"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 32]"/>
                 </Property>
@@ -287,12 +290,13 @@
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/universidad/imagenes/limpiar-w.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Limpiar"/>
+                <Property name="iconTextGap" type="int" value="10"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 32]"/>
                 </Property>
@@ -307,14 +311,15 @@
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/universidad/imagenes/eliminar-w.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar"/>
+                <Property name="iconTextGap" type="int" value="10"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[100, 32]"/>
+                  <Dimension value="[105, 32]"/>
                 </Property>
               </Properties>
               <Events>
@@ -327,14 +332,15 @@
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/universidad/imagenes/guardar-w.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
+                <Property name="iconTextGap" type="int" value="10"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                  <Dimension value="[100, 32]"/>
+                  <Dimension value="[105, 32]"/>
                 </Property>
               </Properties>
               <Events>
@@ -347,12 +353,13 @@
                   <Color blue="33" green="33" red="33" type="rgb"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                  <Color blue="eb" green="eb" red="eb" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/universidad/imagenes/salir-w.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Salir"/>
+                <Property name="iconTextGap" type="int" value="10"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[100, 32]"/>
                 </Property>
@@ -398,7 +405,7 @@
                       <Font name="Dialog" size="18" style="1"/>
                     </Property>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                      <Color blue="eb" green="eb" red="eb" type="rgb"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="FORMULARIO DE ALUMNO"/>
@@ -407,7 +414,7 @@
                 <Component class="javax.swing.JLabel" name="jLLogo">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/universidad/imagenes/LogoULP-vss.png"/>
+                      <Image iconType="3" name="/universidad/imagenes/LogoULP3-w.png"/>
                     </Property>
                   </Properties>
                 </Component>

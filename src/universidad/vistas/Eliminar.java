@@ -68,9 +68,10 @@ public class Eliminar extends javax.swing.JInternalFrame {
         jPBackground.setBackground(new java.awt.Color(51, 51, 51));
 
         jbAceptar.setBackground(new java.awt.Color(51, 51, 51));
-        jbAceptar.setForeground(new java.awt.Color(204, 204, 204));
+        jbAceptar.setForeground(new java.awt.Color(235, 235, 235));
         jbAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/aceptar-c.png"))); // NOI18N
         jbAceptar.setText("Aceptar");
+        jbAceptar.setIconTextGap(10);
         jbAceptar.setPreferredSize(new java.awt.Dimension(110, 32));
         jbAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -79,9 +80,10 @@ public class Eliminar extends javax.swing.JInternalFrame {
         });
 
         jbCancelar.setBackground(new java.awt.Color(51, 51, 51));
-        jbCancelar.setForeground(new java.awt.Color(204, 204, 204));
+        jbCancelar.setForeground(new java.awt.Color(235, 235, 235));
         jbCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/universidad/imagenes/cancelar-c.png"))); // NOI18N
         jbCancelar.setText("Cancelar");
+        jbCancelar.setIconTextGap(10);
         jbCancelar.setPreferredSize(new java.awt.Dimension(110, 32));
         jbCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +96,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
         jLabel1.setText("(Esta acción es definitiva)");
 
         jLTitulo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        jLTitulo.setForeground(new java.awt.Color(235, 235, 235));
         jLTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLTitulo.setText("Titulo");
 
@@ -128,11 +130,11 @@ public class Eliminar extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+            .addComponent(jPBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
