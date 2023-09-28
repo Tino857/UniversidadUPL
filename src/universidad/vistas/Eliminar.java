@@ -20,19 +20,19 @@ public class Eliminar extends javax.swing.JInternalFrame {
     
     /**
      * Creates new form Eliminar
-     * @param dni
+     * @param al
      */
     public Eliminar(Alumno al) {
         this.al = al;
         this.clase = 1;
         initComponents();
-        jLTitulo.setText("¿Desea eliminar a este alumno?");
+        jLTitulo.setText("¿Desea eliminar este alumno?");
     }
 
     /**
      * Creates new form Eliminar
      *
-     * @param nombre
+     * @param mat
      */
     public Eliminar(Materia mat) {
         this.mat = mat;
@@ -51,7 +51,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Fondito.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/WindowBackground.png"));
         Image image = icon.getImage();
         jPBackground = new javax.swing.JPanel(){
 
@@ -112,7 +112,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
             .addGroup(jPBackgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
         );
@@ -122,7 +122,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
                 .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -153,9 +153,10 @@ public class Eliminar extends javax.swing.JInternalFrame {
         switch (clase) {
             case 1:
                 registro = Vista.getAD().eliminarAlumnoLogico(al.getDni());
+                
                 if (registro == 1) {
                 
-                   JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
+                    JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
                     Vista.getID().limpariInscripciones(al);
                 } else {
                 
@@ -169,7 +170,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
                 if (registro == 1) {
                     
                     JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
-                     Vista.getID().limpariInscripciones(mat);
+                    Vista.getID().limpariInscripciones(mat);
                 } else {
 
                     JOptionPane.showMessageDialog(this, "No se pudo borrar a la materia");

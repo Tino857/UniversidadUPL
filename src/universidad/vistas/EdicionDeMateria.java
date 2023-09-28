@@ -43,7 +43,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Fondito.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/WindowBackground.png"));
         Image image = icon.getImage();
         jPBackground = new javax.swing.JPanel(){
 
@@ -244,8 +244,8 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
                 .addComponent(jLPCabecera, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -279,7 +279,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
     //BOTON SALIR
     private void jBSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSalirActionPerformed
-        
+
         //Cierra la ventana
         dispose();
     }//GEN-LAST:event_jBSalirActionPerformed
@@ -289,12 +289,12 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
         //Se captura el evento de click en una fila de la tabla y se recupera el indice de la misma
         int filaSelec = jTable1.getSelectedRow();
-        
+
         //Se obtienen los datos de la materia almacenada en la fila seleccionada
         String codigo = (String) modelo.getValueAt(filaSelec, 0);
         String nombre = (String) modelo.getValueAt(filaSelec, 1);
         String anio = (String) modelo.getValueAt(filaSelec, 2);
-        
+
         //Se setean los valores recuperados anteriormente en los campos correspondientes
         jTFCodigo.setText(codigo);
         jTFNombre.setText(nombre);
@@ -306,51 +306,52 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
         //Se controla que no hayan campos vacios
         if (jTFNombre.getText().isEmpty() || jTFAño.getText().isEmpty()) {
-            
+
             JOptionPane.showMessageDialog(this, "No pude haber campos vacíos.");
             return;
         }
-        
+
         //Se controla que una materia de la tabla esté seleccionada
-          if (jTable1.getSelectedRow() == -1&& jTable1.getRowCount()>1) {
-            JOptionPane.showMessageDialog(this, "Seleccione un alumno de la lista.", "",JOptionPane.WARNING_MESSAGE);
+        if (jTable1.getSelectedRow() == -1 && jTable1.getRowCount() > 1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un alumno de la lista.", "", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         try {
-            
+
             //Se intenta parsear el año y se realiza su validacion
             int anio = Integer.parseInt(jTFAño.getText());
             if (ValidarData.validarAnio(anio)) {
-                
+
                 JOptionPane.showMessageDialog(this, "En la casilla Año debe ir un dato valido");
                 return;
             }
-            
+
             //Se valida si el campo nombre no contiene caracteres especiales
             String nombre = jTFNombre.getText();
             if (ValidarData.caracteresEspeciales(nombre)) {
-                
+
                 JOptionPane.showMessageDialog(this, "No se permiten caracteres especiales o numeros");
                 return;
             }
-            
+
             //Se valida que el nombre de la materia cumpla con un largo determinado
             if (ValidarData.largoCadena(nombre)) {
-                
+
                 JOptionPane.showMessageDialog(this, "El nombre de la materia es incorrecto");
                 return;
             }
-            
+
             //Se recupera la fila seleccionada de la tabla. Si hay una sola fila y el usuario no selecciono ninguna ya que la aplicacion ya lo hizo por el entonces filaSelec se setea en 0
-             int filaSelec =jTable1.getSelectedRow();
-                    if (jTable1.getRowCount()==1) {
-                filaSelec=0;
+            int filaSelec = jTable1.getSelectedRow();
+            if (jTable1.getRowCount() == 1) {
+                filaSelec = 0;
             }
+            
             //Llegado el punto en que todos los valores son correctos, se crea una materia
             //En esta materia guardamos el resultado de la busqueda por medio del nombre que figura en la tabla
             Materia mat = Vista.getMD().buscarMateriaPorNombre((String) modelo.getValueAt(filaSelec, 1));
-            
+
             //Seteamos la materia con la informacion nueva
             mat.setId(Integer.parseInt(jTFCodigo.getText()));
             mat.setAnioMateria(anio);
@@ -358,61 +359,67 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
             //Se crea una variable tipo entero y se usa para almacenar el registro de la ejecucion del metodo editarMateria
             int registro = Vista.getMD().editarMateria(mat);
-            
+
             //Dependiendo del valor que tome la variable registro se muestra un mensaje al usuario
             if (registro > 0) {
                 JOptionPane.showMessageDialog(this, "Datos actualizados.");
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo actualizar los datos. \nEl nombre está en uso.");
             }
-            
+
             //Se limpia la tabla y se vuelven a cargar los datos de los alumnos
             limpiarTabla();
             cargarDatos();
         } catch (NumberFormatException e) {
-            
+
             JOptionPane.showMessageDialog(this, "En la casilla de Año solo deben ir numeros");
         }
         //Se limpian los textfields
         limpiar();
     }//GEN-LAST:event_JBEditarActionPerformed
 
+    //Este metodo setea el texto y propiedades del textField de busqueda al entrar al mismo
     private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
+        
         if (JTFBuscador.getText().equals("Ingrese un DNI para filtrar la tabla...")) {
+            
             JTFBuscador.setText("");
         }
         JTFBuscador.setForeground(Color.WHITE);
     }//GEN-LAST:event_JTFBuscadorFocusGained
 
+    //Este metodo setea el texto y propiedades del textField de busqueda al salir del mismo
     private void JTFBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusLost
+        
         if (JTFBuscador.getText().equals("")) {
+            
             JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
-          
         }
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
 
+    //Este metodo permite filtrar las materias de la tabla al escribir un nombre en el textField de busqueda
     private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
-       limpiarTabla();
-       ArrayList <Materia> materias=Vista.getMD().listarMaterias();
+        
+        limpiarTabla();
+        ArrayList<Materia> materias = Vista.getMD().listarMaterias();
         for (Materia materia : materias) {
+            
             if (materia.getNombre().startsWith(JTFBuscador.getText())) {
+                
                 cargarTabla(materia);
             }
         }
-        if (jTable1.getRowCount()==1) {
-            int filaSelec =0;
         
-        //Se obtienen los datos de la materia almacenada en la fila seleccionada
-        String codigo = (String) modelo.getValueAt(filaSelec, 0);
-        String nombre = (String) modelo.getValueAt(filaSelec, 1);
-        String anio = (String) modelo.getValueAt(filaSelec, 2);
-        
-        //Se setean los valores recuperados anteriormente en los campos correspondientes
-        jTFCodigo.setText(codigo);
-        jTFNombre.setText(nombre);
-        jTFAño.setText(anio);
-        }else{
+        if (jTable1.getRowCount() == 1) {
+            
+            //Si solo quedo una materia al filtrar, se setean los valores recuperados de la materia en los campos correspondientes
+            jTFCodigo.setText((String) modelo.getValueAt(0, 0));
+            jTFNombre.setText((String) modelo.getValueAt(0, 1));
+            jTFAño.setText((String) modelo.getValueAt(0, 2));
+        } else {
+            
+            //Si se borra la busqueda y aparece mas de un resultado, se limpian los campos
             limpiar();
         }
     }//GEN-LAST:event_JTFBuscadorKeyReleased
@@ -440,18 +447,18 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
     //Este metodo permite setear un modelo de tabla personalizado
     private void armarTabla() {
-        
+
         //Se agregan las columnas con su nombre correspondiente al modelo de tabla creado anteriormente
         modelo.addColumn("Codigo");
         modelo.addColumn("Nombre");
         modelo.addColumn("Año");
-        
+
         //Se setea el modelo de tabla a la tabla de materias
         jTable1.setModel(modelo);
-        
+
         //Se recupera el modelo de columnas
         TableColumnModel columnas = jTable1.getColumnModel();
-        
+
         //Se llama al metodo que se encarga de setear el ancho de las columnas
         anchoColumna(columnas, 0, 60);
         anchoColumna(columnas, 2, 60);
@@ -459,10 +466,10 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
     //Se cargan las filas en la tabla
     private void cargarDatos() {
-        
+
         //Se recupera una lista de materias
         ArrayList<Materia> ListaDeMaterias = Vista.getMD().listarMaterias();
-        
+
         //Se recorre la lista y por cada materia, se llama al metodo correspondiente para agregar la fila, enviando por parametro dicha materia
         for (Materia next : ListaDeMaterias) {
             cargarTabla(next);
@@ -481,7 +488,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
     //Este metodo limpia los textfields
     public void limpiar() {
-        
+
         jTFCodigo.setText("");
         jTFAño.setText("");
         jTFNombre.setText("");
@@ -489,20 +496,20 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
 
     //Este metodo elimina todas las filas de la tabla
     private void limpiarTabla() {
-        
+
         int filas = modelo.getRowCount() - 1;
         for (int i = filas; i >= 0; i--) {
             modelo.removeRow(i);
         }
     }
-    
+
     //Este metodo se usa para setear el ancho de una columna
     //Recibe por parametro el modelo de columna de la tabla, el indice de la columna a modificar y el ancho deseado
-    private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho){
-        
+    private void anchoColumna(TableColumnModel modeloTabla, int indice, int ancho) {
+
         modeloTabla.getColumn(indice).setWidth(ancho);
-        modeloTabla.getColumn(indice).setMaxWidth(ancho+30);
-        modeloTabla.getColumn(indice).setMinWidth(ancho-10);
+        modeloTabla.getColumn(indice).setMaxWidth(ancho + 30);
+        modeloTabla.getColumn(indice).setMinWidth(ancho - 10);
         modeloTabla.getColumn(indice).setPreferredWidth(ancho);
     }
 }

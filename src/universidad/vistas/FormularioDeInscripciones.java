@@ -1,6 +1,5 @@
 package universidad.vistas;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -49,7 +48,7 @@ public class FormularioDeInscripciones extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         bG = new javax.swing.ButtonGroup();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Fondito.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/WindowBackground.png"));
         Image image = icon.getImage();
         jPanel1 = new javax.swing.JPanel(){
 

@@ -3,12 +3,8 @@ package universidad.vistas;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import universidad.accesoADatos.AlumnoData;
 import universidad.accesoADatos.InscripcionData;
 import universidad.accesoADatos.MateriaData;
@@ -52,13 +48,14 @@ public class Vista extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Background2.png"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/universidad/imagenes/Background.png"));
         Image image = icon.getImage();
         escritorio = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g){
                 g.drawImage(image,0,0,getWidth(),getHeight(),this);
             }
         };
+        logo = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMAlumnos = new javax.swing.JMenu();
         jMIFormularioDeAlumno = new javax.swing.JMenuItem();
@@ -81,15 +78,23 @@ public class Vista extends javax.swing.JFrame {
             }
         });
 
+        escritorio.setLayer(logo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addContainerGap(794, Short.MAX_VALUE)
+                .addComponent(logo)
+                .addContainerGap())
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 577, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, escritorioLayout.createSequentialGroup()
+                .addContainerGap(571, Short.MAX_VALUE)
+                .addComponent(logo)
+                .addContainerGap())
         );
 
         jMenuBar1.setBackground(new java.awt.Color(51, 51, 51));
@@ -242,7 +247,7 @@ public class Vista extends javax.swing.JFrame {
     private void escritorioComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_escritorioComponentResized
         
         //Captura el evento de redimension de la ventana, quita el logo y lo vuelve a colocar en la esquina inferior izquierda
-        escritorio.removeAll();
+        escritorio.remove(logo);
         escritorio.repaint();
         colocarLogo();
     }//GEN-LAST:event_escritorioComponentResized
@@ -297,6 +302,7 @@ public class Vista extends javax.swing.JFrame {
     private javax.swing.JMenu jMMaterias;
     private javax.swing.JMenu jMSalir;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 
     //Recibe un componente por parametro y realiza las tareas de remover las ventanas activas, repintar el fondo y colocar la ventana nueva
@@ -313,7 +319,6 @@ public class Vista extends javax.swing.JFrame {
     //Crea un label y coloca el logo de la ULP, y lo posiciona en la esquina inferior izquierda
     private void colocarLogo(){
         
-        JLabel logo = new JLabel();
         Icon icono = new ImageIcon(new ImageIcon(getClass().getResource("/universidad/imagenes/LogoULP-w.png")).getImage());
         logo.setText("");
         logo.setSize(200,81);
@@ -322,5 +327,4 @@ public class Vista extends javax.swing.JFrame {
         escritorio.add(logo);
         escritorio.moveToFront(logo);
     }
-    
 }
