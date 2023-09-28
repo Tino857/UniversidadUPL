@@ -177,7 +177,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         JTFBuscador.setFont(new java.awt.Font("Dialog", 2, 12)); // NOI18N
         JTFBuscador.setForeground(new java.awt.Color(153, 153, 153));
         JTFBuscador.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
+        JTFBuscador.setText("Ingrese un nombre para filtrar la tabla...");
         JTFBuscador.setBorder(null);
         JTFBuscador.setMargin(new java.awt.Insets(0, 10, 0, 10));
         JTFBuscador.setMinimumSize(new java.awt.Dimension(0, 24));
@@ -235,7 +235,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTFAño, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTFNombre)))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 444, Short.MAX_VALUE))
                 .addGap(20, 20, 20))
         );
         jPBackgroundLayout.setVerticalGroup(
@@ -381,7 +381,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
     //Este metodo setea el texto y propiedades del textField de busqueda al entrar al mismo
     private void JTFBuscadorFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusGained
         
-        if (JTFBuscador.getText().equals("Ingrese un DNI para filtrar la tabla...")) {
+        if (JTFBuscador.getText().equals("Ingrese un nombre para filtrar la tabla...")) {
             
             JTFBuscador.setText("");
         }
@@ -393,7 +393,7 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         
         if (JTFBuscador.getText().equals("")) {
             
-            JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
+            JTFBuscador.setText("Ingrese un nombre para filtrar la tabla...");
         }
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
