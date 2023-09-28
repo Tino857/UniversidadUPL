@@ -189,6 +189,11 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
                 JTFBuscadorFocusLost(evt);
             }
         });
+        JTFBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTFBuscadorKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -307,9 +312,8 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
         }
         
         //Se controla que una materia de la tabla esté seleccionada
-        if (jTable1.getSelectedRow() == -1) {
-            
-            JOptionPane.showMessageDialog(this, "Seleccione una materia de la lista.");
+          if (jTable1.getSelectedRow() == -1&& jTable1.getRowCount()>1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un alumno de la lista.", "",JOptionPane.WARNING_MESSAGE);
             return;
         }
 
@@ -338,9 +342,11 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
                 return;
             }
             
-            //Se recupera la fila seleccionada de la tabla
-            int filaSelec = jTable1.getSelectedRow();
-            
+            //Se recupera la fila seleccionada de la tabla. Si hay una sola fila y el usuario no selecciono ninguna ya que la aplicacion ya lo hizo por el entonces filaSelec se setea en 0
+             int filaSelec =jTable1.getSelectedRow();
+                    if (jTable1.getRowCount()==1) {
+                filaSelec=0;
+            }
             //Llegado el punto en que todos los valores son correctos, se crea una materia
             //En esta materia guardamos el resultado de la busqueda por medio del nombre que figura en la tabla
             Materia mat = Vista.getMD().buscarMateriaPorNombre((String) modelo.getValueAt(filaSelec, 1));
@@ -381,9 +387,35 @@ public class EdicionDeMateria extends javax.swing.JInternalFrame {
     private void JTFBuscadorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_JTFBuscadorFocusLost
         if (JTFBuscador.getText().equals("")) {
             JTFBuscador.setText("Ingrese un DNI para filtrar la tabla...");
+          
         }
         JTFBuscador.setForeground(Color.LIGHT_GRAY);
     }//GEN-LAST:event_JTFBuscadorFocusLost
+
+    private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
+       limpiarTabla();
+       ArrayList <Materia> materias=Vista.getMD().listarMaterias();
+        for (Materia materia : materias) {
+            if (materia.getNombre().startsWith(JTFBuscador.getText())) {
+                cargarTabla(materia);
+            }
+        }
+        if (jTable1.getRowCount()==1) {
+            int filaSelec =0;
+        
+        //Se obtienen los datos de la materia almacenada en la fila seleccionada
+        String codigo = (String) modelo.getValueAt(filaSelec, 0);
+        String nombre = (String) modelo.getValueAt(filaSelec, 1);
+        String anio = (String) modelo.getValueAt(filaSelec, 2);
+        
+        //Se setean los valores recuperados anteriormente en los campos correspondientes
+        jTFCodigo.setText(codigo);
+        jTFNombre.setText(nombre);
+        jTFAño.setText(anio);
+        }else{
+            limpiar();
+        }
+    }//GEN-LAST:event_JTFBuscadorKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

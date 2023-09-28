@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import universidad.accesoADatos.ValidarData;
 import universidad.entidades.Alumno;
+import universidad.entidades.Materia;
 
 /**
  *
@@ -199,6 +200,11 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
                 JTFBuscadorFocusLost(evt);
             }
         });
+        JTFBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                JTFBuscadorKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -327,7 +333,7 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         }
         
         //Se controla que un alumno de la tabla esté seleccionado
-        if (jTable1.getSelectedRow() == -1) {
+        if (jTable1.getSelectedRow() == -1&& jTable1.getRowCount()>1) {
             JOptionPane.showMessageDialog(this, "Seleccione un alumno de la lista.", "",JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -335,7 +341,11 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         try {
             
             //Se recupera la fila seleccionada
-            int filaSelec = jTable1.getSelectedRow();
+            int filaSelec =jTable1.getSelectedRow();
+                    if (jTable1.getRowCount()==1) {
+                filaSelec=0;
+            }
+
             
             //Se intenta parsear el nuevo dni a guardar en el alumno y se realiza su validacion
             int dni = Integer.parseInt(jTFDni.getText());
@@ -414,6 +424,33 @@ public class EdicionDeAlumno extends javax.swing.JInternalFrame {
         }
         JTFBuscador.setForeground(Color.WHITE);
     }//GEN-LAST:event_JTFBuscadorFocusGained
+
+    private void JTFBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JTFBuscadorKeyReleased
+       limpiarTabla();
+       ArrayList <Alumno> alumnos=Vista.getAD().listarAlumnos();
+        for (Alumno alumno :alumnos ) {
+            if ((alumno.getDni()+"").startsWith(JTFBuscador.getText())) {
+                cargarTabla(alumno);
+            }
+        }
+        if (jTable1.getRowCount()==1) {
+            int filaSelec =0;
+
+        //Se obtienen los datos del alumno almacenado en la fila seleccionada
+        String dni = (String) modelo.getValueAt(filaSelec, 1);
+        String apellido = (String) modelo.getValueAt(filaSelec, 2);
+        String nombre = (String) modelo.getValueAt(filaSelec, 3);
+        String FN = (String) modelo.getValueAt(filaSelec, 4);
+        
+        //Se setean los valores recuperados anteriormente en los campos correspondientes
+        jTFDni.setText(dni);
+        jTFApellido.setText(apellido);
+        jTFNombre.setText(nombre);
+        jDCCalendario.setDate(Date.valueOf(FN));
+        }else{
+            limpiar();
+        }
+    }//GEN-LAST:event_JTFBuscadorKeyReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton JBEditar;

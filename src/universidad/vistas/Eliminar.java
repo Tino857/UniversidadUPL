@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import universidad.entidades.Alumno;
+import universidad.entidades.Materia;
 
 /**
  *
@@ -11,32 +13,33 @@ import javax.swing.JOptionPane;
  */
 public class Eliminar extends javax.swing.JInternalFrame {
     
-    private int dni = 0;
-    private String nombre = "";
+  
     private final int clase;
+    private Alumno al;
+    private Materia mat;
     
     /**
      * Creates new form Eliminar
      * @param dni
      */
-    public Eliminar(int dni) {
-        
-        this.dni = dni;
+    public Eliminar(Alumno al) {
+        this.al = al;
         this.clase = 1;
         initComponents();
         jLTitulo.setText("¿Desea eliminar a este alumno?");
     }
-    
+
     /**
      * Creates new form Eliminar
+     *
      * @param nombre
      */
-    public Eliminar(String nombre) {
-        
-        this.nombre = nombre;
+    public Eliminar(Materia mat) {
+        this.mat = mat;
         this.clase = 2;
         initComponents();
         jLTitulo.setText("¿Desea eliminar esta materia?");
+
     }
 
     /**
@@ -119,7 +122,7 @@ public class Eliminar extends javax.swing.JInternalFrame {
                 .addComponent(jLTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(jPBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -149,10 +152,11 @@ public class Eliminar extends javax.swing.JInternalFrame {
         int registro;
         switch (clase) {
             case 1:
-                registro = Vista.getAD().eliminarAlumnoLogico(dni);
+                registro = Vista.getAD().eliminarAlumnoLogico(al.getDni());
                 if (registro == 1) {
                 
                    JOptionPane.showMessageDialog(this, "El alumno ha sido borrado");
+                    Vista.getID().limpariInscripciones(al);
                 } else {
                 
                     JOptionPane.showMessageDialog(this, "No se pudo borrar al alumno");
@@ -160,10 +164,12 @@ public class Eliminar extends javax.swing.JInternalFrame {
                 dispose();
                 break;
             case 2:
-                registro = Vista.getMD().eliminarMateriaLogico(nombre);
+                registro = Vista.getMD().eliminarMateriaLogico(mat.getNombre());
+               
                 if (registro == 1) {
                     
                     JOptionPane.showMessageDialog(this, "La materia ha sido borrada");
+                     Vista.getID().limpariInscripciones(mat);
                 } else {
 
                     JOptionPane.showMessageDialog(this, "No se pudo borrar a la materia");

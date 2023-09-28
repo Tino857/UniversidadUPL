@@ -380,8 +380,8 @@ public class GestionDeMaterias extends javax.swing.JInternalFrame {
         try {
 
             //Habiendo confirmado que el nombre de la materia es correcto, que la materia existe en la DB y que su estado es activo
-            //Se crea una ventana de confirmacion para eliminar la materia, esta ventana recibe como parametro el nombre de la materia
-            Eliminar eliminar = new Eliminar(nombre);
+            //Se crea una ventana de confirmacion para eliminar la materia, esta ventana recibe como parametro la materia
+            Eliminar eliminar = new Eliminar(mat);
             eliminar.setVisible(true);
             jDPEscritorio.add(eliminar);
             jDPEscritorio.moveToFront(eliminar);

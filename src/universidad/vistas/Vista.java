@@ -3,6 +3,9 @@ package universidad.vistas;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -319,4 +322,5 @@ public class Vista extends javax.swing.JFrame {
         escritorio.add(logo);
         escritorio.moveToFront(logo);
     }
+    
 }

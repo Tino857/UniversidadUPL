@@ -89,7 +89,7 @@ public class InscripcionData {
     public ArrayList<Inscripcion> listarInscripcionesPorAlumno(int id) {
         
         ArrayList<Inscripcion> listaDeInscripciones = new ArrayList();//se crea una lista
-        String query = "SELECT * FROM inscripcion WHERE idAlumno=?";//se prepara la consulta
+        String query = "SELECT * FROM inscripcion join materia on (inscripcion.idMateria=materia.idMateria) WHERE inscripcion.idAlumno=? and materia.estado=1";//se prepara la consulta
         
         try {
             
@@ -124,7 +124,7 @@ public class InscripcionData {
         
         ArrayList<Materia> listaDeMateriasCursadas = new ArrayList();//se crea una lista
         String query = "SELECT inscripcion.idMateria, nombre, año FROM inscripcion JOIN materia ON "
-                + "(inscripcion.idMateria = materia.idMateria) WHERE inscripcion.idAlumno = ?";//se prepara la consulta SQL
+                + "(inscripcion.idMateria = materia.idMateria) WHERE inscripcion.idAlumno = ? and materia.estado=1";//se prepara la consulta SQL
 
         try {
             
@@ -154,7 +154,7 @@ public class InscripcionData {
         
         ArrayList<Materia> listaDeMateriasNoCursadas = new ArrayList();//se crea una listaa
         String query = "SELECT materia.idMateria, materia.nombre, materia.año FROM materia WHERE NOT EXISTS "
-                + "(SELECT 1 FROM inscripcion WHERE inscripcion.idAlumno = ? AND inscripcion.idMateria = materia.idMateria)";
+                + "(SELECT 1 FROM inscripcion WHERE inscripcion.idAlumno = ? AND inscripcion.idMateria = materia.idMateria and materia.estado=1)";
                //se utiliza un WHERE NOT EXISTS para filtrar las materias que no tienen registros correspondientes en la tabla inscripcion
         try {
             
@@ -248,4 +248,39 @@ public class InscripcionData {
         }  
         return listaDeAlumno;//retorna un alumno
     }
+    //Elimina las inscripciones activas de las materias que hayan sido eliminadas
+    public void limpariInscripciones(Materia mat){
+        String query = "DELETE FROM `inscripcion` WHERE idMateria=?;";//se prepara la consulta, que elimina una fila
+        int registro = 0;//variable en 0, para almacenar los cambios
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, mat.getId());//se asigna valorres paasados por parametro a los comodines          
+            registro = ps.executeUpdate();//se ejecuta la consulta y see guarda en la variable registro
+
+            ps.close();// se cierra el ps
+        } catch (SQLException e) {
+            
+            System.out.println("Error al borrar la inscripcion" + e.getMessage());
+        }
+       
+    }
+      //Elimina las inscripciones activas de los alumnos que hayan sido eliminados
+    public void limpariInscripciones(Alumno al){
+        String query = "DELETE FROM `inscripcion` WHERE idAlumno=?;";//se prepara la consulta, que elimina una fila
+        int registro = 0;//variable en 0, para almacenar los cambios
+        try {
+            
+            PreparedStatement ps = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, al.getId());//se asigna valorres paasados por parametro a los comodines          
+            registro = ps.executeUpdate();//se ejecuta la consulta y see guarda en la variable registro
+
+            ps.close();// se cierra el ps
+        } catch (SQLException e) {
+            
+            System.out.println("Error al borrar la inscripcion" + e.getMessage());
+        }
+       
+    }
+    
 }

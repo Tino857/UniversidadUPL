@@ -430,7 +430,7 @@ public class GestionDeAlumnos extends javax.swing.JInternalFrame {
 
             //Habiendo confirmado que el dni del alumno es correcto, que el alumno existe en la DB y que su estado es activo
             //Se crea una ventana de confirmacion para eliminar al alumno, esta ventana recibe como parametro el dni del alumno
-            Eliminar eliminar = new Eliminar(dni);
+            Eliminar eliminar = new Eliminar(al);
             eliminar.setVisible(true);
             jDPEscritorio.add(eliminar);
             jDPEscritorio.moveToFront(eliminar);
